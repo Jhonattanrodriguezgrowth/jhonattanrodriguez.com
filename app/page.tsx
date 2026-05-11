@@ -286,7 +286,7 @@ export default function HomePage() {
                     className="flex items-center gap-2 text-sm font-semibold transition-all duration-300 group-hover:gap-3"
                     style={{ color: card.color }}
                   >
-                    Explorar <ArrowRight />
+                    Explorar <ArrowRightIcon />
                   </div>
                 </div>
               </Link>
