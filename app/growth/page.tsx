@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { ModernBg } from "@/components/shared/modern-bg";
+import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CheckIcon } from "@/components/shared/icons";
 import { CTASection, CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
 import { THEMES, GROWTH_TOOLS } from "@/lib/design-tokens";
@@ -87,9 +87,7 @@ export default function GrowthPage() {
   const channels = ["Instagram", "LinkedIn", "TikTok", "YouTube"];
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden" style={{ background: t.bg }}>
-      <ModernBg accentColor={t.accent} secondaryColor={t.secondary} dark={dark} />
-
+    <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.secondary} dark={dark}>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative">
         <div className="max-w-5xl mx-auto px-6">
@@ -855,6 +853,6 @@ export default function GrowthPage() {
           />
         </div>
       </section>
-    </div>
+    </ThemedPageShell>
   );
 }
