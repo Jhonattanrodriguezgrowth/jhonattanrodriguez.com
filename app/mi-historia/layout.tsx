@@ -9,6 +9,13 @@ export const metadata: Metadata = {
     description:
       "De donde vengo y hacia donde voy. La historia detras del sistema de crecimiento.",
     type: "website",
+    locale: "es_CO",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mi Historia | Jhonattan Rodriguez",
+    description:
+      "De donde vengo y hacia donde voy. La historia detras del sistema de crecimiento.",
   },
 };
 

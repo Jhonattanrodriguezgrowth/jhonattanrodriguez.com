@@ -21,6 +21,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CO",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Growth Hacker | Jhonattan Rodriguez",
+    description:
+      "Aprende a dominar MetaAds y operar tu marca con sistemas agiles. Entrenamientos y mentorias 1:1.",
+  },
 };
 
 export default function GrowthLayout({

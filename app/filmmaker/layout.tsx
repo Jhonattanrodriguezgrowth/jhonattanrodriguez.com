@@ -22,6 +22,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CO",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Filmmaker | Jhonattan Rodriguez",
+    description:
+      "Produccion de video para founders y marcas. Planes Sprint y Mensual con estrategia incluida.",
+  },
 };
 
 export default function FilmmakerLayout({

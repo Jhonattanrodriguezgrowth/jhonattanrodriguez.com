@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CO",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "IA Builder | Jhonattan Rodriguez",
+    description:
+      "Automatizaciones, agentes IA y aplicaciones web para escalar tu negocio.",
+  },
 };
 
 export default function IABuilderLayout({
