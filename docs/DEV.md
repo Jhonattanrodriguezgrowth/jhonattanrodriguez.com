@@ -17,7 +17,7 @@ npx --yes pnpm@9 run build
 
 ### Lint
 
-`pnpm run lint` ejecuta ESLint sobre el proyecto. Si falla, revisa que existan `eslint` y `eslint-config-next` en `devDependencies` y el archivo `eslint.config.mjs`.
+`pnpm run lint` ejecuta ESLint (flat config en `eslint.config.mjs`, reglas `eslint-config-next/core-web-vitals`).
 
 ## CSS global
 
