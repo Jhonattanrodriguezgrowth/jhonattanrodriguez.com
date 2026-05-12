@@ -220,17 +220,23 @@ export default function IABuilderPage() {
           </span>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div
+            className="flex flex-wrap gap-3 mb-8"
+            role="group"
+            aria-label="Filtrar proyectos por categoría"
+          >
             {BUILDER_FILTERS.map((cat) => (
               <button
                 key={cat}
+                type="button"
                 onClick={() => setFilter(cat)}
-                className="text-xs px-4 py-2 rounded-xl font-mono transition-all duration-200"
+                className="min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl text-sm font-mono transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 style={{
                   background: filter === cat ? t.accent : "transparent",
                   border: `1px solid ${filter === cat ? t.accent : t.border}`,
                   color: filter === cat ? t.accentSolid : t.text.secondary,
                 }}
+                aria-pressed={filter === cat}
               >
                 {cat}
               </button>

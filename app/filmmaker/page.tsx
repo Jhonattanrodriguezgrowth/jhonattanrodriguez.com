@@ -190,10 +190,9 @@ export default function FilmmakerPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
             {FILM_PLANS.map((plan) => (
-              <div
+              <article
                 key={plan.id}
-                onClick={() => setSelectedPlan(selectedPlan === plan.id ? null : plan.id)}
-                className="relative rounded-3xl p-6 sm:p-8 cursor-pointer transition-all duration-500"
+                className="relative rounded-3xl p-6 sm:p-8 transition-all duration-500"
                 style={{
                   background: plan.featured
                     ? dark
@@ -201,11 +200,12 @@ export default function FilmmakerPage() {
                       : "rgba(194,65,12,0.04)"
                     : cardBg,
                   border: plan.featured ? `1.5px solid ${ab}` : `1px solid ${div}`,
-                  transform: selectedPlan === plan.id ? "scale(1.02)" : "scale(1)",
                   boxShadow:
                     plan.featured && dark
                       ? `0 0 80px ${t.glow}12, 0 0 40px ${t.glow}08`
                       : "none",
+                  outline: selectedPlan === plan.id ? `2px solid ${t.accent}` : "none",
+                  outlineOffset: selectedPlan === plan.id ? 2 : 0,
                 }}
               >
                 {plan.featured && (
@@ -223,6 +223,7 @@ export default function FilmmakerPage() {
 
                 <div className="mb-6">
                   <h3
+                    id={`plan-${plan.id}-title`}
                     className="font-semibold text-xl mb-2"
                     style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
                   >
@@ -303,10 +304,51 @@ export default function FilmmakerPage() {
                   className="w-full justify-center text-sm"
                 />
 
-                {/* Expanded details */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedPlan(selectedPlan === plan.id ? null : plan.id)}
+                  className="w-full mt-4 min-h-[44px] inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  style={{
+                    fontFamily: "var(--font-lato), sans-serif",
+                    border: `1px solid ${div}`,
+                    color: tp,
+                    background: gb,
+                  }}
+                  aria-expanded={selectedPlan === plan.id}
+                  aria-controls={`plan-${plan.id}-details`}
+                >
+                  <span>{selectedPlan === plan.id ? "Ocultar detalles" : "Ver detalles"}</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className="shrink-0 transition-transform duration-300"
+                    style={{
+                      color: t.accent,
+                      transform: selectedPlan === plan.id ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                    aria-hidden
+                  >
+                    <path
+                      d="M2.5 4.5L6 8L9.5 4.5"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  id={`plan-${plan.id}-details`}
+                  role="region"
+                  aria-labelledby={`plan-${plan.id}-title`}
+                  hidden={selectedPlan !== plan.id}
+                >
                 {selectedPlan === plan.id && !plan.isCustom && (
                   <div
-                    className="mt-8 pt-6 space-y-6"
+                    className="mt-6 pt-6 space-y-6"
                     style={{ borderTop: `1px solid ${t.border}` }}
                   >
                     {plan.framework && (
@@ -524,14 +566,8 @@ export default function FilmmakerPage() {
                   </div>
                 )}
 
-                {/* Tap indicator */}
-                <div
-                  className="text-center mt-4 text-xs"
-                  style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, opacity: 0.7 }}
-                >
-                  {selectedPlan === plan.id ? "Toca para cerrar" : "Toca para ver detalles"}
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>

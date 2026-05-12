@@ -228,9 +228,12 @@ export default function GrowthPage() {
                   }}
                 >
                   <button
+                    type="button"
                     onClick={() => setExpandedSession(expandedSession === i ? null : i)}
-                    className="w-full flex items-center justify-between p-4 sm:p-5 text-left transition-colors duration-200"
+                    className="w-full min-h-[44px] flex items-center justify-between p-4 sm:p-5 text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                     style={{ background: expandedSession === i ? (dark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.01)") : "transparent" }}
+                    aria-expanded={expandedSession === i}
+                    aria-controls={`growth-session-${i}-panel`}
                   >
                     <div className="flex items-center gap-4">
                       <div
@@ -245,12 +248,13 @@ export default function GrowthPage() {
                         {session.num}
                       </div>
                       <div>
-                        <h3
-                          className="font-semibold text-sm sm:text-base"
+                        <span
+                          id={`growth-session-${i}-title`}
+                          className="font-semibold text-sm sm:text-base block"
                           style={{ fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif", color: t.text.primary }}
                         >
                           {session.title}
-                        </h3>
+                        </span>
                         <span
                           className="text-xs"
                           style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.muted }}
@@ -265,6 +269,7 @@ export default function GrowthPage() {
                         background: dark ? `${t.accent}10` : `${t.accent}08`,
                         transform: expandedSession === i ? "rotate(180deg)" : "rotate(0deg)",
                       }}
+                      aria-hidden
                     >
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ color: t.accent }}>
                         <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -273,12 +278,13 @@ export default function GrowthPage() {
                   </button>
 
                   <div
-                    className="overflow-hidden transition-all duration-300"
-                    style={{
-                      maxHeight: expandedSession === i ? "300px" : "0px",
-                      opacity: expandedSession === i ? 1 : 0,
-                    }}
+                    id={`growth-session-${i}-panel`}
+                    role="region"
+                    aria-labelledby={`growth-session-${i}-title`}
+                    className="grid transition-[grid-template-rows] duration-300 ease-out"
+                    style={{ gridTemplateRows: expandedSession === i ? "1fr" : "0fr" }}
                   >
+                    <div className="min-h-0 overflow-hidden">
                     <div className="px-4 sm:px-5 pb-5 pt-0">
                       <p
                         className="text-sm leading-relaxed mb-4 text-pretty"
@@ -308,6 +314,7 @@ export default function GrowthPage() {
                           </p>
                         </div>
                       )}
+                    </div>
                     </div>
                   </div>
                 </div>
