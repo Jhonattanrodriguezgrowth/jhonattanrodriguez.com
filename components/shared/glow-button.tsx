@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTheme } from "@teispace/next-themes";
-import { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 interface GlowButtonProps {
   children: ReactNode;
@@ -133,6 +133,25 @@ export function GlowButton({
     ...variantStyles,
   };
 
+  const handleHashLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (!href?.startsWith("#")) return;
+
+    const target = document.getElementById(href.slice(1));
+
+    if (!target) return;
+
+    event.preventDefault();
+    onClick?.();
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (window.location.hash === href) {
+      window.history.replaceState(null, "", href);
+    } else {
+      window.history.pushState(null, "", href);
+    }
+  };
+
   if (href) {
     if (external) {
       return (
@@ -143,6 +162,13 @@ export function GlowButton({
           className={baseClasses}
           style={baseStyles}
         >
+          {content}
+        </a>
+      );
+    }
+    if (href.startsWith("#")) {
+      return (
+        <a href={href} onClick={handleHashLinkClick} className={baseClasses} style={baseStyles}>
           {content}
         </a>
       );

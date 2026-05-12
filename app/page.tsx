@@ -173,7 +173,7 @@ export default function HomePage() {
           {/* CTA buttons */}
           <div className="flex gap-4 justify-center flex-wrap">
             <GlowButton
-              href="/growth"
+              href="#disciplinas"
               variant="primary"
               accentColor={t.accent}
               secondaryColor={t.secondary}
@@ -206,7 +206,7 @@ export default function HomePage() {
       </div>
 
       {/* Services cards */}
-      <section style={{ borderTop: `1px solid ${t.border}` }}>
+      <section id="disciplinas" style={{ borderTop: `1px solid ${t.border}` }}>
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="mb-16 text-center">
             <span
