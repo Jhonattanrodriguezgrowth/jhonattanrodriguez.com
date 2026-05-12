@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
 import { GlowButton, ArrowRightIcon } from "@/components/shared/glow-button";
 import { CTASection } from "@/components/cta-buttons";

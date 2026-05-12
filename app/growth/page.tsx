@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
 import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CheckIcon } from "@/components/shared/icons";

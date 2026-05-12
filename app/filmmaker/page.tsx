@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
 import { ModernBg } from "@/components/shared/modern-bg";
 import { Glass } from "@/components/shared/glass";

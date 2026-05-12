@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import { ModernBg } from "./modern-bg";
 
 interface PageWrapperProps {

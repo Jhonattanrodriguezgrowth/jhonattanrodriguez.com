@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
-import { WhatsAppIcon, CalendarIcon } from "./shared/icons";
-import { getWhatsAppLink, getCalendarLink } from "@/lib/cta-links";
+import type { LucideIcon } from "lucide-react";
+import { Youtube, Instagram, Linkedin } from "lucide-react";
+import { GlowButton } from "./shared/glow-button";
+import { getCalendarLink } from "@/lib/cta-links";
+import { THEMES } from "@/lib/design-tokens";
 
 const FOOTER_LINKS = [
   { href: "/growth", label: "Growth" },
@@ -12,16 +15,27 @@ const FOOTER_LINKS = [
   { href: "/ia-builder", label: "IA Builder" },
 ];
 
+const SOCIAL_LINKS: { href: string; label: string; Icon: LucideIcon }[] = [
+  { href: "https://www.youtube.com/@jhonattansfilm", label: "Canal de YouTube", Icon: Youtube },
+  { href: "https://www.instagram.com/jhonattansfilm/", label: "Instagram", Icon: Instagram },
+  {
+    href: "https://www.linkedin.com/in/jhonattanrodriguezgrowth",
+    label: "LinkedIn",
+    Icon: Linkedin,
+  },
+];
+
 export function Footer() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
-  
+
   // Default to dark during SSR to match the initial HTML
   const dark = mounted ? theme === "dark" : true;
+  const t = dark ? THEMES.index.dark : THEMES.index.light;
 
   const ts = dark ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.30)";
   const linkColor = dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)";
@@ -82,34 +96,24 @@ export function Footer() {
             </Link>
           </div>
 
-          {/* CTA Icons */}
-          <div className="flex gap-3">
-            <a
-              href={getCalendarLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{
-                background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-                color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)",
-              }}
-              aria-label="Agenda una llamada"
-            >
-              <CalendarIcon size={18} />
-            </a>
-            <a
-              href={getWhatsAppLink("general")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366]"
-              style={{
-                background: "#25D366",
-                color: "#ffffff",
-              }}
-              aria-label="Escribeme por WhatsApp"
-            >
-              <WhatsAppIcon size={18} />
-            </a>
+          {/* Redes: mismo GlowButton secondary que CTASection */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+              <GlowButton
+                key={href}
+                href={href}
+                external
+                variant="secondary"
+                size="md"
+                accentColor={t.accent}
+                secondaryColor={t.secondary}
+                icon={<Icon size={18} strokeWidth={2} aria-hidden />}
+                iconPosition="left"
+                className="!px-3 !py-3 min-w-[48px] min-h-[48px] !gap-0 shrink-0"
+              >
+                <span className="sr-only">{label}</span>
+              </GlowButton>
+            ))}
           </div>
         </div>
 

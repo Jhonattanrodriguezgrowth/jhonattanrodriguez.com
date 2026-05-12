@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import { SunIcon, MoonIcon, MenuIcon, CloseIcon } from "./shared/icons";
 
 const NAV_ITEMS = [
