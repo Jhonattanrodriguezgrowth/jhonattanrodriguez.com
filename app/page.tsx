@@ -165,8 +165,9 @@ export default function HomePage() {
               color: t.text.secondary,
             }}
           >
-            Construyo sistemas que hacen crecer negocios. No desde la teoria — desde la
-            experiencia de haberlo hecho, fallar, ajustar y volver a ejecutar.
+            Me integro en lo que ya funciona en tu negocio, lo optimizo y lo escalo con
+            metodologías ágiles, contenido y sistemas integrados con IA. Sin equipos enormes.
+            Sin agencias de alto costo.
           </p>
 
           {/* CTA buttons */}

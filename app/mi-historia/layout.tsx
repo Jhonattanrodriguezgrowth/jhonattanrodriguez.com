@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Mi Historia | Jhonattan Rodriguez",
   description:
-    "De donde vengo y hacia donde voy. La historia detras del sistema de crecimiento que combina Growth, Filmmaker e IA Builder.",
+    "Encontrar eso que amamos: confiar en que los puntos se conectarán. Trayectoria desde ingeniería y ciencias del deporte hasta producto, growth y Murphyia.",
   openGraph: {
     title: "Mi Historia | Jhonattan Rodriguez",
     description:
-      "De donde vengo y hacia donde voy. La historia detras del sistema de crecimiento.",
+      "Línea del tiempo y una idea que guía el camino: confiar en el futuro mientras cada etapa cobra sentido al mirar atrás.",
     type: "website",
     locale: "es_CO",
   },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mi Historia | Jhonattan Rodriguez",
     description:
-      "De donde vengo y hacia donde voy. La historia detras del sistema de crecimiento.",
+      "Trayectoria y puntos de conexión: de la UNAL y el cuerpo humano a startups, AI Builder y Murphyia — con una cita que enmarca el porqué.",
   },
 };
 

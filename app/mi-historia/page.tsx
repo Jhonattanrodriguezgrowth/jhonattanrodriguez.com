@@ -2,75 +2,59 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { ModernBg } from "@/components/shared/modern-bg";
 import { GlowButton, ArrowRightIcon } from "@/components/shared/glow-button";
 import { CTASection } from "@/components/cta-buttons";
 import { THEMES } from "@/lib/design-tokens";
 
-// Timeline data expandido para la pagina completa
+// Timeline — orden cronológico (year, title, desc = párrafo 1, expanded = párrafo 2)
 const HISTORIA_TIMELINE = [
   {
-    year: "2015",
+    year: "2013",
     color: "#a78bfa",
-    title: "Ingenieria de Control — Universidad Nacional",
-    desc: "El origen de todo. Entrar a la Nacional fue el primer filtro real que pase en mi vida. No era solo estudiar — era aprender a pensar en sistemas, en logica, en como las cosas se conectan entre si.",
-    expanded: "Ahi entendi que cualquier cosa que funciona tiene una estructura detras. No importa si es un circuito, un negocio o una marca personal. La ingenieria me dio la forma de ver el mundo que todavia uso hoy.",
+    title: "Ingeniería de Control — Universidad Nacional",
+    desc: "Mi paso por la ingeniería de control en la UNAL me dejó algo que no estaba en el pensum: el pensamiento sistémico. Aprender a ver cómo las cosas se conectan entre sí, cómo un sistema responde, falla y se regula. Eso no se olvida.",
+    expanded:
+      "Plantó en mí la semilla de la automatización. No lo sabía en ese momento, pero estaba aprendiendo el lenguaje con el que más adelante iba a construir todo lo demás.",
   },
   {
-    year: "2017",
-    color: "#a78bfa",
-    title: "El quiebre — Paso por el Politecnico",
-    desc: "Deje la Nacional. No por incapacidad — por necesidad de moverme. La teoria sin accion me estaba matando. Necesitaba hacer, no solo entender.",
-    expanded: "El Politecnico fue el puente. Menos prestigio academico, mas tiempo para construir cosas reales. Ahi empece a experimentar con negocios mientras terminaba de estudiar.",
-  },
-  {
-    year: "2018",
-    color: "#86efac",
-    title: "Primer negocio — Entrenador Personalizado",
-    desc: "Mi primer intento serio de monetizar algo propio. Certificaciones, clientes, horarios. Todo manual, todo desde cero, todo con el talento como unica herramienta.",
-    expanded: "Funciono... hasta que no. Sin sistemas, sin metodologia, sin forma de escalar. El talento solo no alcanza para crecer. Esa leccion me costo tiempo y dinero, pero valio cada segundo.",
-  },
-  {
-    year: "2019",
-    color: "#fdba74",
-    title: "Integrow — ExpoFitness 2019",
-    desc: "El momento fundacional. Integrow nace como la marca que unifica todo lo que habia aprendido: el fitness, el emprendimiento, los sistemas y la comunicacion.",
-    expanded: "ExpoFitness fue el bautizo. Primera exposicion masiva, primeras ventas a escala, primer contacto con lo que significa tener una marca que la gente reconoce. De ahi en adelante, todo cambio.",
-  },
-  {
-    year: "2020",
+    year: "2015 – 2018",
     color: "#93c5fd",
-    title: "Pandemia — El pivot forzado",
-    desc: "Como a todos, el COVID me obligo a replantear todo. El fitness presencial murio de un dia para otro. Pero lo digital estaba esperando.",
-    expanded: "Aprendi a grabar, a editar, a vender en redes. No por gusto — por supervivencia. Esa urgencia me convirtio en filmmaker sin darme cuenta.",
+    title: "Ciencias del Deporte — Politécnico JIC",
+    desc: "Mis bases en ciencias del deporte, nutrición y fisiología me enseñaron cómo funciona y cómo falla nuestro metabolismo. El cuerpo humano es el sistema más complejo y maravilloso que existe, y estudiarlo me dio una perspectiva que ningún lenguaje de programación puede reemplazar.",
+    expanded:
+      "Siete semestres de fisiología, kinesiología, bioquímica y anatomía aplicados en la práctica. Entendí el cuerpo humano como un sistema perfecto que responde a los datos correctos. Esa fue la base clínica que hoy traduzco en arquitecturas de datos.",
   },
   {
-    year: "2021",
-    color: "#fdba74",
-    title: "Filmmaker — De necesidad a servicio",
-    desc: "Lo que empezo como contenido para mi marca se convirtio en un servicio para otras marcas. Emprendedores que necesitaban lo mismo que yo habia construido para mi.",
-    expanded: "Produccion agil, entregas rapidas, contenido estrategico. No era solo hacer videos bonitos — era hacer videos que vendieran. Esa diferencia me separo del resto.",
-  },
-  {
-    year: "2022",
+    year: "2017 – 2019",
     color: "#86efac",
-    title: "Growth Hacker — Sistematizando el crecimiento",
-    desc: "MetaAds, embudos, automatizaciones. El contenido ya no era suficiente — habia que ponerle gasolina. Aprendi a escalar lo que ya funcionaba.",
-    expanded: "Me certifique, experimente, queme presupuesto propio hasta entender que funcionaba. Ahora ayudo a otros a saltarse esa curva de aprendizaje.",
+    title: "Personal Trainer, Action Fitness & primer MVP HealthTech",
+    desc: "Dos años como Personal Trainer me revelaron una verdad fundamental: en la salud, el mayor reto no es la falta de teoría clínica. Es la psicología, la adherencia a los hábitos y la falta de trazabilidad diaria. La fuerza de voluntad es frágil. El cuerpo necesita ecosistemas de datos para no fallar.",
+    expanded:
+      "Ante la necesidad de escalar el seguimiento de mis pacientes, conceptualicé mi primera startup de salud y la presenté en Expofitness 2019. Un entrenador virtual semi-personalizado. Era mi primer MVP HealthTech y el inicio de una idea que no pude soltar.",
   },
   {
-    year: "2023",
+    year: "2019 – 2025",
+    color: "#fdba74",
+    title: "InteGrowHome — Growth Hacker, Filmmaker & Ecosistema Startup",
+    desc: "InteGrowHome fue mi campo de ingreso y entrenamiento en el ecosistema startup. Durante más de 5 años aprendí en la práctica el valor de la perseverancia. Lideré y co-creé con 3 equipos de ingeniería diferentes la iteración constante de MVPs. Ingresé en paralelo en dos ecosistemas: el inmobiliario y el de startups tecnológicas. Eso me dio una perspectiva única que hoy es el núcleo de mi trabajo como AI Builder.",
+    expanded:
+      "Fue también la etapa donde descubrí el lenguaje visual como herramienta de growth. El Filmmaker no nació en un set: nació de la necesidad de comunicar con precisión lo que los datos solos no podían decir. Growth, producto y narrativa terminaron siendo, para mí, tres caras de la misma moneda.",
+  },
+  {
+    year: "2025 – 2026",
     color: "#93c5fd",
-    title: "IA Builder — La nueva frontera",
-    desc: "ChatGPT cambio todo. No solo como herramienta — como paradigma. Entendi rapido que esto no era una moda. Era el nuevo juego.",
-    expanded: "Empece a construir automatizaciones, agentes, aplicaciones. No por hype — porque vi que podia multiplicar mi capacidad de ejecucion 10x. Ahora ayudo a otros a hacer lo mismo.",
+    title: "AI Builder — Soberanía en la creación de productos",
+    desc: "Mi trayectoria no es la de un desarrollador tradicional que solo observa una oportunidad de mercado. Con Cursor, Claude Code, Lovable, Supabase y n8n aprendí que un operador único con las herramientas correctas puede orquestar todas las piezas del rompecabezas: producto, growth y visión clínica en un solo rol.",
+    expanded:
+      "Aquí es donde conecté los puntos de mi pasado: traduje mi conocimiento fisiológico en arquitecturas de bases de datos, y mi experiencia en growth en un modelo escalable. No solo creando software. Orquestando ecosistemas.",
   },
   {
-    year: "2024+",
+    year: "2026",
     color: "#a78bfa",
-    title: "Tres disciplinas, un sistema",
-    desc: "Growth, Filmmaker, IA Builder. Tres caras de la misma moneda. No son servicios separados — son capas de un mismo sistema de crecimiento.",
-    expanded: "Cada proyecto que tomo puede usar una, dos o las tres. Depende de donde este el cliente y a donde quiera llegar. El sistema se adapta, no al reves.",
+    title: "Murphyia — El sistema que mi abuela necesitaba",
+    desc: "Tras observar el problema de trazabilidad que enfrentan los pacientes con enfermedades crónicas, incluyendo a mi propia abuela, decidí construir la solución. Un diagnóstico médico no debería ser una sentencia de por vida por falta de datos en la toma de decisiones.",
+    expanded:
+      "Murphyia.com es el ecosistema donde pacientes, cuidadores y médicos recuperan el control y el seguimiento de la Diabetes Tipo 2. No llegué aquí por accidente. Cada paso construyó el sistema que hoy uso para ayudar a otros.",
   },
 ];
 
@@ -92,11 +76,68 @@ export default function MiHistoriaPage() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden" style={{ background: t.bg }}>
-      <ModernBg accentColor={t.accent} secondaryColor={t.secondary} dark={dark} />
+      {/* Fondo plexus + scrims en toda la página (hero, timeline, CTA) */}
+      <div
+        className="absolute inset-0 z-0 min-h-full overflow-x-hidden pointer-events-none"
+        aria-hidden
+      >
+        {dark ? (
+          <>
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "url('/images/hero-mi-historia-dark.svg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center 38%",
+                backgroundRepeat: "no-repeat",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(7,8,15,0.5) 0%, rgba(7,8,15,0.68) 42%, rgba(7,8,15,0.9) 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 90% 55% at 14% 18%, rgba(168,85,247,0.18), transparent 50%), radial-gradient(ellipse 75% 48% at 90% 12%, rgba(34,211,238,0.1), transparent 48%)",
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "url('/images/hero-mi-historia-light.svg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+                backgroundRepeat: "no-repeat",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(255,255,255,0.52) 0%, rgba(248,250,252,0.78) 48%, rgba(244,246,251,0.95) 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 88% 52% at 20% 24%, rgba(99,102,241,0.07), transparent 52%), radial-gradient(ellipse 70% 46% at 84% 22%, rgba(14,165,233,0.06), transparent 48%)",
+              }}
+            />
+          </>
+        )}
+      </div>
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-16">
-        <div className="max-w-3xl mx-auto px-6">
+      <section className="relative z-10 min-h-[72vh] flex flex-col justify-center overflow-x-hidden pt-28 pb-20 sm:pb-24">
+        <div className="max-w-3xl mx-auto px-6 w-full">
           <GlowButton
             href="/"
             variant="ghost"
@@ -111,46 +152,63 @@ export default function MiHistoriaPage() {
           </GlowButton>
 
           <span
-            className="inline-block text-xs tracking-[0.22em] uppercase font-semibold mb-5 px-4 py-2 rounded-full"
+            className="inline-block text-xs tracking-[0.22em] uppercase font-semibold mb-6 px-4 py-2 rounded-full"
             style={{
               fontFamily: "var(--font-lato), sans-serif",
               color: t.accent,
-              background: dark ? `${t.accent}15` : `${t.accent}10`,
+              background: dark ? `${t.accent}18` : `${t.accent}12`,
             }}
           >
             Mi historia
           </span>
 
           <h1
-            className="font-bold mb-6"
+            className="font-bold mb-5 text-balance"
             style={{
               fontFamily: "var(--font-quicksand), sans-serif",
               fontSize: "clamp(32px, 6vw, 52px)",
+              lineHeight: 1.15,
               color: t.text.primary,
               letterSpacing: "-0.02em",
             }}
           >
-            De donde vengo y{" "}
-            <span style={{ color: t.accent }}>hacia donde voy.</span>
+            Encontrar eso que{" "}
+            <span style={{ color: t.accent }}>amamos.</span>
           </h1>
 
-          <p
-            className="text-base sm:text-lg leading-relaxed mb-8"
+          <blockquote
+            cite="https://news.stanford.edu/news/2005/june15/jobs-061505.html"
+            className="max-w-2xl mb-8 pl-4 sm:pl-5 border-l-[3px] rounded-sm text-pretty"
             style={{
-              fontFamily: "var(--font-lato), sans-serif",
-              color: t.text.secondary,
-              lineHeight: 1.7,
+              borderColor: dark ? `${t.accent}4d` : `${t.accent}40`,
             }}
           >
-            No llegue aqui por accidente. Cada paso — incluidos los errores — construyo el sistema 
-            que hoy uso para ayudar a otros. Esta es la version larga de como Growth, Filmmaker 
-            y IA Builder terminaron siendo tres caras de la misma moneda.
-          </p>
+            <p
+              className="text-[17px] sm:text-lg font-normal m-0"
+              style={{
+                fontFamily: "var(--font-lato), sans-serif",
+                color: t.text.secondary,
+                lineHeight: 1.55,
+              }}
+            >
+              «No se pueden conectar los puntos mirando hacia el pasado, por lo que tienen que confiar en que
+              los puntos, de alguna forma, se conectarán en el futuro.»
+            </p>
+            <footer
+              className="mt-3 text-[15px] leading-snug"
+              style={{
+                fontFamily: "var(--font-lato), sans-serif",
+                color: t.text.muted,
+                fontWeight: 500,
+              }}
+            >
+              — Steve Jobs
+            </footer>
+          </blockquote>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="relative pb-24">
+      <section className="relative z-10 pb-24 pt-4">
         <div className="max-w-3xl mx-auto px-6">
           <div className="relative">
             {/* Timeline line */}
@@ -166,7 +224,7 @@ export default function MiHistoriaPage() {
             <div className="flex flex-col gap-6">
               {HISTORIA_TIMELINE.map((item, i) => (
                 <button
-                  key={i}
+                  key={`${item.year}-${item.title}`}
                   onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
                   className="flex gap-4 sm:gap-6 relative group text-left w-full"
                 >
@@ -246,7 +304,7 @@ export default function MiHistoriaPage() {
                     <div
                       className="overflow-hidden transition-all duration-500"
                       style={{
-                        maxHeight: expandedIndex === i ? "200px" : "0px",
+                        maxHeight: expandedIndex === i ? "1200px" : "0px",
                         opacity: expandedIndex === i ? 1 : 0,
                         marginTop: expandedIndex === i ? "16px" : "0px",
                       }}
@@ -274,8 +332,7 @@ export default function MiHistoriaPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={{ borderTop: `1px solid ${t.border}` }}>
+      <section className="relative z-10" style={{ borderTop: `1px solid ${t.border}` }}>
         <div className="max-w-3xl mx-auto px-6">
           <CTASection
             dark={dark}

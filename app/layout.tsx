@@ -29,7 +29,7 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Jhonattan Rodriguez | Growth Hacker, Filmmaker & IA Builder",
   description:
-    "Construyo sistemas que hacen crecer negocios. Growth Hacking, Produccion de Video y soluciones con IA desde Bogota, Colombia.",
+    "Integro, optimizo y escalo lo que ya funciona en tu negocio con metodologías ágiles, contenido e IA. Growth, video y sistemas. Bogotá, Colombia.",
   generator: "v0.app",
   keywords: [
     "Growth Hacker",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Jhonattan Rodriguez | Growth Hacker, Filmmaker & IA Builder",
     description:
-      "Construyo sistemas que hacen crecer negocios. Growth Hacking, Produccion de Video y soluciones con IA.",
+      "Metodologías ágiles, contenido e IA integrada para escalar sin equipos enormes ni agencias de alto costo. Growth Hacker, Filmmaker e IA Builder.",
     type: "website",
     locale: "es_CO",
   },
