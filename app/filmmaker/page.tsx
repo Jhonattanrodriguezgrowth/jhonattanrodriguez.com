@@ -2,7 +2,7 @@
 
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
-import { ModernBg } from "@/components/shared/modern-bg";
+import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { Glass } from "@/components/shared/glass";
 import { CTASection, CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
 import {
@@ -40,12 +40,10 @@ export default function FilmmakerPage() {
   const cardBg = t.card;
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden" style={{ background: t.bg }}>
-      <ModernBg accentColor={t.accent} secondaryColor={t.secondary} dark={dark} />
-
+    <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.secondary} dark={dark}>
       {/* ─── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="pt-28 sm:pt-36 pb-16 sm:pb-24 relative">
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
+        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
           <span
             className="inline-block text-xs tracking-[0.22em] uppercase font-semibold mb-5 px-4 py-2 rounded-full"
             style={{
@@ -54,7 +52,7 @@ export default function FilmmakerPage() {
               background: dark ? `${t.accent}15` : `${t.accent}10`,
             }}
           >
-            Produccion Audiovisual
+            Producción audiovisual
           </span>
           <h1
             className="font-semibold leading-[1.1] mb-6 sm:mb-8"
@@ -65,18 +63,18 @@ export default function FilmmakerPage() {
               letterSpacing: "-0.02em",
             }}
           >
-            Un sistema de produccion
+            Un sistema de producción
             <br />
             <span style={{ color: t.accent }}>optimizado para tu marca.</span>
           </h1>
           <p
-            className="text-base sm:text-lg max-w-xl leading-relaxed mb-10"
+            className="text-base sm:text-lg max-w-xl mx-auto md:mx-0 leading-relaxed mb-10"
             style={{ fontFamily: "var(--font-lato), sans-serif", color: t.text.secondary, lineHeight: 1.7 }}
           >
-            Contenido en video de calidad profesional en tiempo record, con estrategia de
-            publicacion integrada — adaptado al ritmo y presupuesto de cada marca.
+            Contenido en video de calidad profesional en tiempo récord, con estrategia de
+            publicación integrada — adaptado al ritmo y presupuesto de cada marca.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
             <CTACalendar
               variant="primary"
               dark={dark}
@@ -90,8 +88,8 @@ export default function FilmmakerPage() {
 
       {/* ─── PROBLEMA QUE RESOLVEMOS ──────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
-          <Glass dark={dark} accentBorder={ab} className="p-6 sm:p-10">
+        <div className="max-w-5xl mx-auto px-6">
+          <Glass dark={dark} accentBorder={ab} className="p-6 sm:p-10 text-center md:text-left">
             <span
               className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-4"
               style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
@@ -102,15 +100,15 @@ export default function FilmmakerPage() {
               className="text-lg sm:text-xl leading-relaxed mb-6"
               style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp, fontWeight: 500 }}
             >
-              Las marcas necesitan presencia constante en redes sociales, pero la produccion
+              Las marcas necesitan presencia constante en redes sociales, pero la producción
               tradicional es lenta, costosa y fragmentada.
             </p>
             <p
               className="text-base leading-relaxed"
               style={{ fontFamily: "var(--font-lato), sans-serif", color: t.text.secondary, lineHeight: 1.7 }}
             >
-              Cada pieza toma dias de planificacion, rodaje y edicion. La solucion: un sistema
-              optimizado que entrega contenido de calidad profesional en tiempo record.
+              Cada pieza toma días de planificación, rodaje y edición. La solución: un sistema
+              optimizado que entrega contenido de calidad profesional en tiempo récord.
             </p>
           </Glass>
         </div>
@@ -118,12 +116,12 @@ export default function FilmmakerPage() {
 
       {/* ─── PARA QUIEN ES ────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
+        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
           <span
             className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
             style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
           >
-            Para quien es
+            Para quién es
           </span>
           <h2
             className="font-semibold text-xl sm:text-2xl mb-10 sm:mb-12"
@@ -133,17 +131,17 @@ export default function FilmmakerPage() {
               letterSpacing: "-0.01em",
             }}
           >
-            Este servicio esta diseñado para
+            Este servicio está diseñado para
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
             {FILM_TARGET_AUDIENCE.map((item, i) => (
               <div
                 key={i}
-                className="p-5 sm:p-6 rounded-2xl transition-all duration-300"
+                className="p-5 sm:p-6 rounded-2xl transition-all duration-300 text-center md:text-left"
                 style={{ background: cardBg, border: `1px solid ${div}` }}
               >
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-lg font-semibold"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-lg font-semibold mx-auto md:mx-0"
                   style={{ background: gb, color: t.accent, border: `1px solid ${ab}` }}
                 >
                   {i + 1}
@@ -155,7 +153,7 @@ export default function FilmmakerPage() {
                   {item.title}
                 </h3>
                 <p
-                  className="text-sm leading-relaxed"
+                  className="text-sm sm:text-base leading-relaxed"
                   style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.65 }}
                 >
                   {item.desc}
@@ -168,8 +166,8 @@ export default function FilmmakerPage() {
 
       {/* ─── PLANES ───────────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-5 sm:px-8">
-          <div className="text-center mb-12 sm:mb-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center md:text-left mb-12 sm:mb-16">
             <span
               className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
               style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
@@ -217,7 +215,7 @@ export default function FilmmakerPage() {
                       color: t.accentSolid,
                     }}
                   >
-                    Mas Popular
+                    Más popular
                   </div>
                 )}
 
@@ -357,7 +355,7 @@ export default function FilmmakerPage() {
                           className="text-xs tracking-[0.2em] uppercase font-medium mb-4"
                           style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
                         >
-                          Framework estrategico
+                          Framework estratégico
                         </h4>
                         <div className="space-y-3">
                           {plan.framework.map((f, k) => (
@@ -575,13 +573,13 @@ export default function FilmmakerPage() {
 
       {/* ─── PROCESO ──────────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
-          <div className="mb-10 sm:mb-14">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="mb-10 sm:mb-14 text-center md:text-left">
             <span
               className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
               style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
             >
-              Como trabajamos
+              Cómo trabajamos
             </span>
             <h2
               className="font-semibold text-xl sm:text-2xl"
@@ -591,7 +589,7 @@ export default function FilmmakerPage() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Proceso de produccion
+              Proceso de producción
             </h2>
           </div>
 
@@ -655,13 +653,13 @@ export default function FilmmakerPage() {
 
       {/* ─── POR QUE FUNCIONA ─────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
-          <div className="text-center mb-10 sm:mb-14">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center md:text-left mb-10 sm:mb-14">
             <span
               className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
               style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
             >
-              Metodologia
+              Metodología
             </span>
             <h2
               className="font-semibold text-xl sm:text-2xl"
@@ -671,7 +669,7 @@ export default function FilmmakerPage() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Por que funciona esta metodologia
+              Por qué funciona esta metodología
             </h2>
           </div>
 
@@ -681,7 +679,7 @@ export default function FilmmakerPage() {
                 key={i}
                 dark={dark}
                 accentBorder={dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}
-                className="p-5 sm:p-6"
+                className="p-5 sm:p-6 text-center md:text-left"
               >
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center mb-4 text-sm font-bold"
@@ -709,8 +707,8 @@ export default function FilmmakerPage() {
 
       {/* ─── RESULTADOS ───────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
-          <div className="text-center mb-10">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center md:text-left mb-10">
             <span
               className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
               style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
@@ -756,17 +754,17 @@ export default function FilmmakerPage() {
 
       {/* ─── CTA FINAL ────────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
+        <div className="max-w-5xl mx-auto px-6">
           <CTASection
             dark={dark}
             accentColor={t.accent}
             accentSolidColor={t.accentSolid}
             context="filmmaker"
             title="¿Listo para producir?"
-            description="Agenda una llamada estrategica (30 min) para evaluar tu marca y objetivos. Confirmamos fechas y arrancamos la pre-produccion."
+            description="Agenda una llamada estratégica (30 min) para evaluar tu marca y objetivos. Confirmamos fechas y arrancamos la pre-producción."
           />
         </div>
       </section>
-    </div>
+    </ThemedPageShell>
   );
 }

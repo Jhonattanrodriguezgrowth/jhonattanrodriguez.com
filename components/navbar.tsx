@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "@teispace/next-themes";
+import { THEMES } from "@/lib/design-tokens";
+import { hexToRgba, resolveRouteThemeId } from "@/lib/route-theme";
 import { SunIcon, MoonIcon, MenuIcon, CloseIcon } from "./shared/icons";
 
 const NAV_ITEMS = [
@@ -57,9 +59,6 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
-  const textC = dark ? "rgba(255,255,255,0.48)" : "rgba(0,0,0,0.44)";
-  const hoverC = dark ? "rgba(255,255,255,0.88)" : "rgba(0,0,0,0.86)";
-
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
@@ -69,22 +68,22 @@ export function Navbar() {
     return <nav className="fixed top-0 left-0 right-0 z-50 h-16" />;
   }
 
+  const routeId = resolveRouteThemeId(pathname);
+  const mode = dark ? "dark" : "light";
+  const pt = THEMES[routeId][mode];
+  const navScrolledBg = dark ? hexToRgba(pt.bg, 0.88) : hexToRgba(pt.bg, 0.92);
+  const mobilePanelBg = hexToRgba(pt.bg, 0.98);
+  const textC = pt.text.muted;
+  const hoverC = pt.text.secondary;
+
   return (
     <>
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled
-            ? dark
-              ? "rgba(7,8,15,0.88)"
-              : "rgba(240,242,248,0.88)"
-            : "transparent",
+          background: scrolled ? navScrolledBg : "transparent",
           backdropFilter: scrolled ? "blur(16px)" : "none",
-          borderBottom: scrolled
-            ? dark
-              ? "1px solid rgba(255,255,255,0.07)"
-              : "1px solid rgba(0,0,0,0.07)"
-            : "none",
+          borderBottom: scrolled ? `1px solid ${pt.border}` : "none",
         }}
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -93,7 +92,7 @@ export function Navbar() {
             className="transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-current rounded-md whitespace-nowrap"
             style={{
               fontFamily: "'Engagement', cursive",
-              color: dark ? "#f4f0e8" : "#1a1a1a",
+              color: pt.text.primary,
               letterSpacing: 1,
             }}
           >
@@ -111,7 +110,7 @@ export function Navbar() {
                   className="px-4 py-2 min-h-[44px] flex items-center rounded-lg text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   style={{
                     fontFamily: "'Lato', sans-serif",
-                    color: active ? (dark ? "#fff" : "#000") : textC,
+                    color: active ? pt.text.primary : textC,
                     background: active
                       ? dark
                         ? "rgba(255,255,255,0.08)"
@@ -185,10 +184,8 @@ export function Navbar() {
           mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
         style={{
-          background: dark ? "rgba(7,8,15,0.98)" : "rgba(240,242,248,0.98)",
-          borderBottom: dark
-            ? "1px solid rgba(255,255,255,0.07)"
-            : "1px solid rgba(0,0,0,0.07)",
+          background: mobilePanelBg,
+          borderBottom: `1px solid ${pt.border}`,
           backdropFilter: "blur(16px)",
         }}
       >
@@ -203,9 +200,7 @@ export function Navbar() {
                 className="text-left px-4 py-3 min-h-[48px] flex items-center rounded-lg text-base transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2"
                 style={{
                   fontFamily: "'Lato', sans-serif",
-                  color: active 
-                    ? (dark ? "#fff" : "#000") 
-                    : (dark ? "rgba(255,255,255,0.70)" : "rgba(0,0,0,0.70)"),
+                  color: active ? pt.text.primary : pt.text.secondary,
                   background: active
                     ? dark
                       ? "rgba(255,255,255,0.08)"

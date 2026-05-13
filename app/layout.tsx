@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "Bogota",
     "Colombia",
     "MetaAds",
-    "Automatizacion",
+    "Automatización",
     "Video Marketing",
   ],
   authors: [{ name: "Jhonattan Rodriguez" }],

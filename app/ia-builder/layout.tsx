@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     "Automatizaciones, agentes IA y aplicaciones web para escalar tu negocio. Construyo herramientas que trabajan mientras tu creces.",
   keywords: [
     "IA Builder",
-    "Automatizacion",
+    "Automatización",
     "Agentes IA",
     "n8n",
     "Make",

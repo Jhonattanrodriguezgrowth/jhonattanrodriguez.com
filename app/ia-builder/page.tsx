@@ -2,7 +2,7 @@
 
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
-import { ModernBg } from "@/components/shared/modern-bg";
+import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
 import { THEMES, BUILDER_STACK, BUILDER_FILTERS, BUILDER_PROJECTS } from "@/lib/design-tokens";
 
@@ -36,7 +36,7 @@ export default function IABuilderPage() {
     },
     {
       title: "Aplicaciones Web",
-      desc: "MVPs, dashboards, portales. Construidos rapido con las mejores herramientas low-code.",
+      desc: "MVPs, dashboards, portales. Construido rápido con las mejores herramientas low-code.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
@@ -47,7 +47,7 @@ export default function IABuilderPage() {
     },
     {
       title: "Agentes IA",
-      desc: "Asistentes que responden, procesan y ejecutan. Integrados con tu operacion.",
+      desc: "Asistentes que responden, procesan y ejecutan. Integrados con tu operación.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 8V4H8"/>
@@ -61,15 +61,13 @@ export default function IABuilderPage() {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden" style={{ background: t.bg }}>
-      <ModernBg accentColor={t.accent} secondaryColor={t.teal} dark={dark} />
-
+    <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.teal} dark={dark}>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
           {/* Terminal chrome */}
           <div
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2.5 rounded-full backdrop-blur-sm"
+            className="inline-flex items-center gap-2 mb-6 px-4 py-2.5 rounded-full backdrop-blur-sm mx-auto md:mx-0"
             style={{
               background: t.card,
               border: `1px solid ${t.border}`,
@@ -84,7 +82,7 @@ export default function IABuilderPage() {
           </div>
 
           <span
-            className="text-xs font-mono block mb-4 px-3 py-1.5 rounded-lg w-fit"
+            className="text-xs font-mono block mb-4 px-3 py-1.5 rounded-lg w-fit mx-auto md:mx-0"
             style={{
               color: t.teal,
               background: dark ? `${t.teal}15` : `${t.teal}10`,
@@ -104,16 +102,16 @@ export default function IABuilderPage() {
             <br />
             que <span style={{ color: t.accent }}>trabajan</span> mientras
             <br />
-            tu escalas.
+            tú escalas.
           </h1>
           <p
-            className="text-base md:text-lg max-w-2xl leading-relaxed mb-8"
+            className="text-base md:text-lg max-w-2xl mx-auto md:mx-0 leading-relaxed mb-8"
             style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
           >
-            Automatizaciones, agentes y aplicaciones construidas con las herramientas que estan
-            redefiniendo como se trabaja. Cada proyecto resuelve un problema real.
+            Automatizaciones, agentes y aplicaciones construidas con las herramientas que están
+            redefiniendo cómo se trabaja. Cada proyecto resuelve un problema real.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <CTACalendar variant="primary" dark={dark} accentColor={t.accent} accentSolidColor={t.accentSolid} />
             <CTAWhatsApp variant="secondary" context="builder" dark={dark} accentColor={t.accent} />
           </div>
@@ -122,7 +120,7 @@ export default function IABuilderPage() {
 
       {/* Stack */}
       <section className="py-12 relative">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
           <span
             className="inline-block text-xs font-mono mb-4 px-3 py-1.5 rounded-lg"
             style={{
@@ -132,7 +130,7 @@ export default function IABuilderPage() {
           >
             {"> stack --personal"}
           </span>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 justify-items-stretch">
             {BUILDER_STACK.map((name, i) => (
               <div
                 key={i}
@@ -153,7 +151,7 @@ export default function IABuilderPage() {
 
       {/* Services */}
       <section className="py-12 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
           <span
             className="inline-block text-xs font-mono mb-4 px-3 py-1.5 rounded-lg"
             style={{
@@ -167,20 +165,20 @@ export default function IABuilderPage() {
             className="font-bold text-2xl mb-8"
             style={{ fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif", color: t.text.primary }}
           >
-            Que puedo construir para ti
+            Qué puedo construir para ti
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {services.map((s, i) => (
               <div
                 key={i}
-                className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
+                className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02] text-center md:text-left"
                 style={{
                   background: t.card,
                   border: `1px solid ${t.border}`,
                 }}
               >
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 mx-auto md:mx-0"
                   style={{
                     background: dark ? `${t.accent}15` : `${t.accent}10`,
                     color: t.accent,
@@ -195,7 +193,7 @@ export default function IABuilderPage() {
                   {s.title}
                 </h3>
                 <p
-                  className="text-sm leading-relaxed"
+                  className="text-sm sm:text-base leading-relaxed"
                   style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
                 >
                   {s.desc}
@@ -208,7 +206,7 @@ export default function IABuilderPage() {
 
       {/* Projects */}
       <section className="py-12 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
           <span
             className="inline-block text-xs font-mono mb-4 px-3 py-1.5 rounded-lg"
             style={{
@@ -221,7 +219,7 @@ export default function IABuilderPage() {
 
           {/* Filters */}
           <div
-            className="flex flex-wrap gap-3 mb-8"
+            className="flex flex-wrap gap-3 mb-8 justify-center md:justify-start"
             role="group"
             aria-label="Filtrar proyectos por categoría"
           >
@@ -248,14 +246,14 @@ export default function IABuilderPage() {
             {filtered.map((project, i) => (
               <div
                 key={i}
-                className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
+                className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02] text-center md:text-left"
                 style={{
                   background: t.card,
                   border: `1px solid ${t.border}`,
                   opacity: project.soon ? 0.6 : 1,
                 }}
               >
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start mb-4 flex-wrap gap-2 justify-center md:justify-between">
                   <span
                     className="text-xs px-2 py-1 rounded-lg font-mono"
                     style={{
@@ -267,7 +265,7 @@ export default function IABuilderPage() {
                   </span>
                   {project.soon && (
                     <span className="text-xs font-mono" style={{ color: t.text.muted }}>
-                      proximamente
+                      Próximamente
                     </span>
                   )}
                 </div>
@@ -278,12 +276,12 @@ export default function IABuilderPage() {
                   {project.title}
                 </h3>
                 <p
-                  className="text-sm leading-relaxed mb-4"
+                  className="text-sm sm:text-base leading-relaxed mb-4"
                   style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
                 >
                   {project.desc}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                   {project.stack.map((s, j) => (
                     <span
                       key={j}
@@ -305,7 +303,7 @@ export default function IABuilderPage() {
 
       {/* Process */}
       <section className="py-12 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
           <span
             className="inline-block text-xs font-mono mb-4 px-3 py-1.5 rounded-lg"
             style={{
@@ -319,7 +317,7 @@ export default function IABuilderPage() {
             className="font-bold text-2xl mb-8"
             style={{ fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif", color: t.text.primary }}
           >
-            Como desarrollo tu proyecto
+            Cómo desarrollo tu proyecto
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
@@ -331,22 +329,22 @@ export default function IABuilderPage() {
               {
                 step: "02",
                 title: "Prototipo",
-                desc: "Construyo un MVP funcional para validar la solucion antes de invertir mas.",
+                desc: "Construyo un MVP funcional para validar la solución antes de invertir más.",
               },
               {
                 step: "03",
                 title: "Desarrollo",
-                desc: "Itero sobre el prototipo hasta tener la solucion completa y robusta.",
+                desc: "Itero sobre el prototipo hasta tener la solución completa y robusta.",
               },
               {
                 step: "04",
                 title: "Entrega",
-                desc: "Documentacion, capacitacion y soporte inicial incluido.",
+                desc: "Documentación, capacitación y soporte inicial incluido.",
               },
             ].map((item, i) => (
               <div
                 key={i}
-                className="flex gap-4 p-5 rounded-2xl transition-all duration-300 hover:scale-[1.01]"
+                className="flex flex-col items-center text-center gap-4 p-5 rounded-2xl transition-all duration-300 hover:scale-[1.01] sm:flex-row sm:items-start sm:text-left"
                 style={{
                   background: t.card,
                   border: `1px solid ${t.border}`,
@@ -369,7 +367,7 @@ export default function IABuilderPage() {
                     {item.title}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed"
+                    className="text-sm sm:text-base leading-relaxed"
                     style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
                   >
                     {item.desc}
@@ -385,7 +383,7 @@ export default function IABuilderPage() {
       <section className="py-16 relative" style={{ borderTop: `1px solid ${t.border}` }}>
         <div className="max-w-5xl mx-auto px-6">
           <div
-            className="p-10 rounded-3xl text-center backdrop-blur-xl"
+            className="p-10 rounded-3xl text-center backdrop-blur-xl md:text-left"
             style={{
               background: t.card,
               border: `1px solid ${t.border}`,
@@ -393,34 +391,34 @@ export default function IABuilderPage() {
             }}
           >
             <div
-              className="inline-block text-xs font-mono mb-4 px-3 py-1.5 rounded-lg"
+              className="inline-block text-xs font-mono mb-4 px-3 py-1.5 rounded-lg mx-auto md:mx-0"
               style={{
                 color: t.teal,
                 background: dark ? `${t.teal}15` : `${t.teal}10`,
               }}
             >
-              {"> tienes un problema que necesita solucion?"}
+              {"> ¿tienes un problema que necesita solución?"}
             </div>
             <h3
-              className="font-bold text-2xl mb-3"
+              className="font-bold text-2xl mb-3 mx-auto md:mx-0 max-w-xl"
               style={{ fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif", color: t.text.primary }}
             >
               Construyamos algo juntos
             </h3>
             <p
-              className="text-sm mb-7 max-w-md mx-auto leading-relaxed"
+              className="text-sm sm:text-base mb-7 max-w-md mx-auto md:mx-0 leading-relaxed"
               style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
             >
               Si tienes un proceso repetitivo, una idea de app o quieres implementar IA en tu
-              operacion — hablemos.
+              operación — hablemos.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center md:justify-start">
               <CTACalendar variant="primary" dark={dark} accentColor={t.accent} accentSolidColor={t.accentSolid} />
               <CTAWhatsApp variant="secondary" context="builder" dark={dark} accentColor={t.accent} />
             </div>
           </div>
         </div>
       </section>
-    </div>
+    </ThemedPageShell>
   );
 }

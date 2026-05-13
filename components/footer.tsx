@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
@@ -8,6 +9,7 @@ import { Youtube, Instagram, Linkedin } from "lucide-react";
 import { GlowButton } from "./shared/glow-button";
 import { getCalendarLink } from "@/lib/cta-links";
 import { THEMES } from "@/lib/design-tokens";
+import { glowSecondaryForRoute, resolveRouteThemeId } from "@/lib/route-theme";
 
 const FOOTER_LINKS = [
   { href: "/growth", label: "Growth" },
@@ -27,6 +29,7 @@ const SOCIAL_LINKS: { href: string; label: string; Icon: LucideIcon }[] = [
 
 export function Footer() {
   const { theme } = useTheme();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,19 +38,17 @@ export function Footer() {
 
   // Default to dark during SSR to match the initial HTML
   const dark = mounted ? theme === "dark" : true;
-  const t = dark ? THEMES.index.dark : THEMES.index.light;
-
-  const ts = dark ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.30)";
-  const linkColor = dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)";
+  const routeId = resolveRouteThemeId(pathname);
+  const mode = dark ? "dark" : "light";
+  const t = THEMES[routeId][mode];
+  const secondaryGlow = glowSecondaryForRoute(routeId, mode);
 
   return (
     <footer
       className="py-12 relative"
       style={{
-        background: dark ? "#07080f" : "#f0f2f8",
-        borderTop: dark
-          ? "1px solid rgba(255,255,255,0.07)"
-          : "1px solid rgba(0,0,0,0.07)",
+        background: t.bg,
+        borderTop: `1px solid ${t.border}`,
       }}
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -59,7 +60,7 @@ export function Footer() {
             style={{
               fontFamily: "'Engagement', cursive",
               fontSize: 24,
-              color: dark ? "#f4f0e8" : "#1a1a1a",
+              color: t.text.primary,
             }}
           >
             JR
@@ -74,7 +75,7 @@ export function Footer() {
                 className="text-sm transition-colors duration-200 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-1"
                 style={{
                   fontFamily: "'Lato', sans-serif",
-                  color: linkColor,
+                  color: t.text.secondary,
                 }}
               >
                 {label}
@@ -85,7 +86,7 @@ export function Footer() {
               className="text-sm transition-colors duration-200 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-1"
               style={{
                 fontFamily: "'Lato', sans-serif",
-                color: linkColor,
+                color: t.text.secondary,
               }}
               onClick={(e) => {
                 e.preventDefault();
@@ -106,7 +107,7 @@ export function Footer() {
                 variant="secondary"
                 size="md"
                 accentColor={t.accent}
-                secondaryColor={t.secondary}
+                secondaryColor={secondaryGlow}
                 icon={<Icon size={18} strokeWidth={2} aria-hidden />}
                 iconPosition="left"
                 className="!px-3 !py-3 min-w-[48px] min-h-[48px] !gap-0 shrink-0"
@@ -118,10 +119,10 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-6 border-t text-center" style={{ borderColor: dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)" }}>
+        <div className="mt-8 pt-6 border-t text-center" style={{ borderColor: t.border }}>
           <p
             className="text-sm"
-            style={{ fontFamily: "'Lato', sans-serif", color: ts }}
+            style={{ fontFamily: "'Lato', sans-serif", color: t.text.muted }}
           >
             {new Date().getFullYear()} Jhonattan Rodriguez - Bogota, Colombia
           </p>

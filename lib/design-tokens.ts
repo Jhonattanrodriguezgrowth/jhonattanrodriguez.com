@@ -102,21 +102,19 @@ export const TIMELINE = [
   { year: "2020+", color: "#93c5fd", title: "Growth - Filmmaker - IA Builder", desc: "Tres disciplinas que conviven y se potencian — el mismo sistema visto desde angulos distintos." },
 ];
 
-export const GROWTH_TOOLS = ["MetaAds", "Notion", "Scrum", "Cursor", "Claude", "CapCut", "Supabase", "v0 / Lovable"];
-
 // ─── FILMMAKER DATA (Real) ────────────────────────────────────────────────────
 export const FILM_TARGET_AUDIENCE = [
   {
     title: "Emprendedores de alto ticket",
-    desc: "Que buscan diferenciarse de su competencia en calidad de contenido y posicionamiento en redes sociales, y consideran que necesitan un equipo pero no quieren asumir toda la inversion.",
+    desc: "Buscan diferenciarse de la competencia en calidad de contenido y posicionamiento en redes sociales, y consideran que necesitan un equipo pero no quieren asumir toda la inversión.",
   },
   {
     title: "Startups y PyMEs con pauta en Meta",
-    desc: "Que ejecutan o planean ejecutar campanas publicitarias en Meta Ads y requieren contenido de pauta para mantener actualizada a la audiencia.",
+    desc: "Ejecutan o planean ejecutar campañas publicitarias en Meta Ads y requieren contenido de pauta para mantener actualizada a la audiencia.",
   },
   {
     title: "Departamentos de universidades",
-    desc: "Que buscan publicitar sus cursos y actividades en redes sociales de forma organica o paga.",
+    desc: "Buscan publicitar sus cursos y actividades en redes sociales de forma orgánica o de pago.",
   },
 ];
 
@@ -124,23 +122,23 @@ export const FILM_PLANS = [
   {
     id: "sprint",
     name: "Plan Sprint",
-    tagline: "Un dia. Una locacion. Ocho piezas listas para publicar.",
+    tagline: "Un día. Una locación. Ocho piezas listas para publicar.",
     price: "$1.200.000 COP",
     priceUSD: "$400 USD",
     featured: true,
-    production: "1 dia de produccion (6-8 horas)",
+    production: "1 día de producción (6–8 horas)",
     includes: [
-      "Sesion intensiva de grabacion en locacion acordada",
-      "Direccion creativa y produccion para redes sociales",
-      "Captura de material para 8 reels estrategicos",
+      "Sesión intensiva de grabación en locación acordada",
+      "Dirección creativa y producción para redes sociales",
+      "Captura de material para 8 reels estratégicos",
       "Multiples angulos, tomas y recursos visuales",
-      "Direccion de talento (fundador, equipo o embajadores)",
+      "Dirección de talento (fundador, equipo o embajadores)",
     ],
     postproduction: [
-      "Edicion profesional de 8 reels en formato vertical",
-      "Color grading y diseno sonoro",
-      "Motion graphics, subtitulos y elementos graficos",
-      "Optimizacion para Instagram Reels, TikTok, YouTube Shorts",
+      "Edición profesional de 8 reels en formato vertical",
+      "Color grading y diseño sonoro",
+      "Motion graphics, subtítulos y elementos gráficos",
+      "Optimización para Instagram Reels, TikTok, YouTube Shorts",
       "Entrega en carpeta de Drive propia de la marca",
     ],
     framework: [
@@ -148,11 +146,11 @@ export const FILM_PLANS = [
       { type: "Ventas", count: 3, goal: "Convertir y generar leads calificados" },
       { type: "Blockbuster", count: 2, goal: "Destacar en calidad frente a la competencia" },
     ],
-    savings: "Mas del 50% comparado con produccion tradicional",
-    costPerPiece: "$150.000 COP vs. $300.000–$500.000 en produccion tradicional",
-    addon: "Sesion fotografica profesional: $300.000 COP / $75 USD",
+    savings: "Más del 50 % comparado con producción tradicional",
+    costPerPiece: "$150.000 COP vs. $300.000–$500.000 en producción tradicional",
+    addon: "Sesión fotográfica profesional: $300.000 COP / $75 USD",
     payment: [
-      { stage: "Al confirmar", amount: "$400.000 COP ($100 USD)", desc: "Asegura tu cupo, iniciamos pre-produccion" },
+      { stage: "Al confirmar", amount: "$400.000 COP ($100 USD)", desc: "Asegura tu cupo; iniciamos pre-producción" },
       { stage: "Contra entrega", amount: "$800.000 COP ($300 USD)", desc: "Pagas al recibir tus 8 reels listos" },
     ],
   },
@@ -163,30 +161,30 @@ export const FILM_PLANS = [
     price: "$2.520.000 COP",
     priceUSD: "$630 USD",
     featured: false,
-    production: "3 dias de produccion (3 horas cada sesion)",
+    production: "3 días de producción (3 horas cada sesión)",
     includes: [
-      "3 dias de produccion al mes en locaciones distintas",
-      "Cada dia entrega: 1 Valor + 1 Ventas + 1 Blockbuster",
-      "1 sesion fotografica profesional por dia",
-      "Setup propio y edicion independiente por sesion",
+      "3 días de producción al mes en locaciones distintas",
+      "Cada día entrega: 1 Valor + 1 Ventas + 1 Blockbuster",
+      "1 sesión fotográfica profesional por día",
+      "Setup propio y edición independiente por sesión",
       "Entrega progresiva semana a semana",
     ],
     postproduction: [
-      "Edicion profesional de 9 reels totales",
-      "Color grading y diseno sonoro por sesion",
-      "Motion graphics, subtitulos y elementos graficos",
-      "Optimizacion para todas las plataformas",
+      "Edición profesional de 9 reels totales",
+      "Color grading y diseño sonoro por sesión",
+      "Motion graphics, subtítulos y elementos gráficos",
+      "Optimización para todas las plataformas",
       "Entrega en carpeta de Drive propia de la marca",
     ],
     deliverables: [
       { type: "Piezas de Valor", count: 3 },
       { type: "Piezas de Ventas", count: 3 },
       { type: "Piezas Blockbuster", count: 3 },
-      { type: "Sesiones fotograficas", count: 3 },
+      { type: "Sesiones fotográficas", count: 3 },
     ],
     costPerPiece: "$280.000 COP por pieza de video",
     payment: [
-      { stage: "Al confirmar", amount: "$840.000 COP ($210 USD)", desc: "Asegura tus 3 fechas de produccion" },
+      { stage: "Al confirmar", amount: "$840.000 COP ($210 USD)", desc: "Asegura tus 3 fechas de producción" },
       { stage: "Contra entrega", amount: "$1.680.000 COP ($420 USD)", desc: "Pagas al recibir todo el contenido del mes" },
     ],
   },
@@ -194,18 +192,18 @@ export const FILM_PLANS = [
     id: "legacy",
     name: "Plan Legacy",
     tagline: "Algunos momentos no se repiten. Este plan existe para que tampoco se olviden.",
-    price: "Cotizacion personalizada",
+    price: "Cotización personalizada",
     priceUSD: "",
     featured: false,
     isCustom: true,
-    description: "Matrimonios, lanzamientos corporativos iconicos, eventos que marcan un antes y un despues. Direccion narrativa en tiempo real con el ojo puesto en lo que vale la pena preservar para siempre.",
+    description: "Matrimonios, lanzamientos corporativos icónicos, eventos que marcan un antes y un después. Dirección narrativa en tiempo real con el ojo puesto en lo que vale la pena preservar para siempre.",
     forWho: [
       "Matrimonios que quieren mas que un video de recuerdo",
       "Eventos corporativos iconicos (GoFest, AI Summit, Startco, etc.)",
     ],
     deliverables: [
       { type: "Highlight para redes", desc: "Pieza corta en formato vertical, menos de 60 segundos" },
-      { type: "Reportaje completo", desc: "Video documental con entrevistas, momentos clave y edicion cinematografica" },
+      { type: "Reportaje completo", desc: "Video documental con entrevistas, momentos clave y edición cinematográfica" },
     ],
   },
 ];
@@ -213,31 +211,31 @@ export const FILM_PLANS = [
 export const FILM_PROCESS = [
   {
     step: "01",
-    title: "Pre-produccion",
+    title: "Pre-producción",
     items: [
-      "Briefing estrategico y definicion de objetivos",
+      "Briefing estratégico y definición de objetivos",
       "Desarrollo de temas y storyboards",
-      "Planificacion de locaciones y recursos",
-      "Coordinacion de talento y logistica",
+      "Planificación de locaciones y recursos",
+      "Coordinación de talento y logística",
     ],
   },
   {
     step: "02",
-    title: "Produccion",
+    title: "Producción",
     items: [
       "Setup tecnico y pruebas",
-      "Grabacion secuencial de todas las piezas",
+      "Grabación secuencial de todas las piezas",
       "Supervision de calidad en tiempo real",
       "Captura de material adicional y B-roll",
     ],
   },
   {
     step: "03",
-    title: "Post-produccion",
+    title: "Post-producción",
     items: [
       "Seleccion y organizacion del material",
-      "Edicion, correccion de color y diseno sonoro",
-      "Revision interna de calidad",
+      "Edición, corrección de color y diseño sonoro",
+      "Revisión interna de calidad",
       "Entrega de piezas finales",
     ],
   },
@@ -247,8 +245,8 @@ export const FILM_PROCESS = [
     items: [
       "Archivos optimizados en Drive",
       "Sugerencias de copy y hashtags",
-      "Calendario de publicacion recomendado",
-      "Guia de mejores practicas",
+      "Calendario de publicación recomendado",
+      "Guía de mejores prácticas",
     ],
   },
 ];
@@ -260,29 +258,29 @@ export const FILM_WHY_WORKS = [
   },
   {
     title: "Cada pieza tiene un trabajo que hacer",
-    desc: "Antes de encender la camara ya sabemos que tiene que lograr cada video: atraer, nutrir o convertir. Estrategia aplicada al set.",
+    desc: "Antes de encender la cámara ya sabemos qué tiene que lograr cada video: atraer, nutrir o convertir. Estrategia aplicada al set.",
   },
   {
     title: "El tiempo de tu marca vale",
-    desc: "Concentrar la produccion en sesiones intensivas no es un truco de eficiencia — es respeto por tu tiempo y tu presupuesto.",
+    desc: "Concentrar la producción en sesiones intensivas no es un truco de eficiencia — es respeto por tu tiempo y tu presupuesto.",
   },
   {
     title: "El video ya gano",
-    desc: "El 80% del consumo de contenido en redes sociales es video. No es una tendencia — es el estandar. El formato vertical es donde se gana.",
+    desc: "El 80 % del consumo de contenido en redes sociales es video. No es una tendencia — es el estándar. El formato vertical es donde se gana.",
   },
 ];
 
 export const FILM_RESULTS = [
   { metric: "Autoridad", desc: "Posicionamiento como referente en tu nicho" },
   { metric: "Conversion", desc: "Pipeline constante de leads calificados" },
-  { metric: "Eficiencia", desc: "Ahorro de tiempo con produccion agil" },
+  { metric: "Eficiencia", desc: "Ahorro de tiempo con producción ágil" },
 ];
 
 // ─── BUILDER DATA ─────────────────────────────────────────────────────────────
 export const BUILDER_STACK = ["Claude", "Cursor", "v0", "Supabase", "n8n", "Lovable"];
-export const BUILDER_FILTERS = ["Todos", "Automatizacion", "App", "Agente IA"];
+export const BUILDER_FILTERS = ["Todos", "Automatización", "App", "Agente IA"];
 export const BUILDER_PROJECTS = [
-  { title: "Proyecto 1", category: "Automatizacion", stack: ["Claude", "n8n"], desc: "Descripcion proximamente.", soon: true },
-  { title: "Proyecto 2", category: "App", stack: ["v0", "Supabase"], desc: "Descripcion proximamente.", soon: true },
-  { title: "Proyecto 3", category: "Agente IA", stack: ["Claude", "Cursor"], desc: "Descripcion proximamente.", soon: true },
+  { title: "Proyecto 1", category: "Automatización", stack: ["Claude", "n8n"], desc: "Descripción próximamente.", soon: true },
+  { title: "Proyecto 2", category: "App", stack: ["v0", "Supabase"], desc: "Descripción próximamente.", soon: true },
+  { title: "Proyecto 3", category: "Agente IA", stack: ["Claude", "Cursor"], desc: "Descripción próximamente.", soon: true },
 ];

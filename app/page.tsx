@@ -220,14 +220,17 @@ export default function HomePage() {
               Lo que hago
             </span>
             <h2
-              className="font-bold"
+              className="font-bold text-balance leading-tight md:leading-normal"
               style={{
                 fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
-                fontSize: "clamp(28px,5vw,40px)",
+                fontSize: "clamp(18px, 4.5vw, 40px)",
+                letterSpacing: "-0.02em",
                 color: t.text.primary,
               }}
             >
-              Tres disciplinas, un sistema
+              «ESTRATEGIA, NARRATIVA E IA:
+              <br className="md:hidden" />
+              CADA UNA CON SU RUTA»
             </h2>
           </div>
 
@@ -236,7 +239,7 @@ export default function HomePage() {
               <Link
                 key={i}
                 href={card.href}
-                className={`group relative text-left p-8 rounded-3xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 overflow-hidden border ${card.border}`}
+                className={`group relative text-center p-8 rounded-3xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 overflow-hidden border ${card.border}`}
                 style={{
                   background: t.card,
                   backdropFilter: "blur(20px)",
@@ -250,7 +253,7 @@ export default function HomePage() {
                   className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
 
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col items-center text-center">
                   {/* Icon placeholder */}
                   <div
                     className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
@@ -275,7 +278,7 @@ export default function HomePage() {
                     {card.label}
                   </div>
                   <p
-                    className="text-sm leading-relaxed mb-6"
+                    className="text-sm leading-relaxed mb-6 text-pretty max-w-prose"
                     style={{
                       fontFamily: "var(--font-lato), 'Lato', sans-serif",
                       color: t.text.secondary,
@@ -284,8 +287,11 @@ export default function HomePage() {
                     {card.desc}
                   </p>
                   <div
-                    className="flex items-center gap-2 text-sm font-semibold transition-all duration-300 group-hover:gap-3"
-                    style={{ color: card.color }}
+                    className="flex items-center justify-center gap-2 text-sm font-semibold transition-all duration-300 group-hover:gap-3"
+                    style={{
+                      color: card.color,
+                      fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
+                    }}
                   >
                     Explorar <ArrowRightIcon />
                   </div>
