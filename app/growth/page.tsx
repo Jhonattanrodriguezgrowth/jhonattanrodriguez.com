@@ -6,7 +6,13 @@ import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CheckIcon } from "@/components/shared/icons";
 import { CTASection, CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
 import { GlowButton } from "@/components/shared/glow-button";
-import { THEMES } from "@/lib/design-tokens";
+import { RouteHeroStack } from "@/components/sections/route-hero-stack";
+import { GROWTH_STACK, THEMES } from "@/lib/design-tokens";
+import {
+  ROUTE_HERO_CONTENT,
+  ROUTE_HERO_INNER,
+  ROUTE_HERO_SECTION,
+} from "@/lib/route-hero-layout";
 
 export default function GrowthPage() {
   const { theme } = useTheme();
@@ -23,6 +29,7 @@ export default function GrowthPage() {
 
   const dark = theme === "dark";
   const t = dark ? THEMES.growth.dark : THEMES.growth.light;
+  const display = "display" in t ? (t as { display: string }).display : t.accent;
   /** RGB de t.bg: dark #060d04 → 6,13,4 | light #fafdfb → 250,253,251 */
   const heroBgRgb = dark ? "6, 13, 4" : "250, 253, 251";
 
@@ -93,7 +100,8 @@ export default function GrowthPage() {
     <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.secondary} dark={dark}>
       {/* Hero Section */}
       <section
-        className="pt-32 pb-20 relative overflow-hidden"
+        data-route-hero
+        className={ROUTE_HERO_SECTION}
         style={{ "--hero-fade-color": t.bg, backgroundColor: t.bg } as CSSProperties}
       >
         <div
@@ -125,8 +133,9 @@ export default function GrowthPage() {
           }}
           aria-hidden
         />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <div className="mb-6 flex justify-center">
+        <div className={ROUTE_HERO_CONTENT}>
+          <div className={ROUTE_HERO_INNER}>
+          <div className="mb-4 flex justify-center">
             <GlowButton
               href="https://www.linkedin.com/in/jhonattansgrowth/"
               external
@@ -155,21 +164,43 @@ export default function GrowthPage() {
               </span>
             </GlowButton>
           </div>
+          <p
+            className="film-display-kicker font-semibold mb-4 text-center"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+          >
+            Growth Hacker
+          </p>
           <h1
-            className="font-bold leading-[1.1] mb-6 text-center"
+            className="font-bold leading-[1.1] mb-4 text-center"
             style={{
               fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
               fontSize: "clamp(28px,4.5vw,52px)",
               color: t.text.primary,
             }}
           >
-            <span className="text-balance">
-              El founder que domina sus propias herramientas{" "}
-              <span style={{ color: t.accent }}>no necesita permiso de nadie para crecer.</span>
+            <span className="md:hidden">
+              <span className="block">El founder que domina</span>
+              <span className="block">sus propias herramientas</span>
+              <span className="block" style={{ color: t.accent }}>
+                no necesita permiso
+              </span>
+              <span className="block" style={{ color: t.accent }}>
+                de nadie para crecer.
+              </span>
+            </span>
+            <span className="hidden md:block">
+              <span className="block">El founder que domina</span>
+              <span className="block">
+                sus propias herramientas{" "}
+                <span style={{ color: t.accent }}>no necesita</span>
+              </span>
+              <span className="block" style={{ color: t.accent }}>
+                permiso de nadie para crecer.
+              </span>
             </span>
           </h1>
           <p
-            className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-8 text-pretty"
+            className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-6 text-pretty"
             style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
           >
             Es imposible delegar bien lo que no entiendes. Te entreno en pensamiento sistémico,
@@ -191,6 +222,18 @@ export default function GrowthPage() {
               accentColor={t.accent}
               label="Hablemos de tu operación"
             />
+          </div>
+          <RouteHeroStack
+            stackLabel="> stack --growth"
+            items={GROWTH_STACK}
+            dark={dark}
+            theme={{
+              card: t.card,
+              border: t.border,
+              accent: t.accent,
+              textSecondary: t.text.secondary,
+            }}
+          />
           </div>
         </div>
 

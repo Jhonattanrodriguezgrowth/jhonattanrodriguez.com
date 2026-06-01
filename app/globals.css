@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --mobile-tab-bar-height: 3.75rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -251,6 +252,43 @@
   );
 }
 
+/* Filmmaker hero GIF — opacity and crop by viewport */
+.filmmaker-hero .filmmaker-hero-gif {
+  background-position: center 42%;
+}
+
+.filmmaker-hero[data-theme="light"] .filmmaker-hero-gif {
+  opacity: 0.5;
+}
+
+.filmmaker-hero[data-theme="dark"] .filmmaker-hero-gif {
+  opacity: 0.72;
+}
+
+@media (min-width: 640px) {
+  .filmmaker-hero .filmmaker-hero-gif {
+    background-position: center;
+  }
+
+  .filmmaker-hero[data-theme="light"] .filmmaker-hero-gif {
+    opacity: 0.48;
+  }
+
+  .filmmaker-hero[data-theme="dark"] .filmmaker-hero-gif {
+    opacity: 0.78;
+  }
+}
+
+@media (min-width: 1024px) {
+  .filmmaker-hero[data-theme="light"] .filmmaker-hero-gif {
+    opacity: 0.45;
+  }
+
+  .filmmaker-hero[data-theme="dark"] .filmmaker-hero-gif {
+    opacity: 0.82;
+  }
+}
+
 /* Filmmaker: taller fade into route bg (#0a0704 dark / #fffcfa light) */
 .hero-bottom-fade--filmmaker {
   height: min(22vh, 240px);
@@ -269,6 +307,18 @@
   font-size: clamp(0.65rem, 1.2vw, 0.75rem);
   letter-spacing: 0.28em;
   text-transform: uppercase;
+}
+
+/* Route nav — glass pill (backdrop en .route-nav-pill) */
+.route-nav-pill {
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.mobile-tab-bar {
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /* Filmmaker: contenedores foto/video sin borde visible */

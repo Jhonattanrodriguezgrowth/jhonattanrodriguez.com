@@ -7,6 +7,7 @@ interface CTAButtonProps {
   variant?: "primary" | "secondary";
   context?: keyof typeof WHATSAPP_MESSAGES;
   className?: string;
+  /** Visual mode of the parent surface (not site theme). Passed to GlowButton as surfaceDark. */
   dark?: boolean;
   accentColor?: string;
   accentSolidColor?: string;
@@ -31,6 +32,7 @@ export function CTAWhatsApp({
       href={getWhatsAppLink(context)}
       external
       variant={variant}
+      surfaceDark={dark}
       accentColor={variant === "primary" ? waGreen : (accentSolidColor || accentColor)}
       secondaryColor={variant === "primary" ? waGreenDark : (accentColor || accentSolidColor)}
       className={className}
@@ -55,6 +57,7 @@ export function CTACalendar({
       href={getCalendarLink()}
       external
       variant={variant}
+      surfaceDark={dark}
       accentColor={accentSolidColor || accentColor}
       secondaryColor={accentColor || accentSolidColor}
       className={className}

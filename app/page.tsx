@@ -100,7 +100,7 @@ export default function HomePage() {
                 )}
                 <Link
                   href={item.href}
-                  className="font-semibold text-base md:text-lg transition-all duration-200 hover:opacity-70"
+                  className="font-semibold text-base md:text-lg uppercase tracking-[0.18em] transition-all duration-200 hover:opacity-70"
                   style={{
                     fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
                     color: item.color,

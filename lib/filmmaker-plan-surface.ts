@@ -23,6 +23,8 @@ export type PlanSurface = {
   ctaAccent: string;
   ctaAccentSolid: string;
   inverted: boolean;
+  badgeBg: string;
+  badgeText: string;
 };
 
 type SurfaceTheme = {
@@ -67,6 +69,8 @@ export function getPlanSurface(
     ctaAccent: accent,
     ctaAccentSolid: accentSolid,
     inverted: false,
+    badgeBg: accent,
+    badgeText: "#ffffff",
   };
 
   if (!featured) return standard;
@@ -95,6 +99,8 @@ export function getPlanSurface(
       ctaAccent: "#c2410c",
       ctaAccentSolid: "#9a3412",
       inverted: true,
+      badgeBg: "#c2410c",
+      badgeText: "#ffffff",
     };
   }
 
@@ -121,5 +127,7 @@ export function getPlanSurface(
     ctaAccent: "#fdba74",
     ctaAccentSolid: "#7c2d12",
     inverted: true,
+    badgeBg: "#fdba74",
+    badgeText: "#0a0704",
   };
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Engagement, Quicksand, Lato } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LIGHT_MODE_UI_ENABLED } from "@/lib/site-theme";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import "./globals.css";
@@ -81,11 +82,14 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          enableSystem={LIGHT_MODE_UI_ENABLED}
+          forcedTheme={LIGHT_MODE_UI_ENABLED ? undefined : "dark"}
           disableTransitionOnChange
         >
           <Navbar />
-          <main>{children}</main>
+          <main className="pb-[calc(var(--mobile-tab-bar-height)+env(safe-area-inset-bottom,0px))] md:pb-0">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}

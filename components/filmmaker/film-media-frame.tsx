@@ -13,6 +13,7 @@ type FilmMediaFrameProps = {
   dark: boolean;
   className?: string;
   imageSrc?: string;
+  imagePosition?: string;
   videoId?: string;
   children?: ReactNode;
   "aria-hidden"?: boolean;
@@ -32,6 +33,7 @@ export function FilmMediaFrame({
   dark,
   className = "",
   imageSrc,
+  imagePosition = "center",
   videoId,
   children,
   "aria-hidden": ariaHidden,
@@ -77,7 +79,7 @@ export function FilmMediaFrame({
           ...frameStyle(pageBg),
           backgroundImage: `${filmImageOverlay(dark)}, url('${imageSrc}')`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: imagePosition,
         }}
         aria-hidden={ariaHidden}
       />

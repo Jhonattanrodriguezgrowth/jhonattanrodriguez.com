@@ -22,6 +22,34 @@ export function hexToRgba(hex: string, alpha: number): string {
 
 type ThemeMode = "dark" | "light";
 
+export type NavPillSurface = {
+  pillBg: string;
+  pillBorder: string;
+  activeBg: string;
+  shadow: string;
+  textPrimary: string;
+  textMuted: string;
+  textSecondary: string;
+};
+
+/** Superficie glass de la píldora de navegación — teñida por la vertical actual */
+export function navPillSurface(pt: {
+  bg: string;
+  accent: string;
+  border: string;
+  text: { primary: string; secondary: string; muted: string };
+}): NavPillSurface {
+  return {
+    pillBg: hexToRgba(pt.bg, 0.42),
+    pillBorder: pt.border,
+    activeBg: hexToRgba(pt.accent, 0.12),
+    shadow: "0 4px 24px rgba(0,0,0,0.14)",
+    textPrimary: pt.text.primary,
+    textMuted: pt.text.muted,
+    textSecondary: pt.text.secondary,
+  };
+}
+
 /** Secundario para GlowButton: en Developer AI se usa `teal` como en el resto de la página. */
 export function glowSecondaryForRoute(themeId: RouteThemeId, mode: ThemeMode): string {
   const palette = THEMES[themeId][mode];

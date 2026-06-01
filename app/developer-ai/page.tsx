@@ -3,11 +3,17 @@
 import Image from "next/image";
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState, type CSSProperties } from "react";
+import { RouteHeroStack } from "@/components/sections/route-hero-stack";
 import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
 import { GlowButton } from "@/components/shared/glow-button";
 import { getGitHubProfileLink } from "@/lib/cta-links";
 import { THEMES, BUILDER_STACK, BUILDER_PROJECTS } from "@/lib/design-tokens";
+import {
+  ROUTE_HERO_CONTENT,
+  ROUTE_HERO_INNER,
+  ROUTE_HERO_SECTION,
+} from "@/lib/route-hero-layout";
 
 export default function DeveloperAIPage() {
   const { theme } = useTheme();
@@ -24,6 +30,7 @@ export default function DeveloperAIPage() {
 
   const dark = theme === "dark";
   const t = dark ? THEMES.builder.dark : THEMES.builder.light;
+  const display = "display" in t ? (t as { display: string }).display : t.accent;
   /** RGB de t.bg: dark #04080f → 4,8,15 | light #fafbff → 250,251,255 */
   const heroBgRgb = dark ? "4, 8, 15" : "250, 251, 255";
   const terminalLabelClass = "inline-block text-sm font-mono mb-4 px-3 py-1.5 rounded-lg";
@@ -73,7 +80,8 @@ export default function DeveloperAIPage() {
     <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.teal} dark={dark}>
       {/* Hero */}
       <section
-        className="pt-32 pb-20 relative overflow-hidden"
+        data-route-hero
+        className={ROUTE_HERO_SECTION}
         style={{ "--hero-fade-color": t.bg, backgroundColor: t.bg } as CSSProperties}
       >
         {/* GIF background layer */}
@@ -107,8 +115,9 @@ export default function DeveloperAIPage() {
           }}
           aria-hidden
         />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <div className="mb-6 flex justify-center">
+        <div className={ROUTE_HERO_CONTENT}>
+          <div className={ROUTE_HERO_INNER}>
+          <div className="mb-4 flex justify-center">
             <GlowButton
               href="https://www.instagram.com/jhonattansdev/"
               external
@@ -137,23 +146,27 @@ export default function DeveloperAIPage() {
               </span>
             </GlowButton>
           </div>
+          <p
+            className="film-display-kicker font-semibold mb-4 text-center"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+          >
+            Developer AI
+          </p>
           <h1
-            className="font-bold leading-tight mb-6 text-center"
+            className="font-bold leading-tight mb-4 text-center"
             style={{
               fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
               fontSize: "clamp(32px,5vw,56px)",
               color: t.text.primary,
             }}
           >
-            <span className="block lg:inline">
-              La tecnología es lo
-              <br className="lg:hidden" aria-hidden />
-              más cercano a la{" "}
-              <span style={{ color: t.accent }}>magia.</span>
+            <span className="block">La tecnología es lo más</span>
+            <span className="block">
+              cercano a la <span style={{ color: t.accent }}>magia.</span>
             </span>
           </h1>
           <p
-            className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-pretty mb-8"
+            className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-pretty mb-6"
             style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
           >
             Creo firmemente que el software y la inteligencia artificial pueden transformar la calidad
@@ -165,26 +178,17 @@ export default function DeveloperAIPage() {
             <CTAWhatsApp variant="secondary" context="builder" dark={dark} accentColor={t.accent} />
           </div>
 
-          <div className="mt-12">
-            <span
-              className={terminalLabelClass}
-              style={terminalLabelStyle}
-            >
-              {"> stack --developer_ai"}
-            </span>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 justify-items-stretch">
-              {BUILDER_STACK.map((name) => (
-                <div
-                  key={name}
-                  className="p-4 text-center rounded-2xl transition-all duration-200 hover:scale-105"
-                  style={{ background: t.card, border: `1px solid ${t.border}` }}
-                >
-                  <div className="text-xs font-mono" style={{ color: t.accent }}>
-                    {name}
-                  </div>
-                </div>
-              ))}
-            </div>
+          <RouteHeroStack
+            stackLabel="> stack --developer_ai"
+            items={BUILDER_STACK}
+            dark={dark}
+            theme={{
+              card: t.card,
+              border: t.border,
+              accent: t.accent,
+              textSecondary: t.text.secondary,
+            }}
+          />
           </div>
         </div>
 

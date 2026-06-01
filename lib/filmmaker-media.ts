@@ -1,14 +1,20 @@
 /** Rutas y overlays para contenedores media en /filmmaker */
 
 export const FILM_MEDIA = {
-  problema: "/filmmaker/foto-el-problema.jpg",
-  proceso: "/filmmaker/foto-proceso-produccion.jpg",
+  problema: {
+    src: "/filmmaker/foto-el-problema.jpg",
+    position: "center 35%",
+  },
+  proceso: {
+    src: "/filmmaker/foto-proceso-produccion.jpg",
+    position: "center right",
+  },
 } as const;
 
 export function filmImageOverlay(dark: boolean): string {
   return dark
-    ? `linear-gradient(180deg, rgba(60,36,18,0.55), rgba(10,7,4,0.82))`
-    : `linear-gradient(180deg, rgba(10,7,4,0.25), rgba(10,7,4,0.08))`;
+    ? `linear-gradient(180deg, rgba(60,36,18,0.17), rgba(10,7,4,0.25))`
+    : `linear-gradient(180deg, rgba(10,7,4,0.08), rgba(10,7,4,0.02))`;
 }
 
 export function filmPlaceholderBackground(dark: boolean): string {

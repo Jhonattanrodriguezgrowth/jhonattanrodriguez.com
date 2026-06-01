@@ -2,6 +2,7 @@
 
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState, type CSSProperties } from "react";
+import { RouteHeroStack } from "@/components/sections/route-hero-stack";
 import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { GlowButton } from "@/components/shared/glow-button";
 import { FilmMediaFrame } from "@/components/filmmaker/film-media-frame";
@@ -20,7 +21,14 @@ import {
   FILM_RESULTS,
   FILM_SERVICE_PILLARS,
   FILM_FEATURED_VIDEO_ID,
+  FILM_REEL,
+  FILM_STACK,
 } from "@/lib/design-tokens";
+import {
+  ROUTE_HERO_CONTENT,
+  ROUTE_HERO_INNER,
+  ROUTE_HERO_SECTION,
+} from "@/lib/route-hero-layout";
 
 export default function FilmmakerPage() {
   const { theme } = useTheme();
@@ -65,15 +73,27 @@ export default function FilmmakerPage() {
     <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.secondary} dark={dark}>
       {/* ─── HERO ─────────────────────────────────────────────────────────────── */}
       <section
-        className="pt-28 sm:pt-36 pb-16 sm:pb-24 relative overflow-hidden min-h-[85vh] flex flex-col justify-center"
+        data-route-hero
+        data-theme={dark ? "dark" : "light"}
+        className={`${ROUTE_HERO_SECTION} filmmaker-hero`}
         style={{ "--hero-fade-color": t.bg, backgroundColor: t.bg } as CSSProperties}
       >
+        <div
+          className="absolute inset-0 pointer-events-none filmmaker-hero-gif"
+          style={{
+            backgroundImage: "url('/filmmaker/filmmaker-hero-bg.gif')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+          aria-hidden
+        />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: dark
-              ? "linear-gradient(160deg, rgba(50,28,14,0.55) 0%, rgba(20,12,8,0.88) 45%, rgba(10,7,4,0.98) 100%)"
-              : "linear-gradient(160deg, rgba(251,146,60,0.2) 0%, rgba(255,252,250,0.92) 55%, rgba(255,252,250,1) 100%)",
+              ? "linear-gradient(160deg, rgba(50,28,14,0.28) 0%, rgba(20,12,8,0.44) 45%, rgba(10,7,4,0.5) 100%)"
+              : "linear-gradient(160deg, rgba(251,146,60,0.1) 0%, rgba(255,252,250,0.46) 55%, rgba(255,252,250,0.5) 100%)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -83,8 +103,8 @@ export default function FilmmakerPage() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background: dark
-              ? `linear-gradient(135deg, rgba(${heroBgRgb},0.88) 0%, rgba(${heroBgRgb},0.72) 45%, rgba(${heroBgRgb},0.82) 100%)`
-              : `linear-gradient(135deg, rgba(${heroBgRgb},0.92) 0%, rgba(${heroBgRgb},0.84) 55%, rgba(${heroBgRgb},0.9) 100%)`,
+              ? `linear-gradient(135deg, rgba(${heroBgRgb},0.44) 0%, rgba(${heroBgRgb},0.36) 45%, rgba(${heroBgRgb},0.41) 100%)`
+              : `linear-gradient(135deg, rgba(${heroBgRgb},0.46) 0%, rgba(${heroBgRgb},0.42) 55%, rgba(${heroBgRgb},0.45) 100%)`,
           }}
           aria-hidden
         />
@@ -92,14 +112,15 @@ export default function FilmmakerPage() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background: dark
-              ? `linear-gradient(to bottom, rgba(${heroBgRgb},0.08) 0%, rgba(${heroBgRgb},0.45) 55%, ${t.bg} 100%)`
-              : `linear-gradient(to bottom, rgba(${heroBgRgb},0.06) 0%, rgba(${heroBgRgb},0.35) 55%, ${t.bg} 100%)`,
+              ? `linear-gradient(to bottom, rgba(${heroBgRgb},0.04) 0%, rgba(${heroBgRgb},0.24) 55%, ${t.bg} 100%)`
+              : `linear-gradient(to bottom, rgba(${heroBgRgb},0.03) 0%, rgba(${heroBgRgb},0.18) 55%, ${t.bg} 100%)`,
           }}
           aria-hidden
         />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center w-full">
-          <div className="mb-6 flex justify-center">
+        <div className={ROUTE_HERO_CONTENT}>
+          <div className={ROUTE_HERO_INNER}>
+          <div className="mb-4 flex justify-center">
             <GlowButton
               href={getFilmmakerYouTubeLink()}
               external
@@ -134,23 +155,39 @@ export default function FilmmakerPage() {
             Filmmaker
           </p>
           <h1
-            className="font-bold leading-[1.05] mb-6 sm:mb-8 text-center max-w-4xl mx-auto"
+            className="font-bold leading-tight mb-4 text-center"
             style={{
-              fontFamily: "var(--font-quicksand), sans-serif",
-              fontSize: "clamp(28px, 5.5vw, 56px)",
+              fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
+              fontSize: "clamp(32px, 5vw, 56px)",
               color: tp,
-              letterSpacing: "-0.02em",
             }}
           >
-            Un sistema de producción{" "}
-            <span style={{ color: t.accent }}>optimizado para tu marca.</span>
+            <span className="md:hidden">
+              <span className="block">Un sistema de producción</span>
+              <span className="block">de contenido</span>
+              <span className="block" style={{ color: t.accent }}>
+                eficiente y efectivo.
+              </span>
+            </span>
+            <span className="hidden md:block">
+              <span className="block">Un sistema de producción</span>
+              <span className="block">
+                de contenido{" "}
+                <span style={{ color: t.accent }}>eficiente y efectivo.</span>
+              </span>
+            </span>
           </h1>
           <p
-            className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10 text-pretty"
-            style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.7 }}
+            className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-6 text-pretty"
+            style={{
+              fontFamily: "var(--font-lato), 'Lato', sans-serif",
+              color: ts,
+              lineHeight: 1.7,
+            }}
           >
-            Contenidos en video de calidad profesional en tiempo récord, con estrategia de publicación
-            integrada adaptados al ritmo y presupuesto de cada marca.
+            Este sistema se ha implementado con más de 30 marcas personales, comunidades y empresas,
+            siendo ágiles en la producción sin perder la calidad siempre que ejecutemos el paso a paso
+            de la metodología.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center items-center">
             <CTACalendar
@@ -171,24 +208,73 @@ export default function FilmmakerPage() {
               Ver planes
             </GlowButton>
           </div>
+          <RouteHeroStack
+            stackLabel="> stack --filmmaker"
+            items={FILM_STACK}
+            dark={dark}
+            theme={{
+              card: t.card,
+              border: t.border,
+              accent: t.accent,
+              textSecondary: t.text.secondary,
+            }}
+          />
+          </div>
         </div>
         <div className="hero-bottom-fade hero-bottom-fade--filmmaker" aria-hidden />
       </section>
 
-      {/* ─── REEL ───────────────────────────────────────────────────────────────── */}
+      {/* ─── PROBLEMA ───────────────────────────────────────────────────────────── */}
+      <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div className="text-center lg:text-left order-2 lg:order-1">
+            <span
+              className="film-display-kicker font-medium block mb-3"
+              style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+            >
+              El problema
+            </span>
+            <p
+              className="text-lg sm:text-xl leading-relaxed mb-6"
+              style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp, fontWeight: 500 }}
+            >
+              Las marcas necesitan presencia constante en redes sociales, pero la producción
+              tradicional es lenta, costosa y fragmentada.
+            </p>
+            <p
+              className="text-base leading-relaxed"
+              style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.7 }}
+            >
+              Cada pieza toma días de planificación, rodaje y edición. La solución: un sistema
+              optimizado que entrega contenido de calidad profesional en tiempo récord.
+            </p>
+          </div>
+          <FilmMediaFrame
+            variant="image"
+            imageSrc={FILM_MEDIA.problema.src}
+            imagePosition={FILM_MEDIA.problema.position}
+            pageBg={t.bg}
+            dark={dark}
+            className="order-1 lg:order-2 min-h-[280px] sm:min-h-[360px] w-full"
+            aria-hidden
+          />
+        </div>
+      </section>
+
+      {/* ─── CREAR CONTENIDO (video) ────────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
         <div className="max-w-5xl mx-auto px-6 text-center">
           <span
             className="film-display-kicker font-medium block mb-3"
             style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
           >
-            Trabajo reciente
+            {FILM_REEL.kicker}
           </span>
           <h2
-            className="font-semibold text-2xl sm:text-3xl mb-8"
+            className="font-semibold text-xl sm:text-2xl md:text-3xl mb-8 max-w-3xl mx-auto text-pretty leading-snug"
             style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
           >
-            Calidad de cine, ritmo de marca
+            {FILM_REEL.title}
           </h2>
           <div className="flex w-full justify-center mb-6">
             {FILM_FEATURED_VIDEO_ID ? (
@@ -229,42 +315,6 @@ export default function FilmmakerPage() {
           >
             @jhonattansfilm
           </GlowButton>
-        </div>
-      </section>
-
-      {/* ─── PROBLEMA ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-          <div className="text-center lg:text-left order-2 lg:order-1">
-            <span
-              className="film-display-kicker font-medium block mb-3"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
-            >
-              El problema
-            </span>
-            <p
-              className="text-lg sm:text-xl leading-relaxed mb-6"
-              style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp, fontWeight: 500 }}
-            >
-              Las marcas necesitan presencia constante en redes sociales, pero la producción
-              tradicional es lenta, costosa y fragmentada.
-            </p>
-            <p
-              className="text-base leading-relaxed"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.7 }}
-            >
-              Cada pieza toma días de planificación, rodaje y edición. La solución: un sistema
-              optimizado que entrega contenido de calidad profesional en tiempo récord.
-            </p>
-          </div>
-          <FilmMediaFrame
-            variant="image"
-            imageSrc={FILM_MEDIA.problema}
-            pageBg={t.bg}
-            dark={dark}
-            className="order-1 lg:order-2 min-h-[280px] sm:min-h-[360px] w-full"
-            aria-hidden
-          />
         </div>
       </section>
 
@@ -346,7 +396,7 @@ export default function FilmmakerPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {FILM_PLANS.map((plan) => (
               <PlanCard
                 key={plan.id}
@@ -416,7 +466,8 @@ export default function FilmmakerPage() {
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <FilmMediaFrame
             variant="image"
-            imageSrc={FILM_MEDIA.proceso}
+            imageSrc={FILM_MEDIA.proceso.src}
+            imagePosition={FILM_MEDIA.proceso.position}
             pageBg={t.bg}
             dark={dark}
             className="min-h-[320px] sm:min-h-[360px] w-full order-2 lg:order-1"
@@ -442,8 +493,8 @@ export default function FilmmakerPage() {
                     className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center font-bold text-sm"
                     style={{
                       fontFamily: "var(--font-quicksand), sans-serif",
-                      background: i === 0 ? t.accent : gb,
-                      color: i === 0 ? t.accentSolid : t.accent,
+                      background: gb,
+                      color: t.accent,
                       border: `1px solid ${ab}`,
                     }}
                   >

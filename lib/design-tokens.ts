@@ -28,6 +28,7 @@ export const THEMES = {
       bg: "#060d04", 
       accent: "#4ade80", // Green
       secondary: "#86efac",
+      display: "#86efac",
       accentSolid: "#22c55e",
       text: { primary: "rgba(255,255,255,0.92)", secondary: "rgba(255,255,255,0.58)", muted: "rgba(255,255,255,0.32)" },
       border: "rgba(134,239,172,0.12)",
@@ -38,6 +39,7 @@ export const THEMES = {
       bg: "#fafdfb", 
       accent: "#16a34a", // Green
       secondary: "#4ade80",
+      display: "#15803d",
       accentSolid: "#15803d",
       text: { primary: "rgba(0,0,0,0.88)", secondary: "rgba(0,0,0,0.58)", muted: "rgba(0,0,0,0.38)" },
       border: "rgba(22,163,74,0.12)",
@@ -74,6 +76,7 @@ export const THEMES = {
       bg: "#04080f", 
       accent: "#3b82f6", // Blue
       secondary: "#93c5fd",
+      display: "#93c5fd",
       teal: "#34d399",
       accentSolid: "#2563eb",
       text: { primary: "rgba(255,255,255,0.92)", secondary: "rgba(255,255,255,0.58)", muted: "rgba(255,255,255,0.32)" },
@@ -85,6 +88,7 @@ export const THEMES = {
       bg: "#fafbff", 
       accent: "#2563eb", // Blue
       secondary: "#60a5fa",
+      display: "#1d4ed8",
       teal: "#059669",
       accentSolid: "#1d4ed8",
       text: { primary: "rgba(0,0,0,0.88)", secondary: "rgba(0,0,0,0.58)", muted: "rgba(0,0,0,0.38)" },
@@ -108,6 +112,11 @@ export const TIMELINE = [
 /** Opcional: ID de video YouTube para embed en sección Reel (ej. dQw4w9WgXcQ) */
 /** https://youtu.be/VBgeWLdwaVw — reel destacado en /filmmaker */
 export const FILM_FEATURED_VIDEO_ID = "VBgeWLdwaVw";
+
+export const FILM_REEL = {
+  kicker: "Crear contenido es un proceso",
+  title: "No es solo grabar, es entender lo que se está haciendo.",
+} as const;
 
 export const FILM_SERVICE_PILLARS = [
   {
@@ -302,6 +311,26 @@ export const FILM_RESULTS = [
   { metric: "Conversion", desc: "Pipeline constante de leads calificados" },
   { metric: "Eficiencia", desc: "Ahorro de tiempo con producción ágil" },
 ];
+
+// ─── GROWTH STACK (hero) ──────────────────────────────────────────────────────
+export const GROWTH_STACK = [
+  "Notion",
+  "Claude",
+  "Meta Ads",
+  "Obsidian",
+  "Google Workspace",
+  "Microsoft 365",
+] as const;
+
+// ─── FILM STACK (hero) ────────────────────────────────────────────────────────
+export const FILM_STACK = [
+  "CapCut",
+  "OBS",
+  "Stream Yard",
+  "Higgsfield",
+  "Canva",
+  "Nano Banana",
+] as const;
 
 // ─── BUILDER DATA ─────────────────────────────────────────────────────────────
 export const BUILDER_STACK = [

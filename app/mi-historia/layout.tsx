@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CV | Jhonattan Rodriguez",
+  title: "CV | Storytelling | Jhonattan Rodriguez",
   description:
-    "Encontrar eso que amamos: confiar en que los puntos se conectarán. Trayectoria desde ingeniería y ciencias del deporte hasta producto, growth y Murphyia.",
+    "En 2026 conecto los puntos mirando hacia el pasado: trayectoria desde ingeniería y ciencias del deporte hasta producto, growth, film y Murphyia.",
   openGraph: {
-    title: "CV | Jhonattan Rodriguez",
+    title: "CV | Storytelling | Jhonattan Rodriguez",
     description:
-      "Línea del tiempo y una idea que guía el camino: confiar en el futuro mientras cada etapa cobra sentido al mirar atrás.",
+      "Línea del tiempo y narrativa personal: de la UNAL y el deporte a startups, Developer AI y Murphyia.",
     type: "website",
     locale: "es_CO",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CV | Jhonattan Rodriguez",
+    title: "CV | Storytelling | Jhonattan Rodriguez",
     description:
-      "Trayectoria y puntos de conexión: de la UNAL y el cuerpo humano a startups, Developer AI y Murphyia — con una cita que enmarca el porqué.",
+      "CV y storytelling: trayectoria profesional y los puntos que conectan cada etapa del camino.",
   },
 };
 

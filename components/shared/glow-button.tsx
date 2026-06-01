@@ -16,6 +16,8 @@ interface GlowButtonProps {
   external?: boolean;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
+  /** When set, styles follow the parent surface (e.g. inverted plan card) instead of site theme only. */
+  surfaceDark?: boolean;
 }
 
 export function GlowButton({
@@ -30,13 +32,15 @@ export function GlowButton({
   external = false,
   icon,
   iconPosition = "right",
+  surfaceDark,
 }: GlowButtonProps) {
   const { resolvedTheme } = useTheme();
-  const dark = resolvedTheme === "dark";
+  const siteDark = resolvedTheme === "dark";
+  const dark = surfaceDark ?? siteDark;
 
   // Default colors if not provided
-  const primary = accentColor || (dark ? "#a78bfa" : "#7c3aed");
-  const secondary = secondaryColor || (dark ? "#3b82f6" : "#2563eb");
+  const primary = accentColor || (siteDark ? "#a78bfa" : "#7c3aed");
+  const secondary = secondaryColor || (siteDark ? "#3b82f6" : "#2563eb");
 
   // Size classes
   const sizeClasses = {
@@ -61,12 +65,12 @@ export function GlowButton({
     }
     if (variant === "secondary") {
       return {
-        background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.8)",
-        color: dark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.8)",
-        border: "none",
+        background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.65)",
+        color: dark ? "rgba(255,255,255,0.9)" : "rgba(10,7,4,0.88)",
+        border: dark ? "none" : `1px solid ${primary}`,
         boxShadow: dark
           ? `0 0 0 1px rgba(255,255,255,0.1), 0 0 15px ${primary}15, 0 0 30px ${secondary}10`
-          : `0 0 0 1px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06)`,
+          : `0 2px 8px rgba(0,0,0,0.06)`,
       };
     }
     // ghost

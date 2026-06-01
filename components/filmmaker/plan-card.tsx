@@ -44,15 +44,17 @@ export function PlanCard({
       }}
     >
       {plan.featured && (
-        <div
-          className="absolute -top-3 left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 text-[10px] sm:text-xs font-semibold px-4 py-1.5 rounded-full"
-          style={{
-            fontFamily: "var(--font-lato), sans-serif",
-            background: accent,
-            color: accentSolid,
-          }}
-        >
-          Más popular
+        <div className="mb-4 flex justify-center sm:justify-start">
+          <span
+            className="inline-flex text-[10px] sm:text-xs font-semibold px-4 py-1.5 rounded-full"
+            style={{
+              fontFamily: "var(--font-lato), sans-serif",
+              background: surface.badgeBg,
+              color: surface.badgeText,
+            }}
+          >
+            Más popular
+          </span>
         </div>
       )}
 
@@ -192,44 +194,13 @@ export function PlanCard({
               <DetailSection title="Framework estratégico" surface={surface}>
                 <div className="space-y-3">
                   {plan.framework.map((f, k) => (
-                    <div
+                    <PlanFrameworkRow
                       key={k}
-                      className="flex items-center justify-between p-3 rounded-xl"
-                      style={{
-                        background: surface.detailPanelBg,
-                        border: `1px solid ${surface.detailPanelBorder}`,
-                      }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <span
-                          className="text-lg font-bold"
-                          style={{
-                            fontFamily: "var(--font-quicksand), sans-serif",
-                            color: surface.detailAccent,
-                          }}
-                        >
-                          {f.count}
-                        </span>
-                        <span
-                          className="text-sm font-medium"
-                          style={{
-                            fontFamily: "var(--font-quicksand), sans-serif",
-                            color: surface.title,
-                          }}
-                        >
-                          {f.type}
-                        </span>
-                      </div>
-                      <span
-                        className="text-xs text-right max-w-[140px]"
-                        style={{
-                          fontFamily: "var(--font-lato), sans-serif",
-                          color: surface.detailBody,
-                        }}
-                      >
-                        {f.goal}
-                      </span>
-                    </div>
+                      count={f.count}
+                      type={f.type}
+                      goal={f.goal}
+                      surface={surface}
+                    />
                   ))}
                 </div>
               </DetailSection>
@@ -237,14 +208,14 @@ export function PlanCard({
 
             {"deliverables" in plan && plan.deliverables && (
               <DetailSection title="Entregables al mes" surface={surface}>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-3">
                   {plan.deliverables.map((d, k) => (
                     <div
                       key={k}
                       className={
                         "count" in d
-                          ? "p-3 rounded-xl text-center"
-                          : "p-3 rounded-xl text-left col-span-2"
+                          ? "min-w-0 p-3 rounded-xl text-center"
+                          : "min-w-0 p-3 rounded-xl text-left col-span-1 min-[400px]:col-span-2"
                       }
                       style={{
                         background: surface.detailPanelBg,
@@ -263,7 +234,7 @@ export function PlanCard({
                             {d.count}
                           </span>
                           <span
-                            className="text-xs"
+                            className="text-xs text-pretty"
                             style={{
                               fontFamily: "var(--font-lato), sans-serif",
                               color: surface.detailBody,
@@ -304,44 +275,13 @@ export function PlanCard({
               <DetailSection title="Estructura de pago" surface={surface}>
                 <div className="space-y-3">
                   {plan.payment.map((p, k) => (
-                    <div
+                    <PlanDetailRow
                       key={k}
-                      className="flex items-start justify-between gap-3 p-3 rounded-xl"
-                      style={{
-                        background: surface.paymentPanelBg,
-                        border: `1px solid ${surface.detailPanelBorder}`,
-                      }}
-                    >
-                      <div>
-                        <span
-                          className="text-sm font-medium block"
-                          style={{
-                            fontFamily: "var(--font-quicksand), sans-serif",
-                            color: surface.title,
-                          }}
-                        >
-                          {p.stage}
-                        </span>
-                        <span
-                          className="text-xs"
-                          style={{
-                            fontFamily: "var(--font-lato), sans-serif",
-                            color: surface.detailBody,
-                          }}
-                        >
-                          {p.desc}
-                        </span>
-                      </div>
-                      <span
-                        className="text-sm font-semibold shrink-0 text-right"
-                        style={{
-                          fontFamily: "var(--font-quicksand), sans-serif",
-                          color: surface.detailAccent,
-                        }}
-                      >
-                        {p.amount}
-                      </span>
-                    </div>
+                      stage={p.stage}
+                      desc={p.desc}
+                      amount={p.amount}
+                      surface={surface}
+                    />
                   ))}
                 </div>
               </DetailSection>
@@ -349,14 +289,14 @@ export function PlanCard({
 
             {"costPerPiece" in plan && plan.costPerPiece && (
               <div
-                className="p-4 rounded-xl text-center space-y-2"
+                className="p-4 rounded-xl text-left text-pretty space-y-2"
                 style={{
                   background: surface.detailPanelBg,
                   border: `1px solid ${surface.detailPanelBorder}`,
                 }}
               >
                 <span
-                  className="text-sm block"
+                  className="text-sm block leading-relaxed"
                   style={{
                     fontFamily: "var(--font-lato), sans-serif",
                     color: surface.detailBody,
@@ -366,7 +306,7 @@ export function PlanCard({
                 </span>
                 {"savings" in plan && plan.savings && (
                   <span
-                    className="block text-xs font-medium"
+                    className="block text-xs font-medium leading-relaxed"
                     style={{ color: surface.detailAccent }}
                   >
                     {plan.savings}
@@ -374,7 +314,7 @@ export function PlanCard({
                 )}
                 {"addon" in plan && plan.addon && (
                   <span
-                    className="block text-xs"
+                    className="block text-xs leading-relaxed"
                     style={{
                       fontFamily: "var(--font-lato), sans-serif",
                       color: surface.muted,
@@ -407,7 +347,7 @@ export function PlanCard({
                     <span className="mt-0.5 shrink-0" style={{ color: surface.detailAccent }}>
                       <CheckIcon />
                     </span>
-                    <span>{item}</span>
+                    <span className="text-pretty leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -418,14 +358,14 @@ export function PlanCard({
                   {plan.deliverables.map((d, k) => (
                     <div
                       key={k}
-                      className="p-3 rounded-xl"
+                      className="min-w-0 p-3 rounded-xl"
                       style={{
                         background: surface.detailPanelBg,
                         border: `1px solid ${surface.detailPanelBorder}`,
                       }}
                     >
                       <span
-                        className="text-sm font-medium block"
+                        className="text-sm font-medium block mb-1"
                         style={{
                           fontFamily: "var(--font-quicksand), sans-serif",
                           color: surface.title,
@@ -434,7 +374,7 @@ export function PlanCard({
                         {d.type}
                       </span>
                       <span
-                        className="text-xs"
+                        className="text-xs leading-relaxed text-pretty block"
                         style={{
                           fontFamily: "var(--font-lato), sans-serif",
                           color: surface.detailBody,
@@ -454,6 +394,133 @@ export function PlanCard({
   );
 }
 
+function splitPaymentAmount(amount: string): { main: string; usd?: string } {
+  const match = amount.match(/^(.+?)\s*(\([^)]+\))\s*$/);
+  if (match) {
+    return { main: match[1].trim(), usd: match[2] };
+  }
+  return { main: amount };
+}
+
+function PlanDetailRow({
+  stage,
+  desc,
+  amount,
+  surface,
+}: {
+  stage: string;
+  desc: string;
+  amount: string;
+  surface: PlanSurface;
+}) {
+  const { main, usd } = splitPaymentAmount(amount);
+
+  return (
+    <div
+      className="flex flex-col gap-2 p-4 rounded-xl sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+      style={{
+        background: surface.paymentPanelBg,
+        border: `1px solid ${surface.detailPanelBorder}`,
+      }}
+    >
+      <div className="order-1 sm:order-2 w-full sm:w-auto sm:max-w-[11rem] shrink-0 text-left sm:text-right">
+        <span
+          className="text-sm font-semibold leading-snug text-pretty block"
+          style={{
+            fontFamily: "var(--font-quicksand), sans-serif",
+            color: surface.detailAccent,
+          }}
+        >
+          {main}
+        </span>
+        {usd && (
+          <span
+            className="block text-xs font-normal mt-0.5 text-pretty"
+            style={{
+              fontFamily: "var(--font-lato), sans-serif",
+              color: surface.detailBody,
+            }}
+          >
+            {usd}
+          </span>
+        )}
+      </div>
+      <div className="min-w-0 flex-1 order-2 sm:order-1">
+        <span
+          className="text-sm font-semibold block"
+          style={{
+            fontFamily: "var(--font-quicksand), sans-serif",
+            color: surface.title,
+          }}
+        >
+          {stage}
+        </span>
+        <span
+          className="text-xs leading-relaxed text-pretty block mt-1"
+          style={{
+            fontFamily: "var(--font-lato), sans-serif",
+            color: surface.detailBody,
+          }}
+        >
+          {desc}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function PlanFrameworkRow({
+  count,
+  type,
+  goal,
+  surface,
+}: {
+  count: number;
+  type: string;
+  goal: string;
+  surface: PlanSurface;
+}) {
+  return (
+    <div
+      className="flex flex-col gap-2 p-4 rounded-xl sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+      style={{
+        background: surface.detailPanelBg,
+        border: `1px solid ${surface.detailPanelBorder}`,
+      }}
+    >
+      <div className="flex items-center gap-3 min-w-0">
+        <span
+          className="text-lg font-bold shrink-0"
+          style={{
+            fontFamily: "var(--font-quicksand), sans-serif",
+            color: surface.detailAccent,
+          }}
+        >
+          {count}
+        </span>
+        <span
+          className="text-sm font-medium text-pretty"
+          style={{
+            fontFamily: "var(--font-quicksand), sans-serif",
+            color: surface.title,
+          }}
+        >
+          {type}
+        </span>
+      </div>
+      <span
+        className="text-xs leading-relaxed text-pretty sm:text-right sm:max-w-[55%]"
+        style={{
+          fontFamily: "var(--font-lato), sans-serif",
+          color: surface.detailBody,
+        }}
+      >
+        {goal}
+      </span>
+    </div>
+  );
+}
+
 function DetailSection({
   title,
   surface,
@@ -466,7 +533,7 @@ function DetailSection({
   return (
     <div>
       <h4
-        className="text-xs tracking-[0.2em] uppercase font-medium mb-4"
+        className="text-xs tracking-[0.2em] uppercase font-medium mb-3 text-left"
         style={{ fontFamily: "var(--font-lato), sans-serif", color: surface.detailLabel }}
       >
         {title}

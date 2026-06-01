@@ -3,7 +3,6 @@
 import { useTheme } from "@teispace/next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { GlowButton, ArrowRightIcon } from "@/components/shared/glow-button";
 import { CTASection } from "@/components/cta-buttons";
 import { THEMES } from "@/lib/design-tokens";
 
@@ -177,58 +176,51 @@ export default function MiHistoriaPage() {
       </div>
 
       <section className="relative z-10 min-h-[72vh] flex flex-col justify-center overflow-x-hidden pt-28 pb-20 sm:pb-24">
-        <div className="max-w-3xl mx-auto px-6 w-full">
-          <GlowButton
-            href="/"
-            variant="ghost"
-            size="sm"
-            accentColor={t.accent}
-            secondaryColor={t.secondary}
-            icon={<span className="rotate-180"><ArrowRightIcon /></span>}
-            iconPosition="left"
-            className="mb-8"
-          >
-            Volver al inicio
-          </GlowButton>
-
+        <div className="max-w-3xl mx-auto px-6 w-full text-center flex flex-col items-center">
           <span
-            className="inline-block text-xs tracking-[0.22em] uppercase font-semibold mb-6 px-4 py-2 rounded-full"
+            className="inline-block text-[11px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] uppercase font-semibold mb-6 px-4 py-2 rounded-full"
             style={{
-              fontFamily: "var(--font-lato), sans-serif",
+              fontFamily: "var(--font-lato), 'Lato', sans-serif",
               color: t.accent,
               background: dark ? `${t.accent}18` : `${t.accent}12`,
             }}
           >
-            CV
+            CV | Storytelling
           </span>
 
           <h1
-            className="font-bold mb-5 text-balance"
+            className="font-bold leading-tight mb-5 text-center text-balance max-w-4xl mx-auto"
             style={{
-              fontFamily: "var(--font-quicksand), sans-serif",
-              fontSize: "clamp(32px, 6vw, 52px)",
-              lineHeight: 1.15,
+              fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
+              fontSize: "clamp(32px, 5vw, 56px)",
               color: t.text.primary,
-              letterSpacing: "-0.02em",
             }}
           >
-            Los puntos solo se entienden{" "}
-            <span style={{ color: t.accent }}>mirando atrás.</span>
+            <span className="md:hidden">
+              <span className="block">En 2026 me encuentro</span>
+              <span className="block">conectando los puntos</span>
+              <span className="block" style={{ color: t.accent }}>
+                mirando hacia el pasado.
+              </span>
+            </span>
+            <span className="hidden md:block">
+              <span className="block">En 2026 me encuentro conectando los puntos</span>
+              <span className="block" style={{ color: t.accent }}>
+                mirando hacia el pasado.
+              </span>
+            </span>
           </h1>
 
           <blockquote
             cite="https://news.stanford.edu/news/2005/june15/jobs-061505.html"
-            className="max-w-2xl mb-8 pl-4 sm:pl-5 border-l-[3px] rounded-sm text-pretty"
-            style={{
-              borderColor: dark ? `${t.accent}4d` : `${t.accent}40`,
-            }}
+            className="max-w-2xl mx-auto mb-8 text-center text-pretty"
           >
             <p
-              className="text-[17px] sm:text-lg font-normal m-0"
+              className="text-base md:text-lg font-normal m-0"
               style={{
-                fontFamily: "var(--font-lato), sans-serif",
+                fontFamily: "var(--font-lato), 'Lato', sans-serif",
                 color: t.text.secondary,
-                lineHeight: 1.55,
+                lineHeight: 1.7,
               }}
             >
               «No puedes conectar los puntos mirando hacia el futuro; solo puedes conectarlos mirando hacia el
