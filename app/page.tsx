@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useTheme } from "@teispace/next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { GlowButton, ArrowRightIcon } from "@/components/shared/glow-button";
 import { CTASection } from "@/components/cta-buttons";
+import { ThemeImageBackground } from "@/components/home/theme-image-background";
 import { THEMES } from "@/lib/design-tokens";
 
 export default function HomePage() {
@@ -24,11 +25,19 @@ export default function HomePage() {
 
   const services = [
     {
+      label: "Developer AI",
+      color: dark ? "#93c5fd" : "#2563eb",
+      gradient: dark ? "from-blue-500/20 to-cyan-500/5" : "from-blue-100 to-cyan-50",
+      border: dark ? "border-blue-500/20" : "border-blue-200",
+      desc: "Arquitectura, orquestación y desarrollo de plataformas propias con sistemas integrados con IA para resolver problemas reales.",
+      href: "/developer-ai",
+    },
+    {
       label: "Growth Hacker",
       color: dark ? "#86efac" : "#16a34a",
       gradient: dark ? "from-green-500/20 to-emerald-500/5" : "from-green-100 to-emerald-50",
       border: dark ? "border-green-500/20" : "border-green-200",
-      desc: "Sistemas, IA y metodologias agiles para founders que quieren operar sin depender de nadie.",
+      desc: "Sistemas, IA y metodologías ágiles para founders que quieren operar sin depender de nadie.",
       href: "/growth",
     },
     {
@@ -36,77 +45,23 @@ export default function HomePage() {
       color: dark ? "#fdba74" : "#ea580c",
       gradient: dark ? "from-orange-500/20 to-amber-500/5" : "from-orange-100 to-amber-50",
       border: dark ? "border-orange-500/20" : "border-orange-200",
-      desc: "Produccion de contenido en video con estrategia integrada para marcas que necesitan presencia real.",
+      desc: "Producción de contenido en video con estrategia integrada para marcas que necesitan presencia real.",
       href: "/filmmaker",
-    },
-    {
-      label: "IA Builder",
-      color: dark ? "#93c5fd" : "#2563eb",
-      gradient: dark ? "from-blue-500/20 to-cyan-500/5" : "from-blue-100 to-cyan-50",
-      border: dark ? "border-blue-500/20" : "border-blue-200",
-      desc: "Automatizaciones, agentes y apps construidas con las herramientas que estan redefiniendo como se trabaja.",
-      href: "/ia-builder",
     },
   ];
 
   return (
     <div className="relative min-h-screen overflow-x-hidden" style={{ background: t.bg }}>
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center pt-24 pb-16">
-        {/* Background images based on theme */}
-        {dark ? (
-          <>
-            <div 
-              className="absolute inset-0 z-0"
-              style={{
-                backgroundImage: "url('/images/hero-bg.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center 30%",
-                backgroundRepeat: "no-repeat",
-              }}
-            />
-            {/* Gradient overlays for text readability - dark mode */}
-            <div 
-              className="absolute inset-0 z-0"
-              style={{
-                background: "linear-gradient(to bottom, rgba(7,8,15,0.4) 0%, rgba(7,8,15,0.7) 50%, rgba(7,8,15,0.95) 100%)",
-              }}
-            />
-            <div 
-              className="absolute inset-0 z-0"
-              style={{
-                background: "radial-gradient(ellipse at center top, transparent 30%, rgba(7,8,15,0.8) 70%)",
-              }}
-            />
-          </>
-        ) : (
-          <>
-            <div 
-              className="absolute inset-0 z-0"
-              style={{
-                backgroundImage: "url('/images/hero-bg-light.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
-                backgroundRepeat: "no-repeat",
-              }}
-            />
-            {/* Gradient overlays for text readability - light mode */}
-            <div 
-              className="absolute inset-0 z-0"
-              style={{
-                background: "linear-gradient(to bottom, rgba(250,251,252,0.3) 0%, rgba(250,251,252,0.6) 50%, rgba(250,251,252,0.95) 100%)",
-              }}
-            />
-            <div 
-              className="absolute inset-0 z-0"
-              style={{
-                background: "radial-gradient(ellipse at center, transparent 20%, rgba(250,251,252,0.7) 70%)",
-              }}
-            />
-          </>
-        )}
-        
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+      {/* Hero — image + gradients scoped to this section only */}
+      <section
+        className="relative min-h-screen overflow-hidden flex flex-col pt-24 pb-8"
+        style={{ "--hero-fade-color": t.bg } as CSSProperties}
+      >
+        <ThemeImageBackground dark={dark} />
+        <div className="hero-bottom-fade" aria-hidden />
+
+        <div className="flex flex-1 items-center justify-center relative z-10">
+            <div className="max-w-4xl mx-auto px-6 text-center relative z-10 w-full">
           {/* Location badge */}
           <div
             className="inline-flex items-center gap-2 text-xs tracking-[0.18em] uppercase mb-8 px-4 py-2.5 rounded-full backdrop-blur-sm transition-all duration-300"
@@ -165,9 +120,9 @@ export default function HomePage() {
               color: t.text.secondary,
             }}
           >
-            Me integro en lo que ya funciona en tu negocio, lo optimizo y lo escalo con
-            metodologías ágiles, contenido y sistemas integrados con IA. Sin equipos enormes.
-            Sin agencias de alto costo.
+            No soy una agencia ni un consultor de PowerPoints. Soy el que entra, entiende
+            cómo funciona tu negocio, y construye contigo lo que necesitas para crecer: marca,
+            contenido, pauta y cultura tech.
           </p>
 
           {/* CTA buttons */}
@@ -179,7 +134,7 @@ export default function HomePage() {
               secondaryColor={t.secondary}
               icon={<ArrowRightIcon />}
             >
-              Ver mi trabajo
+              Conoce lo que hago
             </GlowButton>
             <GlowButton
               href="/mi-historia"
@@ -187,28 +142,29 @@ export default function HomePage() {
               accentColor={t.accent}
               secondaryColor={t.secondary}
             >
-              Mi historia
+              CV
             </GlowButton>
           </div>
-        </div>
-      </section>
+            </div>
+          </div>
 
-      {/* Scroll indicator */}
-      <div className="flex justify-center pb-12 relative">
-        <div
-          className="w-px h-16"
-          style={{
-            background: dark
-              ? "linear-gradient(to bottom,rgba(255,255,255,0.18),transparent)"
-              : `linear-gradient(to bottom,${t.accent}40,transparent)`,
-          }}
-        />
-      </div>
+          {/* Scroll indicator */}
+          <div className="flex justify-center relative z-10">
+            <div
+              className="w-px h-16"
+              style={{
+                background: dark
+                  ? "linear-gradient(to bottom,rgba(255,255,255,0.18),transparent)"
+                  : `linear-gradient(to bottom,${t.accent}40,transparent)`,
+              }}
+            />
+          </div>
+        </section>
 
       {/* Services cards */}
-      <section id="disciplinas" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="mb-16 text-center">
+      <section id="disciplinas" className="relative">
+          <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
+          <div className="mb-16 text-center discipline-surface px-5 py-10 sm:px-8 sm:py-12 md:px-10">
             <span
               className="inline-block text-xs tracking-[0.22em] uppercase font-medium mb-4 px-4 py-2 rounded-full"
               style={{
@@ -299,8 +255,8 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
       {/* CTA Section */}
       <section style={{ borderTop: `1px solid ${t.border}` }}>

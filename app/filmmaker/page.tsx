@@ -1,17 +1,25 @@
 "use client";
 
 import { useTheme } from "@teispace/next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { ThemedPageShell } from "@/components/sections/themed-page-shell";
-import { Glass } from "@/components/shared/glass";
+import { GlowButton } from "@/components/shared/glow-button";
+import { FilmMediaFrame } from "@/components/filmmaker/film-media-frame";
+import { PlanCard } from "@/components/filmmaker/plan-card";
+import { FILM_MEDIA } from "@/lib/filmmaker-media";
 import { CTASection, CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
+import { getFilmmakerYouTubeLink } from "@/lib/cta-links";
+import { getPlanSurface } from "@/lib/filmmaker-plan-surface";
 import {
   THEMES,
   FILM_TARGET_AUDIENCE,
   FILM_PLANS,
+  FILM_PLANS_INTRO,
   FILM_PROCESS,
   FILM_WHY_WORKS,
   FILM_RESULTS,
+  FILM_SERVICE_PILLARS,
+  FILM_FEATURED_VIDEO_ID,
 } from "@/lib/design-tokens";
 
 export default function FilmmakerPage() {
@@ -29,8 +37,10 @@ export default function FilmmakerPage() {
 
   const dark = theme === "dark";
   const t = dark ? THEMES.filmmaker.dark : THEMES.filmmaker.light;
-  
-  // Color variables
+  const display = "display" in t ? (t as { display: string }).display : t.accent;
+  /** RGB de t.bg: dark #0a0704 | light #fffcfa */
+  const heroBgRgb = dark ? "10, 7, 4" : "255, 252, 250";
+
   const tp = t.text.primary;
   const ts = t.text.secondary;
   const tm = t.text.muted;
@@ -39,42 +49,110 @@ export default function FilmmakerPage() {
   const div = t.border;
   const cardBg = t.card;
 
+  const planTheme = {
+    tp,
+    ts,
+    tm,
+    accent: t.accent,
+    accentSolid: t.accentSolid,
+    cardBg,
+    div,
+    ab,
+    gb,
+  };
+
   return (
     <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.secondary} dark={dark}>
       {/* ─── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="pt-28 sm:pt-36 pb-16 sm:pb-24 relative">
-        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
-          <span
-            className="inline-block text-xs tracking-[0.22em] uppercase font-semibold mb-5 px-4 py-2 rounded-full"
-            style={{
-              fontFamily: "var(--font-lato), sans-serif",
-              color: t.accent,
-              background: dark ? `${t.accent}15` : `${t.accent}10`,
-            }}
+      <section
+        className="pt-28 sm:pt-36 pb-16 sm:pb-24 relative overflow-hidden min-h-[85vh] flex flex-col justify-center"
+        style={{ "--hero-fade-color": t.bg, backgroundColor: t.bg } as CSSProperties}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: dark
+              ? "linear-gradient(160deg, rgba(50,28,14,0.55) 0%, rgba(20,12,8,0.88) 45%, rgba(10,7,4,0.98) 100%)"
+              : "linear-gradient(160deg, rgba(251,146,60,0.2) 0%, rgba(255,252,250,0.92) 55%, rgba(255,252,250,1) 100%)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: dark
+              ? `linear-gradient(135deg, rgba(${heroBgRgb},0.88) 0%, rgba(${heroBgRgb},0.72) 45%, rgba(${heroBgRgb},0.82) 100%)`
+              : `linear-gradient(135deg, rgba(${heroBgRgb},0.92) 0%, rgba(${heroBgRgb},0.84) 55%, rgba(${heroBgRgb},0.9) 100%)`,
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: dark
+              ? `linear-gradient(to bottom, rgba(${heroBgRgb},0.08) 0%, rgba(${heroBgRgb},0.45) 55%, ${t.bg} 100%)`
+              : `linear-gradient(to bottom, rgba(${heroBgRgb},0.06) 0%, rgba(${heroBgRgb},0.35) 55%, ${t.bg} 100%)`,
+          }}
+          aria-hidden
+        />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center w-full">
+          <div className="mb-6 flex justify-center">
+            <GlowButton
+              href={getFilmmakerYouTubeLink()}
+              external
+              variant="secondary"
+              size="md"
+              accentColor={t.accentSolid}
+              secondaryColor={t.accent}
+            >
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2 2.87 2.87 0 0 0 0 1.07v3.09a2.87 2.87 0 0 0 1.03 2.2 2.78 2.78 0 0 0 1.95.43C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2 2.87 2.87 0 0 0 0-1.07V7.49a2.87 2.87 0 0 0-1.03-2.07z" />
+                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none" />
+                </svg>
+                jhonattansfilm
+              </span>
+            </GlowButton>
+          </div>
+          <p
+            className="film-display-kicker font-semibold mb-4"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
           >
-            Producción audiovisual
-          </span>
+            Filmmaker
+          </p>
           <h1
-            className="font-semibold leading-[1.1] mb-6 sm:mb-8"
+            className="font-bold leading-[1.05] mb-6 sm:mb-8 text-center max-w-4xl mx-auto"
             style={{
               fontFamily: "var(--font-quicksand), sans-serif",
-              fontSize: "clamp(28px, 6vw, 52px)",
-              color: t.text.primary,
+              fontSize: "clamp(28px, 5.5vw, 56px)",
+              color: tp,
               letterSpacing: "-0.02em",
             }}
           >
-            Un sistema de producción
-            <br />
+            Un sistema de producción{" "}
             <span style={{ color: t.accent }}>optimizado para tu marca.</span>
           </h1>
           <p
-            className="text-base sm:text-lg max-w-xl mx-auto md:mx-0 leading-relaxed mb-10"
-            style={{ fontFamily: "var(--font-lato), sans-serif", color: t.text.secondary, lineHeight: 1.7 }}
+            className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10 text-pretty"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.7 }}
           >
-            Contenido en video de calidad profesional en tiempo récord, con estrategia de
-            publicación integrada — adaptado al ritmo y presupuesto de cada marca.
+            Contenidos en video de calidad profesional en tiempo récord, con estrategia de publicación
+            integrada adaptados al ritmo y presupuesto de cada marca.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center items-center">
             <CTACalendar
               variant="primary"
               dark={dark}
@@ -82,19 +160,87 @@ export default function FilmmakerPage() {
               accentSolidColor={t.accentSolid}
             />
             <CTAWhatsApp variant="secondary" context="filmmaker" dark={dark} accentColor={t.accent} />
+            <GlowButton
+              href="#planes"
+              variant="ghost"
+              size="md"
+              accentColor={t.accent}
+              secondaryColor={t.accent}
+              className="text-sm"
+            >
+              Ver planes
+            </GlowButton>
           </div>
+        </div>
+        <div className="hero-bottom-fade hero-bottom-fade--filmmaker" aria-hidden />
+      </section>
+
+      {/* ─── REEL ───────────────────────────────────────────────────────────────── */}
+      <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <span
+            className="film-display-kicker font-medium block mb-3"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+          >
+            Trabajo reciente
+          </span>
+          <h2
+            className="font-semibold text-2xl sm:text-3xl mb-8"
+            style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
+          >
+            Calidad de cine, ritmo de marca
+          </h2>
+          <div className="flex w-full justify-center mb-6">
+            {FILM_FEATURED_VIDEO_ID ? (
+              <FilmMediaFrame
+                variant="video"
+                videoId={FILM_FEATURED_VIDEO_ID}
+                pageBg={t.bg}
+                dark={dark}
+                className="max-w-4xl"
+              />
+            ) : (
+              <FilmMediaFrame
+                variant="placeholder"
+                pageBg={t.bg}
+                dark={dark}
+                className="max-w-4xl"
+              >
+                <GlowButton
+                  href={getFilmmakerYouTubeLink()}
+                  external
+                  variant="primary"
+                  size="lg"
+                  accentColor={t.accentSolid}
+                  secondaryColor={t.accent}
+                >
+                  Ver canal en YouTube
+                </GlowButton>
+              </FilmMediaFrame>
+            )}
+          </div>
+          <GlowButton
+            href={getFilmmakerYouTubeLink()}
+            external
+            variant="secondary"
+            size="md"
+            accentColor={t.accentSolid}
+            secondaryColor={t.accent}
+          >
+            @jhonattansfilm
+          </GlowButton>
         </div>
       </section>
 
-      {/* ─── PROBLEMA QUE RESOLVEMOS ──────────────────────────────────────────── */}
+      {/* ─── PROBLEMA ───────────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <Glass dark={dark} accentBorder={ab} className="p-6 sm:p-10 text-center md:text-left">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div className="text-center lg:text-left order-2 lg:order-1">
             <span
-              className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-4"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
+              className="film-display-kicker font-medium block mb-3"
+              style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
             >
-              El problema que resolvemos
+              El problema
             </span>
             <p
               className="text-lg sm:text-xl leading-relaxed mb-6"
@@ -105,43 +251,144 @@ export default function FilmmakerPage() {
             </p>
             <p
               className="text-base leading-relaxed"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: t.text.secondary, lineHeight: 1.7 }}
+              style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.7 }}
             >
               Cada pieza toma días de planificación, rodaje y edición. La solución: un sistema
               optimizado que entrega contenido de calidad profesional en tiempo récord.
             </p>
-          </Glass>
+          </div>
+          <FilmMediaFrame
+            variant="image"
+            imageSrc={FILM_MEDIA.problema}
+            pageBg={t.bg}
+            dark={dark}
+            className="order-1 lg:order-2 min-h-[280px] sm:min-h-[360px] w-full"
+            aria-hidden
+          />
         </div>
       </section>
 
-      {/* ─── PARA QUIEN ES ────────────────────────────────────────────────────── */}
+      {/* ─── QUÉ INCLUYE ────────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
+        <div className="max-w-5xl mx-auto px-6 text-center">
           <span
-            className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
-            style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
+            className="film-display-kicker font-medium block mb-3"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+          >
+            Qué incluye
+          </span>
+          <h2
+            className="font-semibold text-2xl sm:text-3xl mb-10 sm:mb-12"
+            style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
+          >
+            Todo lo que compras con cada plan
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 text-left">
+            {FILM_SERVICE_PILLARS.map((item, i) => (
+              <div
+                key={i}
+                className="p-5 sm:p-6 rounded-2xl"
+                style={{ background: cardBg, border: `1px solid ${div}` }}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-sm font-bold"
+                  style={{ background: gb, color: t.accent, border: `1px solid ${ab}` }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <h3
+                  className="font-semibold text-base mb-2"
+                  style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.65 }}
+                >
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PLANES ───────────────────────────────────────────────────────────── */}
+      <section
+        id="planes"
+        className="py-16 sm:py-24 relative scroll-mt-28"
+        style={{ borderTop: `1px solid ${t.border}` }}
+      >
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <span
+              className="film-display-kicker font-medium block mb-3"
+              style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+            >
+              Nuestros planes
+            </span>
+            <h2
+              className="font-semibold text-2xl sm:text-3xl"
+              style={{
+                fontFamily: "var(--font-quicksand), sans-serif",
+                color: tp,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Elige el plan que se adapta a tu ritmo
+            </h2>
+            <p
+              className="text-base max-w-2xl mx-auto mt-6 leading-relaxed text-pretty"
+              style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.7 }}
+            >
+              {FILM_PLANS_INTRO}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+            {FILM_PLANS.map((plan) => (
+              <PlanCard
+                key={plan.id}
+                plan={plan}
+                surface={getPlanSurface(!!plan.featured, dark, planTheme)}
+                siteDark={dark}
+                accent={t.accent}
+                accentSolid={t.accentSolid}
+                selected={selectedPlan === plan.id}
+                onToggle={() =>
+                  setSelectedPlan(selectedPlan === plan.id ? null : plan.id)
+                }
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PARA QUIÉN ES ────────────────────────────────────────────────────── */}
+      <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <span
+            className="film-display-kicker font-medium block mb-3"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
           >
             Para quién es
           </span>
           <h2
-            className="font-semibold text-xl sm:text-2xl mb-10 sm:mb-12"
-            style={{
-              fontFamily: "var(--font-quicksand), sans-serif",
-              color: tp,
-              letterSpacing: "-0.01em",
-            }}
+            className="font-semibold text-2xl sm:text-3xl mb-10 sm:mb-12"
+            style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
           >
             Este servicio está diseñado para
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 text-left">
             {FILM_TARGET_AUDIENCE.map((item, i) => (
               <div
                 key={i}
-                className="p-5 sm:p-6 rounded-2xl transition-all duration-300 text-center md:text-left"
+                className="p-5 sm:p-6 rounded-2xl"
                 style={{ background: cardBg, border: `1px solid ${div}` }}
               >
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-lg font-semibold mx-auto md:mx-0"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-lg font-semibold"
                   style={{ background: gb, color: t.accent, border: `1px solid ${ab}` }}
                 >
                   {i + 1}
@@ -164,456 +411,35 @@ export default function FilmmakerPage() {
         </div>
       </section>
 
-      {/* ─── PLANES ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center md:text-left mb-12 sm:mb-16">
-            <span
-              className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-            >
-              Nuestros planes
-            </span>
-            <h2
-              className="font-semibold text-2xl sm:text-3xl"
-              style={{
-                fontFamily: "var(--font-quicksand), sans-serif",
-                color: tp,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Elige el plan que se adapta a tu ritmo
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
-            {FILM_PLANS.map((plan) => (
-              <article
-                key={plan.id}
-                className="relative rounded-3xl p-6 sm:p-8 transition-all duration-500"
-                style={{
-                  background: plan.featured
-                    ? dark
-                      ? "rgba(253,186,116,0.06)"
-                      : "rgba(194,65,12,0.04)"
-                    : cardBg,
-                  border: plan.featured ? `1.5px solid ${ab}` : `1px solid ${div}`,
-                  boxShadow:
-                    plan.featured && dark
-                      ? `0 0 80px ${t.glow}12, 0 0 40px ${t.glow}08`
-                      : "none",
-                  outline: selectedPlan === plan.id ? `2px solid ${t.accent}` : "none",
-                  outlineOffset: selectedPlan === plan.id ? 2 : 0,
-                }}
-              >
-                {plan.featured && (
-                  <div
-                    className="absolute -top-3 left-6 text-[10px] sm:text-xs font-semibold px-4 py-1.5 rounded-full"
-                    style={{
-                      fontFamily: "var(--font-lato), sans-serif",
-                      background: t.accent,
-                      color: t.accentSolid,
-                    }}
-                  >
-                    Más popular
-                  </div>
-                )}
-
-                <div className="mb-6">
-                  <h3
-                    id={`plan-${plan.id}-title`}
-                    className="font-semibold text-xl mb-2"
-                    style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
-                  >
-                    {plan.name}
-                  </h3>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                  >
-                    {plan.tagline}
-                  </p>
-                </div>
-
-                <div className="mb-6">
-                  <div
-                    className="font-bold text-2xl sm:text-3xl"
-                    style={{ fontFamily: "var(--font-quicksand), sans-serif", color: t.accent }}
-                  >
-                    {plan.price}
-                  </div>
-                  {plan.priceUSD && (
-                    <div
-                      className="text-sm mt-1"
-                      style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                    >
-                      {plan.priceUSD}
-                    </div>
-                  )}
-                </div>
-
-                {plan.production && (
-                  <div
-                    className="text-xs font-medium px-3 py-1.5 rounded-lg inline-block mb-6"
-                    style={{
-                      fontFamily: "var(--font-lato), sans-serif",
-                      background: gb,
-                      color: t.accent,
-                      border: `1px solid ${ab}`,
-                    }}
-                  >
-                    {plan.production}
-                  </div>
-                )}
-
-                {plan.includes && (
-                  <ul className="space-y-2.5 mb-6">
-                    {plan.includes.slice(0, 4).map((item, j) => (
-                      <li
-                        key={j}
-                        className="flex items-start gap-3 text-sm"
-                        style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                      >
-                        <span className="mt-0.5 shrink-0" style={{ color: t.accent }}>
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
-                          </svg>
-                        </span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {plan.isCustom && plan.description && (
-                  <p
-                    className="text-sm leading-relaxed mb-6"
-                    style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.65 }}
-                  >
-                    {plan.description}
-                  </p>
-                )}
-
-                <CTACalendar
-                  variant={plan.featured ? "primary" : "secondary"}
-                  dark={dark}
-                  accentColor={t.accent}
-                  accentSolidColor={t.accentSolid}
-                  className="w-full justify-center text-sm"
-                />
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedPlan(selectedPlan === plan.id ? null : plan.id)}
-                  className="w-full mt-4 min-h-[44px] inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                  style={{
-                    fontFamily: "var(--font-lato), sans-serif",
-                    border: `1px solid ${div}`,
-                    color: tp,
-                    background: gb,
-                  }}
-                  aria-expanded={selectedPlan === plan.id}
-                  aria-controls={`plan-${plan.id}-details`}
-                >
-                  <span>{selectedPlan === plan.id ? "Ocultar detalles" : "Ver detalles"}</span>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    className="shrink-0 transition-transform duration-300"
-                    style={{
-                      color: t.accent,
-                      transform: selectedPlan === plan.id ? "rotate(180deg)" : "rotate(0deg)",
-                    }}
-                    aria-hidden
-                  >
-                    <path
-                      d="M2.5 4.5L6 8L9.5 4.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-
-                <div
-                  id={`plan-${plan.id}-details`}
-                  role="region"
-                  aria-labelledby={`plan-${plan.id}-title`}
-                  hidden={selectedPlan !== plan.id}
-                >
-                {selectedPlan === plan.id && !plan.isCustom && (
-                  <div
-                    className="mt-6 pt-6 space-y-6"
-                    style={{ borderTop: `1px solid ${t.border}` }}
-                  >
-                    {plan.framework && (
-                      <div>
-                        <h4
-                          className="text-xs tracking-[0.2em] uppercase font-medium mb-4"
-                          style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-                        >
-                          Framework estratégico
-                        </h4>
-                        <div className="space-y-3">
-                          {plan.framework.map((f, k) => (
-                            <div
-                              key={k}
-                              className="flex items-center justify-between p-3 rounded-xl"
-                              style={{ background: gb, border: `1px solid ${ab}` }}
-                            >
-                              <div className="flex items-center gap-3">
-                                <span
-                                  className="text-lg font-bold"
-                                  style={{
-                                    fontFamily: "var(--font-quicksand), sans-serif",
-                                    color: t.accent,
-                                  }}
-                                >
-                                  {f.count}
-                                </span>
-                                <span
-                                  className="text-sm font-medium"
-                                  style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
-                                >
-                                  {f.type}
-                                </span>
-                              </div>
-                              <span
-                                className="text-xs text-right max-w-[140px]"
-                                style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                              >
-                                {f.goal}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {plan.deliverables && (
-                      <div>
-                        <h4
-                          className="text-xs tracking-[0.2em] uppercase font-medium mb-4"
-                          style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-                        >
-                          Entregables al mes
-                        </h4>
-                        <div className="grid grid-cols-2 gap-3">
-                          {plan.deliverables.map((d, k) => (
-                            <div
-                              key={k}
-                              className="p-3 rounded-xl text-center"
-                              style={{ background: gb, border: `1px solid ${ab}` }}
-                            >
-                              <span
-                                className="text-2xl font-bold block"
-                                style={{
-                                  fontFamily: "var(--font-quicksand), sans-serif",
-                                  color: t.accent,
-                                }}
-                              >
-                                {d.count}
-                              </span>
-                              <span
-                                className="text-xs"
-                                style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                              >
-                                {d.type}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {plan.payment && (
-                      <div>
-                        <h4
-                          className="text-xs tracking-[0.2em] uppercase font-medium mb-4"
-                          style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-                        >
-                          Estructura de pago
-                        </h4>
-                        <div className="space-y-3">
-                          {plan.payment.map((p, k) => (
-                            <div
-                              key={k}
-                              className="flex items-start justify-between p-3 rounded-xl"
-                              style={{ background: cardBg, border: `1px solid ${div}` }}
-                            >
-                              <div>
-                                <span
-                                  className="text-sm font-medium block"
-                                  style={{
-                                    fontFamily: "var(--font-quicksand), sans-serif",
-                                    color: tp,
-                                  }}
-                                >
-                                  {p.stage}
-                                </span>
-                                <span
-                                  className="text-xs"
-                                  style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                                >
-                                  {p.desc}
-                                </span>
-                              </div>
-                              <span
-                                className="text-sm font-semibold shrink-0"
-                                style={{
-                                  fontFamily: "var(--font-quicksand), sans-serif",
-                                  color: t.accent,
-                                }}
-                              >
-                                {p.amount}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {plan.costPerPiece && (
-                      <div
-                        className="p-4 rounded-xl text-center"
-                        style={{ background: gb, border: `1px solid ${ab}` }}
-                      >
-                        <span
-                          className="text-sm"
-                          style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                        >
-                          {plan.costPerPiece}
-                        </span>
-                        {plan.savings && (
-                          <span
-                            className="block text-xs mt-1 font-medium"
-                            style={{ color: t.accent }}
-                          >
-                            {plan.savings}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {selectedPlan === plan.id && plan.isCustom && plan.forWho && (
-                  <div className="mt-8 pt-6 space-y-6" style={{ borderTop: `1px solid ${t.border}` }}>
-                    <div>
-                      <h4
-                        className="text-xs tracking-[0.2em] uppercase font-medium mb-4"
-                        style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-                      >
-                        Ideal para
-                      </h4>
-                      <ul className="space-y-2">
-                        {plan.forWho.map((item, k) => (
-                          <li
-                            key={k}
-                            className="flex items-start gap-3 text-sm"
-                            style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                          >
-                            <span className="mt-0.5 shrink-0" style={{ color: t.accent }}>
-                              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
-                              </svg>
-                            </span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    {plan.deliverables && (
-                      <div>
-                        <h4
-                          className="text-xs tracking-[0.2em] uppercase font-medium mb-4"
-                          style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-                        >
-                          Entregables
-                        </h4>
-                        <div className="space-y-3">
-                          {plan.deliverables.map((d, k) => (
-                            <div
-                              key={k}
-                              className="p-3 rounded-xl"
-                              style={{ background: gb, border: `1px solid ${ab}` }}
-                            >
-                              <span
-                                className="text-sm font-medium block"
-                                style={{
-                                  fontFamily: "var(--font-quicksand), sans-serif",
-                                  color: tp,
-                                }}
-                              >
-                                {d.type}
-                              </span>
-                              <span
-                                className="text-xs"
-                                style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                              >
-                                {d.desc}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── PROCESO ──────────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="mb-10 sm:mb-14 text-center md:text-left">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+          <FilmMediaFrame
+            variant="image"
+            imageSrc={FILM_MEDIA.proceso}
+            pageBg={t.bg}
+            dark={dark}
+            className="min-h-[320px] sm:min-h-[360px] w-full order-2 lg:order-1"
+            aria-hidden
+          />
+          <div className="order-1 lg:order-2">
             <span
-              className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
+              className="film-display-kicker font-medium block mb-3"
+              style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
             >
               Cómo trabajamos
             </span>
             <h2
-              className="font-semibold text-xl sm:text-2xl"
-              style={{
-                fontFamily: "var(--font-quicksand), sans-serif",
-                color: tp,
-                letterSpacing: "-0.01em",
-              }}
+              className="font-semibold text-2xl sm:text-3xl mb-8"
+              style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
             >
               Proceso de producción
             </h2>
-          </div>
-
-          <div className="space-y-6 sm:space-y-0 sm:grid sm:grid-cols-4 sm:gap-6">
-            {FILM_PROCESS.map((phase, i) => (
-              <div key={i} className="relative">
-                {/* Mobile connector */}
-                {i < FILM_PROCESS.length - 1 && (
+            <ol className="space-y-6">
+              {FILM_PROCESS.map((phase, i) => (
+                <li key={i} className="flex gap-4">
                   <div
-                    className="absolute left-5 top-12 bottom-0 w-px sm:hidden"
-                    style={{ background: div }}
-                  />
-                )}
-                {/* Desktop connector */}
-                {i < FILM_PROCESS.length - 1 && (
-                  <div
-                    className="hidden sm:block absolute top-5 right-0 h-px w-6 translate-x-3"
-                    style={{ background: div }}
-                  />
-                )}
-
-                <div className="relative z-10">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 font-bold text-sm"
+                    className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center font-bold text-sm"
                     style={{
                       fontFamily: "var(--font-quicksand), sans-serif",
                       background: i === 0 ? t.accent : gb,
@@ -623,72 +449,59 @@ export default function FilmmakerPage() {
                   >
                     {phase.step}
                   </div>
-                  <h3
-                    className="font-semibold text-base mb-3"
-                    style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
-                  >
-                    {phase.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {phase.items.map((item, j) => (
-                      <li
-                        key={j}
-                        className="text-sm leading-relaxed pl-4 relative"
-                        style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
-                      >
-                        <span
-                          className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full"
-                          style={{ background: ab }}
-                        />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+                  <div>
+                    <h3
+                      className="font-semibold text-base mb-2"
+                      style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
+                    >
+                      {phase.title}
+                    </h3>
+                    <ul className="space-y-1.5">
+                      {phase.items.map((item, j) => (
+                        <li
+                          key={j}
+                          className="text-sm leading-relaxed"
+                          style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
       {/* ─── POR QUE FUNCIONA ─────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center md:text-left mb-10 sm:mb-14">
-            <span
-              className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-            >
-              Metodología
-            </span>
-            <h2
-              className="font-semibold text-xl sm:text-2xl"
-              style={{
-                fontFamily: "var(--font-quicksand), sans-serif",
-                color: tp,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Por qué funciona esta metodología
-            </h2>
-          </div>
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <span
+            className="film-display-kicker font-medium block mb-3"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+          >
+            Metodología
+          </span>
+          <h2
+            className="font-semibold text-2xl sm:text-3xl mb-10 sm:mb-14 max-w-2xl mx-auto"
+            style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
+          >
+            Por qué funciona esta metodología
+          </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-left">
             {FILM_WHY_WORKS.map((item, i) => (
-              <Glass
-                key={i}
-                dark={dark}
-                accentBorder={dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}
-                className="p-5 sm:p-6 text-center md:text-left"
-              >
-                <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center mb-4 text-sm font-bold"
-                  style={{ background: gb, color: t.accent, border: `1px solid ${ab}` }}
+              <div key={i} className="border-t pt-6" style={{ borderColor: div }}>
+                <span
+                  className="text-3xl font-bold block mb-4"
+                  style={{ fontFamily: "var(--font-quicksand), sans-serif", color: display }}
                 >
-                  {i + 1}
-                </div>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <h3
-                  className="font-semibold text-base mb-2"
+                  className="font-semibold text-base mb-2 uppercase tracking-wide"
                   style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
                 >
                   {item.title}
@@ -699,7 +512,7 @@ export default function FilmmakerPage() {
                 >
                   {item.desc}
                 </p>
-              </Glass>
+              </div>
             ))}
           </div>
         </div>
@@ -707,42 +520,32 @@ export default function FilmmakerPage() {
 
       {/* ─── RESULTADOS ───────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 relative" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center md:text-left mb-10">
-            <span
-              className="text-[11px] tracking-[0.25em] uppercase font-medium block mb-3"
-              style={{ fontFamily: "var(--font-lato), sans-serif", color: tm }}
-            >
-              Resultados
-            </span>
-            <h2
-              className="font-semibold text-xl sm:text-2xl"
-              style={{
-                fontFamily: "var(--font-quicksand), sans-serif",
-                color: tp,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Lo que puedes esperar
-            </h2>
-          </div>
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <span
+            className="film-display-kicker font-medium block mb-3"
+            style={{ fontFamily: "var(--font-lato), sans-serif", color: display }}
+          >
+            Resultados
+          </span>
+          <h2
+            className="font-semibold text-2xl sm:text-3xl mb-12"
+            style={{ fontFamily: "var(--font-quicksand), sans-serif", color: tp }}
+          >
+            Lo que puedes esperar
+          </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
             {FILM_RESULTS.map((item, i) => (
-              <div
-                key={i}
-                className="text-center p-6 rounded-2xl"
-                style={{ background: cardBg, border: `1px solid ${div}` }}
-              >
+              <div key={i} className="text-center">
                 <div
-                  className="text-2xl sm:text-3xl font-bold mb-2"
+                  className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight"
                   style={{ fontFamily: "var(--font-quicksand), sans-serif", color: t.accent }}
                 >
                   {item.metric}
                 </div>
                 <p
-                  className="text-sm"
-                  style={{ fontFamily: "var(--font-lato), sans-serif", color: ts }}
+                  className="text-sm sm:text-base max-w-xs mx-auto"
+                  style={{ fontFamily: "var(--font-lato), sans-serif", color: ts, lineHeight: 1.6 }}
                 >
                   {item.desc}
                 </p>
@@ -755,14 +558,30 @@ export default function FilmmakerPage() {
       {/* ─── CTA FINAL ────────────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 relative" style={{ borderTop: `1px solid ${t.border}` }}>
         <div className="max-w-5xl mx-auto px-6">
-          <CTASection
-            dark={dark}
-            accentColor={t.accent}
-            accentSolidColor={t.accentSolid}
-            context="filmmaker"
-            title="¿Listo para producir?"
-            description="Agenda una llamada estratégica (30 min) para evaluar tu marca y objetivos. Confirmamos fechas y arrancamos la pre-producción."
-          />
+          <div
+            className="relative rounded-3xl overflow-hidden px-6 py-12 sm:px-10 sm:py-14"
+            style={{ border: `1px solid ${div}` }}
+          >
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: dark
+                  ? "linear-gradient(120deg, rgba(40,22,10,0.85), rgba(10,7,4,0.95))"
+                  : "linear-gradient(120deg, rgba(251,146,60,0.2), rgba(255,252,250,0.98))",
+              }}
+              aria-hidden
+            />
+            <div className="relative z-10">
+              <CTASection
+                dark={dark}
+                accentColor={t.accent}
+                accentSolidColor={t.accentSolid}
+                context="filmmaker"
+                title="¿Listo para producir?"
+                description="Agenda una llamada estratégica (30 min) para evaluar tu marca y objetivos. Confirmamos fechas y arrancamos la pre-producción."
+              />
+            </div>
+          </div>
         </div>
       </section>
     </ThemedPageShell>

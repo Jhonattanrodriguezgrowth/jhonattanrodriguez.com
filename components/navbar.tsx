@@ -10,10 +10,10 @@ import { SunIcon, MoonIcon, MenuIcon, CloseIcon } from "./shared/icons";
 
 const NAV_ITEMS = [
   { href: "/", label: "Inicio" },
-  { href: "/mi-historia", label: "Mi historia" },
+  { href: "/developer-ai", label: "Developer AI" },
   { href: "/growth", label: "Growth" },
   { href: "/filmmaker", label: "Filmmaker" },
-  { href: "/ia-builder", label: "IA Builder" },
+  { href: "/mi-historia", label: "CV" },
 ];
 
 export function Navbar() {
@@ -64,14 +64,11 @@ export function Navbar() {
     return pathname.startsWith(href);
   };
 
-  if (!mounted) {
-    return <nav className="fixed top-0 left-0 right-0 z-50 h-16" />;
-  }
-
   const routeId = resolveRouteThemeId(pathname);
-  const mode = dark ? "dark" : "light";
-  const pt = THEMES[routeId][mode];
-  const navScrolledBg = dark ? hexToRgba(pt.bg, 0.88) : hexToRgba(pt.bg, 0.92);
+  /** Hasta hidratar asumimos modo oscuro (defaultTheme en layout) para no mostrar nav vacío. */
+  const paletteDark = !mounted ? true : dark;
+  const pt = THEMES[routeId][paletteDark ? "dark" : "light"];
+  const navScrolledBg = paletteDark ? hexToRgba(pt.bg, 0.88) : hexToRgba(pt.bg, 0.92);
   const mobilePanelBg = hexToRgba(pt.bg, 0.98);
   const textC = pt.text.muted;
   const hoverC = pt.text.secondary;
@@ -112,12 +109,12 @@ export function Navbar() {
                     fontFamily: "'Lato', sans-serif",
                     color: active ? pt.text.primary : textC,
                     background: active
-                      ? dark
+                      ? paletteDark
                         ? "rgba(255,255,255,0.08)"
                         : "rgba(0,0,0,0.06)"
                       : "transparent",
                     // @ts-ignore
-                    "--tw-ring-color": dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+                    "--tw-ring-color": paletteDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
                   }}
                   onMouseEnter={(e) => {
                     if (!active) e.currentTarget.style.color = hoverC;
@@ -131,32 +128,32 @@ export function Navbar() {
               );
             })}
             <button
-              onClick={() => setTheme(dark ? "light" : "dark")}
-              aria-label={dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+              onClick={() => setTheme(paletteDark ? "light" : "dark")}
+              aria-label={paletteDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               className="ml-3 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               style={{ 
                 color: textC,
                 // @ts-ignore
-                "--tw-ring-color": dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+                "--tw-ring-color": paletteDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
               }}
             >
-              {dark ? <SunIcon /> : <MoonIcon />}
+              {paletteDark ? <SunIcon /> : <MoonIcon />}
             </button>
           </div>
 
           {/* Mobile Nav Toggle */}
           <div className="flex md:hidden items-center gap-1">
             <button
-              onClick={() => setTheme(dark ? "light" : "dark")}
-              aria-label={dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+              onClick={() => setTheme(paletteDark ? "light" : "dark")}
+              aria-label={paletteDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               style={{ color: textC }}
               className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-2"
             >
-              {dark ? <SunIcon /> : <MoonIcon />}
+              {paletteDark ? <SunIcon /> : <MoonIcon />}
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Cerrar menu" : "Abrir menu"}
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={mobileOpen}
               style={{ color: textC }}
               className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-2"
@@ -202,7 +199,7 @@ export function Navbar() {
                   fontFamily: "'Lato', sans-serif",
                   color: active ? pt.text.primary : pt.text.secondary,
                   background: active
-                    ? dark
+                    ? paletteDark
                       ? "rgba(255,255,255,0.08)"
                       : "rgba(0,0,0,0.06)"
                     : "transparent",

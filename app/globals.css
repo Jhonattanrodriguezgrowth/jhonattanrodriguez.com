@@ -37,6 +37,19 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --disc-surface-bg: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.68) 0%,
+    rgba(248, 251, 255, 0.52) 48%,
+    rgba(238, 246, 255, 0.4) 100%
+  );
+  --disc-surface-border: rgba(148, 163, 184, 0.34);
+  --disc-surface-shadow: 0 10px 35px rgba(15, 23, 42, 0.08), 0 2px 12px rgba(59, 130, 246, 0.1);
+  --disc-surface-highlight: radial-gradient(
+    ellipse 75% 80% at 20% 0%,
+    rgba(125, 211, 252, 0.28) 0%,
+    rgba(125, 211, 252, 0) 72%
+  );
 }
 
 .dark {
@@ -72,6 +85,19 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  --disc-surface-bg: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.64) 0%,
+    rgba(15, 23, 42, 0.52) 48%,
+    rgba(30, 41, 59, 0.44) 100%
+  );
+  --disc-surface-border: rgba(148, 163, 184, 0.24);
+  --disc-surface-shadow: 0 16px 42px rgba(2, 6, 23, 0.5), 0 4px 22px rgba(56, 189, 248, 0.15);
+  --disc-surface-highlight: radial-gradient(
+    ellipse 70% 85% at 20% 0%,
+    rgba(125, 211, 252, 0.24) 0%,
+    rgba(125, 211, 252, 0) 72%
+  );
 }
 
 @theme inline {
@@ -155,6 +181,124 @@
     min-width: 44px;
     min-height: 44px;
   }
+}
+
+.discipline-surface {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid var(--disc-surface-border);
+  background: var(--disc-surface-bg);
+  box-shadow: var(--disc-surface-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.discipline-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--disc-surface-highlight);
+}
+
+.discipline-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .discipline-surface {
+    background: color-mix(in srgb, var(--color-card) 82%, transparent);
+  }
+}
+
+/* Hero image background — scroll only (no fixed; avoids bleed into #disciplinas) */
+.theme-bg-image {
+  background-attachment: scroll;
+  filter: saturate(0.7);
+  -webkit-filter: saturate(0.7);
+}
+
+.theme-bg-image--light {
+  filter: none;
+  -webkit-filter: none;
+}
+
+.hero-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to bottom, transparent, var(--hero-fade-color, #07080f));
+}
+
+/* Developer AI: taller fade into route bg (#04080f dark / #fafbff light) */
+.hero-bottom-fade--developer-ai {
+  height: min(22vh, 240px);
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--hero-fade-color, #04080f) 40%, transparent) 38%,
+    color-mix(in srgb, var(--hero-fade-color, #04080f) 78%, transparent) 68%,
+    color-mix(in srgb, var(--hero-fade-color, #04080f) 94%, transparent) 88%,
+    var(--hero-fade-color, #04080f) 100%
+  );
+}
+
+/* Filmmaker: taller fade into route bg (#0a0704 dark / #fffcfa light) */
+.hero-bottom-fade--filmmaker {
+  height: min(22vh, 240px);
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--hero-fade-color, #0a0704) 40%, transparent) 38%,
+    color-mix(in srgb, var(--hero-fade-color, #0a0704) 78%, transparent) 68%,
+    color-mix(in srgb, var(--hero-fade-color, #0a0704) 94%, transparent) 88%,
+    var(--hero-fade-color, #0a0704) 100%
+  );
+}
+
+.film-display-kicker {
+  font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Filmmaker: contenedores foto/video sin borde visible */
+.film-media-frame {
+  border: none;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: var(--film-media-bg, #0a0704);
+}
+
+.film-media-iframe {
+  display: block;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--film-media-bg, #0a0704);
+}
+
+/* Growth: taller fade into route bg (#060d04 dark / #fafdfb light) */
+.hero-bottom-fade--growth {
+  height: min(22vh, 240px);
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--hero-fade-color, #060d04) 40%, transparent) 38%,
+    color-mix(in srgb, var(--hero-fade-color, #060d04) 78%, transparent) 68%,
+    color-mix(in srgb, var(--hero-fade-color, #060d04) 94%, transparent) 88%,
+    var(--hero-fade-color, #060d04) 100%
+  );
 }
 
 /* Reduce motion for users who prefer it */

@@ -73,7 +73,7 @@ const HISTORIA_TIMELINE: HistoriaTimelineItem[] = [
   {
     year: "2025 – 2026",
     color: "#93c5fd",
-    title: "AI Builder | Soberanía en la creación de productos",
+    title: "Developer AI | Soberanía en la creación de productos",
     desc: "No es la trayectoria de un desarrollador tradicional que se centra exclusivamente en lo técnico. Creo que los productos deben representar el lenguaje y el propósito de las marcas, además de ser fáciles de usar e implementar. Con Cursor, Claude Code, Lovable/v0, Supabase y Vercel comprendí que un operador único, con las herramientas correctas, puede orquestar todas las piezas del rompecabezas en tiempo récord, haciendo el software más accesible y escalable.",
     expanded:
       "Después de trabajar con varios equipos de desarrollo y observar lo complejo que era sacar un producto con los sistemas tradicionales, principalmente por el tiempo y los salarios de los ingenieros o programadores, al ver la integración de la IA en el código de programación con herramientas como Lovable y Cursor en 2025 entendí que era mi oportunidad de implementar todo lo aprendido empíricamente con los equipos de desarrollo de InteGrowHome y alcanzar lo que denomino como soberanía en la creación de productos tecnológicos. Al fin y al cabo, con todos los equipos mi rol era crear la arquitectura de la solución y, después de hacerlo durante más de 5 años, todo tomó sentido.",
@@ -199,7 +199,7 @@ export default function MiHistoriaPage() {
               background: dark ? `${t.accent}18` : `${t.accent}12`,
             }}
           >
-            Mi historia
+            CV
           </span>
 
           <h1

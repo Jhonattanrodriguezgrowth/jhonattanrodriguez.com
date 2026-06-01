@@ -7,7 +7,7 @@ export function resolveRouteThemeId(pathname: string | null): RouteThemeId {
   if (!pathname) return "index";
   if (pathname.startsWith("/growth")) return "growth";
   if (pathname.startsWith("/filmmaker")) return "filmmaker";
-  if (pathname.startsWith("/ia-builder")) return "builder";
+  if (pathname.startsWith("/developer-ai")) return "builder";
   return "index";
 }
 
@@ -22,7 +22,7 @@ export function hexToRgba(hex: string, alpha: number): string {
 
 type ThemeMode = "dark" | "light";
 
-/** Secundario para GlowButton: en IA Builder se usa `teal` como en el resto de la página. */
+/** Secundario para GlowButton: en Developer AI se usa `teal` como en el resto de la página. */
 export function glowSecondaryForRoute(themeId: RouteThemeId, mode: ThemeMode): string {
   const palette = THEMES[themeId][mode];
   if (themeId === "builder" && "teal" in palette) return palette.teal;

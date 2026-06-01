@@ -5,26 +5,27 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Youtube, Instagram, Linkedin } from "lucide-react";
+import { Youtube, Instagram, Linkedin, Github } from "lucide-react";
 import { GlowButton } from "./shared/glow-button";
-import { getCalendarLink } from "@/lib/cta-links";
+import { getCalendarLink, getFilmmakerYouTubeLink, getGitHubProfileLink } from "@/lib/cta-links";
 import { THEMES } from "@/lib/design-tokens";
 import { glowSecondaryForRoute, resolveRouteThemeId } from "@/lib/route-theme";
 
 const FOOTER_LINKS = [
+  { href: "/developer-ai", label: "Developer AI" },
   { href: "/growth", label: "Growth" },
   { href: "/filmmaker", label: "Filmmaker" },
-  { href: "/ia-builder", label: "IA Builder" },
 ];
 
 const SOCIAL_LINKS: { href: string; label: string; Icon: LucideIcon }[] = [
-  { href: "https://www.youtube.com/@jhonattansfilm", label: "Canal de YouTube", Icon: Youtube },
+  { href: getFilmmakerYouTubeLink(), label: "Canal de YouTube", Icon: Youtube },
   { href: "https://www.instagram.com/jhonattansfilm/", label: "Instagram", Icon: Instagram },
   {
     href: "https://www.linkedin.com/in/jhonattanrodriguezgrowth",
     label: "LinkedIn",
     Icon: Linkedin,
   },
+  { href: getGitHubProfileLink(), label: "Perfil de GitHub", Icon: Github },
 ];
 
 export function Footer() {
@@ -82,15 +83,13 @@ export function Footer() {
               </Link>
             ))}
             <Link
-              href="#contacto"
+              href={getCalendarLink()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm transition-colors duration-200 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-1"
               style={{
                 fontFamily: "'Lato', sans-serif",
                 color: t.text.secondary,
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(getCalendarLink(), "_blank");
               }}
             >
               Contacto
@@ -124,7 +123,7 @@ export function Footer() {
             className="text-sm"
             style={{ fontFamily: "'Lato', sans-serif", color: t.text.muted }}
           >
-            {new Date().getFullYear()} Jhonattan Rodriguez - Bogota, Colombia
+            {new Date().getFullYear()} Jhonattan Rodriguez - Bogotá, Colombia
           </p>
         </div>
       </div>

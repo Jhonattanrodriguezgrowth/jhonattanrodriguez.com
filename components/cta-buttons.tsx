@@ -37,7 +37,7 @@ export function CTAWhatsApp({
       icon={<WhatsAppIcon />}
       iconPosition="left"
     >
-      {label || "Escribeme por WhatsApp"}
+      {label || "Escríbeme por WhatsApp"}
     </GlowButton>
   );
 }

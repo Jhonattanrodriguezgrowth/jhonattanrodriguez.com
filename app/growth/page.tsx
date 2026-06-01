@@ -1,10 +1,11 @@
 "use client";
 
 import { useTheme } from "@teispace/next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CheckIcon } from "@/components/shared/icons";
 import { CTASection, CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
+import { GlowButton } from "@/components/shared/glow-button";
 import { THEMES } from "@/lib/design-tokens";
 
 export default function GrowthPage() {
@@ -22,6 +23,8 @@ export default function GrowthPage() {
 
   const dark = theme === "dark";
   const t = dark ? THEMES.growth.dark : THEMES.growth.light;
+  /** RGB de t.bg: dark #060d04 → 6,13,4 | light #fafdfb → 250,253,251 */
+  const heroBgRgb = dark ? "6, 13, 4" : "250, 253, 251";
 
   const metaAdsSessions = [
     {
@@ -89,20 +92,71 @@ export default function GrowthPage() {
   return (
     <ThemedPageShell pageBackground={t.bg} accentColor={t.accent} secondaryColor={t.secondary} dark={dark}>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative">
-        <div className="max-w-5xl mx-auto px-6 text-center md:text-left">
-          <span
-            className="inline-block text-xs tracking-[0.22em] uppercase font-semibold mb-4 px-4 py-2 rounded-full"
-            style={{
-              fontFamily: "var(--font-lato), 'Lato', sans-serif",
-              color: t.accent,
-              background: dark ? `${t.accent}15` : `${t.accent}10`,
-            }}
-          >
-            Growth Hacker
-          </span>
+      <section
+        className="pt-32 pb-20 relative overflow-hidden"
+        style={{ "--hero-fade-color": t.bg, backgroundColor: t.bg } as CSSProperties}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "url('/growth/growth-hero-bg.gif')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            opacity: dark ? 0.55 : 0.28,
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: dark
+              ? `linear-gradient(135deg, rgba(${heroBgRgb},0.82) 0%, rgba(${heroBgRgb},0.68) 45%, rgba(${heroBgRgb},0.76) 100%)`
+              : `linear-gradient(135deg, rgba(${heroBgRgb},0.88) 0%, rgba(${heroBgRgb},0.80) 55%, rgba(${heroBgRgb},0.86) 100%)`,
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: dark
+              ? `linear-gradient(to bottom, rgba(${heroBgRgb},0.05) 0%, rgba(${heroBgRgb},0.42) 48%, rgba(${heroBgRgb},0.82) 70%, ${t.bg} 100%)`
+              : `linear-gradient(to bottom, rgba(${heroBgRgb},0.04) 0%, rgba(${heroBgRgb},0.22) 48%, rgba(${heroBgRgb},0.76) 72%, ${t.bg} 100%)`,
+          }}
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          <div className="mb-6 flex justify-center">
+            <GlowButton
+              href="https://www.linkedin.com/in/jhonattansgrowth/"
+              external
+              variant="secondary"
+              size="md"
+              accentColor={t.accentSolid}
+              secondaryColor={t.accent}
+            >
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-11h4" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+                jhonattansgrowth
+              </span>
+            </GlowButton>
+          </div>
           <h1
-            className="font-bold leading-[1.1] mb-6"
+            className="font-bold leading-[1.1] mb-6 text-center"
             style={{
               fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
               fontSize: "clamp(28px,4.5vw,52px)",
@@ -115,12 +169,14 @@ export default function GrowthPage() {
             </span>
           </h1>
           <p
-            className="text-base md:text-lg max-w-2xl mx-auto md:mx-0 leading-relaxed mb-8 text-pretty"
+            className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-8 text-pretty"
             style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
           >
-            Deja de pagar a agencias por lo que puedes hacer tú mismo. Te enseño a operar con sistemas ágiles y las herramientas de IA que hoy definen quién escala y quién se queda atrás.
+            Es imposible delegar bien lo que no entiendes. Te entreno en pensamiento sistémico,
+            posicionamiento de marca y metodologías ágiles para que lideres tu operación con estrategia
+            y la cedas cuando quieras, no porque no te quede otra.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+          <div className="flex flex-wrap gap-4 justify-center">
             <CTACalendar
               variant="primary"
               dark={dark}
@@ -137,6 +193,8 @@ export default function GrowthPage() {
             />
           </div>
         </div>
+
+        <div className="hero-bottom-fade hero-bottom-fade--growth" aria-hidden />
       </section>
 
       {/* Entrenamiento MetaAds */}
