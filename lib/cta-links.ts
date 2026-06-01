@@ -3,8 +3,9 @@
 
 export const CTA_LINKS = {
   whatsapp: "https://wa.me/573045818587",
+  /** Sesión de reconocimiento Growth Hack */
   calendar:
-    "https://calendly.com/jhonattanrodriguezgrowth/sesion-de-reconocimiento-growth-hack",
+    "https://calendly.com/jhonattanrodriguez/sesion-de-reconocimiento-growth-hack",
   githubProfile: "https://github.com/Jhonattanrodriguezgrowth",
   filmmakerYoutube: "https://www.youtube.com/@jhonattansfilm",
 };
