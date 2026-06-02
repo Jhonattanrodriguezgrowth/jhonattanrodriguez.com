@@ -9,6 +9,10 @@ export const FILM_MEDIA = {
     src: "/filmmaker/foto-proceso-produccion.jpg",
     position: "center right",
   },
+  procesoEditor: {
+    src: "/filmmaker/foto-proceso-produccion-2.png",
+    position: "center",
+  },
 } as const;
 
 export function filmImageOverlay(dark: boolean): string {
