@@ -52,7 +52,7 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden" style={{ background: t.bg }}>
-      {/* Hero — image + gradients scoped to this section only */}
+      {/* Hero: image + gradients scoped to this section only */}
       <section
         className="relative min-h-screen overflow-hidden flex flex-col pt-24 pb-8"
         style={{ "--hero-fade-color": t.bg } as CSSProperties}

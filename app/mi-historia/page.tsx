@@ -2,9 +2,13 @@
 
 import { useTheme } from "@teispace/next-themes";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { CTASection } from "@/components/cta-buttons";
+import { ThemeImageBackground } from "@/components/home/theme-image-background";
 import { THEMES } from "@/lib/design-tokens";
+
+/** false = fondo plexus legacy; true = misma foto que Home en hero. Borrar legacy tras QA. */
+const CV_HERO_USE_HOME_PHOTO = true;
 
 type HistoriaTimelineItem = {
   year: string;
@@ -16,7 +20,7 @@ type HistoriaTimelineItem = {
   expandedMedia?: { src: string; alt: string; fit?: "cover" | "contain" };
 };
 
-// Timeline — orden cronológico (year, title, desc = párrafo 1, expanded = párrafo 2)
+// Timeline: orden cronológico (year, title, desc = párrafo 1, expanded = párrafo 2)
 const HISTORIA_TIMELINE: HistoriaTimelineItem[] = [
   {
     year: "2013",
@@ -97,6 +101,33 @@ const HISTORIA_TIMELINE: HistoriaTimelineItem[] = [
   },
 ];
 
+function getTimelineCardBackground(dark: boolean, isOpen: boolean) {
+  if (dark) {
+    return isOpen ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.06)";
+  }
+  return isOpen ? "rgba(255,255,255,0.78)" : "rgba(255,255,255,0.58)";
+}
+
+function getTimelineToggleBackground(dark: boolean) {
+  return dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.5)";
+}
+
+function getMediaFrameBackground(
+  dark: boolean,
+  glass: boolean,
+  mediaSrc: string | undefined,
+  mediaFit: string,
+  isOpen: boolean,
+  card: string,
+  cardHover: string
+) {
+  if (mediaSrc && mediaFit === "contain") return "#ffffff";
+  if (glass) {
+    return dark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.35)";
+  }
+  return isOpen ? cardHover : card;
+}
+
 export default function MiHistoriaPage() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -112,10 +143,12 @@ export default function MiHistoriaPage() {
 
   const dark = theme === "dark";
   const t = dark ? THEMES.index.dark : THEMES.index.light;
+  const storyPhoto = CV_HERO_USE_HOME_PHOTO;
 
   return (
     <div className="relative min-h-screen overflow-x-hidden" style={{ background: t.bg }}>
-      {/* Fondo plexus + scrims en toda la página (hero, timeline, CTA) */}
+      {/* LEGACY_PLEXUS_BG: eliminar tras QA si CV_HERO_USE_HOME_PHOTO queda definitivo */}
+      {!CV_HERO_USE_HOME_PHOTO && (
       <div
         className="absolute inset-0 z-0 min-h-full overflow-x-hidden pointer-events-none"
         aria-hidden
@@ -174,11 +207,29 @@ export default function MiHistoriaPage() {
           </>
         )}
       </div>
+      )}
 
-      <section className="relative z-10 min-h-[72vh] flex flex-col justify-center overflow-x-hidden pt-28 pb-20 sm:pb-24">
+      <div
+        data-theme={dark ? "dark" : "light"}
+        className={storyPhoto ? "relative overflow-hidden" : "relative"}
+        style={storyPhoto ? ({ "--hero-fade-color": t.bg } as CSSProperties) : undefined}
+      >
+        {storyPhoto ? (
+          <>
+            <ThemeImageBackground dark={dark} />
+            <div
+              className="mi-historia-story-scrim pointer-events-none absolute inset-0 z-0"
+              aria-hidden
+            />
+          </>
+        ) : null}
+
+        <section
+        className="relative z-10 min-h-[72vh] flex flex-col justify-center overflow-x-hidden pt-28 pb-20 sm:pb-24"
+      >
         <div className="max-w-3xl mx-auto px-6 w-full text-center flex flex-col items-center">
           <span
-            className="inline-block text-[11px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] uppercase font-semibold mb-6 px-4 py-2 rounded-full"
+            className={`inline-block text-[11px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] uppercase font-semibold mb-6 px-4 py-2 rounded-full${storyPhoto ? " backdrop-blur-sm" : ""}`}
             style={{
               fontFamily: "var(--font-lato), 'Lato', sans-serif",
               color: t.accent,
@@ -234,13 +285,13 @@ export default function MiHistoriaPage() {
                 fontWeight: 500,
               }}
             >
-              — Steve Jobs
+              Steve Jobs
             </footer>
           </blockquote>
         </div>
       </section>
 
-      <section className="relative z-10 pb-24 pt-4">
+      <section className={`relative z-10 pt-4 ${storyPhoto ? "pb-28" : "pb-24"}`}>
         <div className="max-w-3xl mx-auto px-6">
           <div className="relative">
             {/* Timeline line */}
@@ -288,9 +339,13 @@ export default function MiHistoriaPage() {
 
                     {/* Card */}
                     <div
-                      className="flex-1 p-6 rounded-2xl transition-all duration-300"
+                      className={`flex-1 p-6 rounded-2xl transition-all duration-300${storyPhoto ? " backdrop-blur-md" : ""}`}
                       style={{
-                        background: isOpen ? t.cardHover : t.card,
+                        background: storyPhoto
+                          ? getTimelineCardBackground(dark, isOpen)
+                          : isOpen
+                            ? t.cardHover
+                            : t.card,
                         border: `1px solid ${isOpen ? item.color + "40" : t.border}`,
                         boxShadow: isOpen ? `0 8px 32px ${item.color}15` : "none",
                       }}
@@ -315,9 +370,11 @@ export default function MiHistoriaPage() {
                             {item.year}
                           </span>
                           <div
-                            className="w-6 h-6 rounded-full flex items-center justify-center transition-transform duration-300 shrink-0"
+                            className={`w-6 h-6 rounded-full flex items-center justify-center transition-transform duration-300 shrink-0${storyPhoto ? " backdrop-blur-sm" : ""}`}
                             style={{
-                              background: t.card,
+                              background: storyPhoto
+                                ? getTimelineToggleBackground(dark)
+                                : t.card,
                               border: `1px solid ${t.border}`,
                               transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
                             }}
@@ -382,12 +439,15 @@ export default function MiHistoriaPage() {
                               className="relative aspect-video w-full overflow-hidden rounded-xl"
                               style={{
                                 border: `1px solid ${t.border}`,
-                                background:
-                                  mediaSrc && mediaFit === "contain"
-                                    ? "#ffffff"
-                                    : isOpen
-                                      ? t.cardHover
-                                      : t.card,
+                                background: getMediaFrameBackground(
+                                  dark,
+                                  storyPhoto,
+                                  mediaSrc,
+                                  mediaFit,
+                                  isOpen,
+                                  t.card,
+                                  t.cardHover
+                                ),
                               }}
                             >
                               {mediaSrc ? (
@@ -424,7 +484,15 @@ export default function MiHistoriaPage() {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+
+        {storyPhoto ? (
+          <div
+            className="hero-bottom-fade hero-bottom-fade--mi-historia pointer-events-none absolute inset-x-0 bottom-0 z-[1]"
+            aria-hidden
+          />
+        ) : null}
+      </div>
 
       <section className="relative z-10" style={{ borderTop: `1px solid ${t.border}` }}>
         <div className="max-w-3xl mx-auto px-6">

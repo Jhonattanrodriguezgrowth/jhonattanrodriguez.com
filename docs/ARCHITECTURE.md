@@ -2,10 +2,10 @@
 
 ## Ubicación de secciones
 
-- **`components/sections/`** — bloques reutilizables entre páginas de marketing (envoltorios de tema, héroes compartidos, etc.).
-- **`components/shared/`** — utilidades visuales de bajo nivel (fondos, glass, botones con glow) usadas por secciones y páginas.
-- **`components/`** (raíz) — piezas globales del sitio: `navbar`, `footer`, `theme-provider`, `cta-buttons`.
-- **`components/ui/`** — kit tipo shadcn (Radix); hoy casi todo el árbol está sin cablear a las rutas (ver `docs/UNUSED_UI_INVENTORY.md`).
+- **`components/sections/`**: bloques reutilizables entre páginas de marketing (envoltorios de tema, héroes compartidos, etc.).
+- **`components/shared/`**: utilidades visuales de bajo nivel (fondos, glass, botones con glow) usadas por secciones y páginas.
+- **`components/`** (raíz): piezas globales del sitio: `navbar`, `footer`, `theme-provider`, `cta-buttons`.
+- **`components/ui/`**: kit tipo shadcn (Radix); hoy casi todo el árbol está sin cablear a las rutas (ver `docs/UNUSED_UI_INVENTORY.md`).
 
 ## Estilos globales
 

@@ -45,7 +45,7 @@ export function FilmMediaFrame({
       <div className={baseClass} style={frameStyle(pageBg)}>
         <RatioBox>
           <iframe
-            title="Reel destacado — jhonattansfilm"
+            title="Reel destacado: jhonattansfilm"
             src={filmYouTubeEmbedUrl(videoId)}
             className="film-media-iframe absolute inset-0 h-full w-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

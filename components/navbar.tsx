@@ -67,7 +67,7 @@ export function Navbar() {
             <span className="text-2xl sm:text-3xl font-bold">JR</span>
           </Link>
 
-          {/* Desktop / tablet — píldora centrada */}
+          {/* Desktop / tablet: píldora centrada */}
           <div
             className="route-nav-pill hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-0.5 rounded-full px-1 py-1 transition-[background,border-color,box-shadow] duration-300 ease-out"
             style={{

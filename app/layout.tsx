@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "Developer AI",
     "Bogota",
     "Colombia",
-    "MetaAds",
+    "Meta Ads",
     "Automatización",
     "Video Marketing",
   ],

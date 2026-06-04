@@ -1,4 +1,4 @@
-/** Hero background — image + overlays (hero section only). */
+/** Hero background: image + overlays (hero section only). */
 export const HOME_THEME_BACKGROUND = {
   dark: {
     image: "/images/hero-bg.jpg",

@@ -32,7 +32,7 @@ export type NavPillSurface = {
   textSecondary: string;
 };
 
-/** Superficie glass de la píldora de navegación — teñida por la vertical actual */
+/** Superficie glass de la píldora de navegación: teñida por la vertical actual */
 export function navPillSurface(pt: {
   bg: string;
   accent: string;

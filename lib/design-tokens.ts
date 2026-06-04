@@ -101,16 +101,16 @@ export const THEMES = {
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 export const TIMELINE = [
-  { year: "2015", color: "#a78bfa", title: "Ingenieria de Control — U. Nacional", desc: "El origen. La curiosidad por los sistemas y la logica que definen todo lo que vino despues." },
+  { year: "2015", color: "#a78bfa", title: "Ingenieria de Control, U. Nacional", desc: "El origen. La curiosidad por los sistemas y la logica que definen todo lo que vino despues." },
   { year: "2017", color: "#a78bfa", title: "Paso por el Politecnico", desc: "El quiebre que redirige el camino hacia la accion y el emprendimiento real." },
   { year: "2018", color: "#86efac", title: "Entrenador Personalizado", desc: "Primer negocio real. Sin sistemas ni metodologia, el talento solo no alcanza." },
-  { year: "2019", color: "#fdba74", title: "Integrow — ExpoFitness 2019", desc: "El momento fundacional. La marca que nace de la necesidad de crecer con sistemas, no con intuicion." },
-  { year: "2020+", color: "#93c5fd", title: "Growth - Filmmaker - Developer AI", desc: "Tres disciplinas que conviven y se potencian — el mismo sistema visto desde angulos distintos." },
+  { year: "2019", color: "#fdba74", title: "Integrow · ExpoFitness 2019", desc: "El momento fundacional. La marca que nace de la necesidad de crecer con sistemas, no con intuicion." },
+  { year: "2020+", color: "#93c5fd", title: "Growth - Filmmaker - Developer AI", desc: "Tres disciplinas que conviven y se potencian: el mismo sistema visto desde angulos distintos." },
 ];
 
 // ─── FILMMAKER DATA (Real) ────────────────────────────────────────────────────
 /** Opcional: ID de video YouTube para embed en sección Reel (ej. dQw4w9WgXcQ) */
-/** https://youtu.be/VBgeWLdwaVw — reel destacado en /filmmaker */
+/** https://youtu.be/VBgeWLdwaVw: reel destacado en /filmmaker */
 export const FILM_FEATURED_VIDEO_ID = "VBgeWLdwaVw";
 
 export const FILM_REEL = {
@@ -184,7 +184,7 @@ export const FILM_PLANS = [
     ],
     savings: "Más del 50 % comparado con producción tradicional",
     costPerPiece: "$150.000 COP vs. $300.000–$500.000 en producción tradicional",
-    addon: "Add-on opcional — sesión fotográfica: $300.000 COP / $75 USD",
+    addon: "Add-on opcional: sesión fotográfica, $300.000 COP / $75 USD",
     payment: [
       { stage: "Al confirmar", amount: "$600.000 COP ($150 USD)", desc: "Asegura tu cupo; iniciamos pre-producción" },
       { stage: "Contra entrega", amount: "$600.000 COP ($150 USD)", desc: "Pagas al recibir tus 8 reels listos" },
@@ -298,11 +298,11 @@ export const FILM_WHY_WORKS = [
   },
   {
     title: "El tiempo de tu marca vale",
-    desc: "Concentrar la producción en sesiones intensivas no es un truco de eficiencia — es respeto por tu tiempo y tu presupuesto.",
+    desc: "Concentrar la producción en sesiones intensivas no es un truco de eficiencia: es respeto por tu tiempo y tu presupuesto.",
   },
   {
     title: "El video ya gano",
-    desc: "El 80 % del consumo de contenido en redes sociales es video. No es una tendencia — es el estándar. El formato vertical es donde se gana.",
+    desc: "El 80 % del consumo de contenido en redes sociales es video. No es una tendencia: es el estándar. El formato vertical es donde se gana.",
   },
 ];
 
@@ -354,7 +354,7 @@ export type BuilderProject = {
   tech: { name: string; desc: string }[];
   stack: string[];
   result: string;
-  expandedMedia?: { src: string; alt: string };
+  expandedMedia?: { src: string; alt: string; width?: number; height?: number };
   ctaUrl?: string;
   ctaLabel?: string;
   closedNote?: string;
@@ -369,7 +369,7 @@ export const BUILDER_PROJECTS: BuilderProject[] = [
     status: "Activo",
     role: "Fundador & AI Developer",
     tagline: "Convierte WhatsApp en un sistema de monitoreo clínico continuo para pacientes con diabetes tipo 2.",
-    desc: "MurphyIA nació de un problema familiar real: el seguimiento de la diabetes tipo 2 de mi abuela materna, donde los 90 días entre consultas eran territorio sin datos ni control. El agente captura datos clínicos diarios por WhatsApp — glucosa, insulina, sueño, estrés, tensión arterial — y los convierte en un historial estructurado que el médico consulta en tiempo real. El paciente nunca llena un formulario: solo escribe como le escribiría a un conocido. Es el primer producto de un ecosistema de salud digital en construcción — la misma arquitectura, replicada para otras enfermedades crónicas del sector.",
+    desc: "MurphyIA nació de un problema familiar real: el seguimiento de la diabetes tipo 2 de mi abuela materna, donde los 90 días entre consultas eran territorio sin datos ni control. El agente captura datos clínicos diarios por WhatsApp (glucosa, insulina, sueño, estrés, tensión arterial) y los convierte en un historial estructurado que el médico consulta en tiempo real. El paciente nunca llena un formulario: solo escribe como le escribiría a un conocido. Es el primer producto de un ecosistema de salud digital en construcción, con la misma arquitectura replicada para otras enfermedades crónicas del sector.",
     problem: "Entre una consulta médica y la siguiente hay 90 días ciegos. El paciente anota sus glucosas en un cuaderno, olvida los episodios críticos y llega a la cita sin evidencia. El médico toma decisiones con información incompleta. Los tratamientos se ajustan tarde y las hospitalizaciones evitables se acumulan.",
     how: [
       { label: "Paciente", desc: "Registra sus datos por WhatsApp escribiendo en lenguaje natural. El agente Murphy interpreta el mensaje, infiere el contexto horario, hace la pregunta correcta si falta información y confirma el dato guardado. Un sistema de XP y racha mantiene la adherencia diaria." },
@@ -377,12 +377,12 @@ export const BUILDER_PROJECTS: BuilderProject[] = [
       { label: "Cuidador", desc: "Accede al mismo dashboard del paciente con permisos de co-gestión. Monitorea los registros del día, recibe alertas activas y actúa como puente entre la familia y el equipo médico sin necesitar que el paciente reporte directamente." },
     ],
     tech: [
-      { name: "Kapso + Meta WhatsApp Business API", desc: "Proxy que recibe el webhook entrante de Meta y entrega las respuestas salientes. Es el único canal de comunicación con el paciente — todo el pipeline se activa desde aquí." },
+      { name: "Kapso + Meta WhatsApp Business API", desc: "Proxy que recibe el webhook entrante de Meta y entrega las respuestas salientes. Es el único canal de comunicación con el paciente: todo el pipeline se activa desde aquí." },
       { name: "GPT-4o-mini (interpretación)", desc: "Una sola llamada LLM por mensaje entrante. Convierte lenguaje natural en datos clínicos estructurados. El sistema degrada de forma transparente si el modelo no responde, sin interrumpir la conversación del paciente." },
       { name: "OpenAI + Gemini (RAG clínico)", desc: "Genera reportes médicos y briefings pre-consulta recuperando los registros clínicos del paciente como contexto. El modelo se selecciona según el tipo y profundidad del documento requerido." },
       { name: "Supabase Edge Functions (Deno)", desc: "Funciones serverless independientes que orquestan el pipeline de mensajes, la generación de reportes, las invitaciones y los webhooks. Cada función aislada, sin servidor compartido." },
-      { name: "Pipeline V2 — arquitectura modular", desc: "Orquestador central con 6 módulos clínicos intercambiables: glucosa, insulina, sueño, estrés, tensión arterial y mareos. Cada módulo encapsula su propia lógica de detección y respuesta sin exponer implementación al orquestador." },
-      { name: "PipelineTracer", desc: "Sistema de observabilidad estructurada propio. Registra cada paso del pipeline con su latencia — parseo, interpretación, selección de módulo y respuesta — para auditoría y debugging en producción." },
+      { name: "Pipeline V2: arquitectura modular", desc: "Orquestador central con 6 módulos clínicos intercambiables: glucosa, insulina, sueño, estrés, tensión arterial y mareos. Cada módulo encapsula su propia lógica de detección y respuesta sin exponer implementación al orquestador." },
+      { name: "PipelineTracer", desc: "Sistema de observabilidad estructurada propio. Registra cada paso del pipeline con su latencia (parseo, interpretación, selección de módulo y respuesta) para auditoría y debugging en producción." },
       { name: "Supabase PostgreSQL + RLS", desc: "Base de datos clínica con Row Level Security. Registros de glucosa, insulina, sueño, estrés, tensión arterial y mareos aislados por paciente. Flujos multi-turno con control de idempotencia. Perfiles diferenciados por rol." },
       { name: "Supabase Auth", desc: "Autenticación con 3 roles: paciente, médico y coadmin. Rutas del frontend y funciones serverless validan el rol antes de ejecutar cualquier operación clínica." },
       { name: "React 18 + TanStack Query + Recharts", desc: "SPA clínica con dashboard diferenciado por rol. Recharts visualiza tendencias de glucosa e insulina. TanStack Query maneja el estado del servidor con caché granular. Shadcn/UI como sistema de componentes base." },
@@ -390,7 +390,12 @@ export const BUILDER_PROJECTS: BuilderProject[] = [
     ],
     stack: ["WhatsApp", "Kapso", "Supabase", "Deno", "OpenAI", "Gemini", "React", "Vercel"],
     result: "Pipeline V2 en producción activa desde abril 2026 con pacientes reales. 6 módulos clínicos desplegados con flujo multi-turno, encadenamiento automático y observabilidad completa por mensaje. Integraciones activas con Meta WhatsApp Business API vía Kapso y generación de reportes médicos por IA.",
-    expandedMedia: { src: "/developer-ai/murphyia-hero.png", alt: "Dashboard clínico de MurphyIA con historial de glucosa e insulina" },
+    expandedMedia: {
+      src: "/developer-ai/murphyia-hero.png",
+      alt: "Dashboard clínico de MurphyIA con historial de glucosa e insulina",
+      width: 1920,
+      height: 1080,
+    },
     ctaUrl: "https://murphyia.com",
     ctaLabel: "Ver producto",
   },
@@ -401,7 +406,7 @@ export const BUILDER_PROJECTS: BuilderProject[] = [
     status: "Activo",
     role: "Arquitecto + Developer único",
     tagline: "Un solo dominio que agrupa identidad, trayectoria y tres verticales de servicio.",
-    desc: "Construido por necesidad: operar como profesional multidisciplinario — Developer AI, Growth y Film — sin un hub central generaba fricción en cada conversación de venta. Cada ruta tiene su propio sistema de diseño, paleta de color y propuesta de valor, pero comparten la misma arquitectura base. Una sola URL que responde '¿quién eres y qué haces?' antes de que el prospecto lo pregunte.",
+    desc: "Construido por necesidad: operar como profesional multidisciplinario (Developer AI, Growth y Film) sin un hub central generaba fricción en cada conversación de venta. Cada ruta tiene su propio sistema de diseño, paleta de color y propuesta de valor, pero comparten la misma arquitectura base. Una sola URL que responde '¿quién eres y qué haces?' antes de que el prospecto lo pregunte.",
     problem: "La información de referencia de un profesional multidisciplinar estaba dispersa entre perfiles, PDFs y conversaciones. Sin un hub central, cada prospecto reconstruía el contexto desde cero antes de agendar.",
     how: [
       { label: "Prospecto", desc: "Llega al home, identifica su perfil (Developer AI / Growth / Film) y navega a la vertical correspondiente con su propia paleta, copy y CTA." },
@@ -413,14 +418,19 @@ export const BUILDER_PROJECTS: BuilderProject[] = [
       { name: "@teispace/next-themes", desc: "Sistema dark/light con detección del sistema operativo. Cada vertical aplica su paleta de color en tiempo real al cambiar el tema." },
       { name: "Design tokens propios", desc: "Sistema centralizado que define la paleta visual por ruta: index (púrpura), growth (verde), filmmaker (naranja), builder (azul). Cambiar el esquema de una vertical no afecta las demás." },
       { name: "Tailwind CSS 4 + clsx", desc: "Sistema de estilos utility-first combinado con clsx y tailwind-merge para composición condicional de clases sin conflictos en los componentes compartidos." },
-      { name: "Radix UI / shadcn/ui", desc: "Componentes headless accesibles (accordion, dialog, navigation-menu, etc.). Base del sistema de UI sin estilos impuestos — la identidad visual la definen los tokens." },
+      { name: "Radix UI / shadcn/ui", desc: "Componentes headless accesibles (accordion, dialog, navigation-menu, etc.). Base del sistema de UI sin estilos impuestos: la identidad visual la definen los tokens." },
       { name: "Next.js Google Fonts", desc: "Carga de Quicksand (títulos), Lato (cuerpo) y Engagement (decorativo) con cero layout shift via font-display: swap y variables CSS globales." },
-      { name: "Vercel Analytics", desc: "Tracking de tráfico y engagement cargado únicamente en producción. Sin configuración extra — se activa automáticamente al hacer deploy en Vercel." },
+      { name: "Vercel Analytics", desc: "Tracking de tráfico y engagement cargado únicamente en producción. Sin configuración extra: se activa automáticamente al hacer deploy en Vercel." },
       { name: "Calendly + WhatsApp API", desc: "CTAs centralizados en un único punto de configuración. Calendly para llamadas de reconocimiento; WhatsApp con mensajes preescritos por contexto (growth, filmmaker, builder)." },
     ],
     stack: ["Next.js", "React 19", "Tailwind CSS", "shadcn/ui", "Vercel", "TypeScript"],
     result: "Sitio live con 5 rutas activas (home, CV, Developer AI, Growth, Film), sistema de temas dark/light por vertical, portafolio expandible con 3 proyectos y analytics en producción.",
-    expandedMedia: { src: "/developer-ai/jhonattanrodriguez-hero.png", alt: "Vista hero de jhonattanrodriguez.com en desktop" },
+    expandedMedia: {
+      src: "/developer-ai/jhonattanrodriguez-hero.png",
+      alt: "Vista hero de jhonattanrodriguez.com en desktop",
+      width: 1920,
+      height: 1080,
+    },
     ctaUrl: "https://jhonattanrodriguez.com",
     ctaLabel: "Explorar el sitio",
   },
@@ -446,7 +456,7 @@ export const BUILDER_PROJECTS: BuilderProject[] = [
       { name: "Supabase + pgvector", desc: "Almacena los chunks con sus embeddings y ejecuta la búsqueda vectorial por similitud coseno. RLS protege los datos por rol de usuario." },
       { name: "pg_net + pg_cron", desc: "pg_net dispara la indexación desde un trigger SQL al publicar un informe. pg_cron corre cada 5 minutos como safety net para reintentar fallos sin intervención manual." },
       { name: "Deno Edge Functions (Supabase)", desc: "Tres funciones serverless que orquestan la consulta RAG, la indexación unitaria de informes y la reindexación masiva del corpus cuando es necesario." },
-      { name: "Búsqueda híbrida FTS + Vector", desc: "Fusiona full-text search (40%) con búsqueda vectorial semántica (60%) usando un algoritmo de ranking propio — garantiza resultados incluso cuando la consulta no coincide lexicalmente." },
+      { name: "Búsqueda híbrida FTS + Vector", desc: "Fusiona full-text search (40%) con búsqueda vectorial semántica (60%) usando un algoritmo de ranking propio, lo que garantiza resultados incluso cuando la consulta no coincide lexicalmente." },
       { name: "React + Vite + Tailwind + shadcn/ui", desc: "Frontend SPA con rutas protegidas por rol. Incluye editor de informes enriquecido, dashboard de actividad, panel de administración y la interfaz de la Caja Mágica." },
       { name: "Lovable", desc: "Generación del frontend inicial: estructura de componentes, rutas, autenticación base y diseño del sistema de vistas." },
       { name: "Cursor", desc: "Edición, refactoring y toda la implementación del sistema RAG, auto-indexado y edge functions sobre la base generada por Lovable." },
@@ -454,10 +464,12 @@ export const BUILDER_PROJECTS: BuilderProject[] = [
       { name: "GoDaddy", desc: "Gestión del dominio personalizado conectado al despliegue de Vercel." },
     ],
     stack: ["Claude", "OpenAI", "Supabase", "pgvector", "AI Gateway", "Deno", "React", "Lovable", "Cursor", "Vercel"],
-    result: "Más de 500 informes indexados y consultables en producción. La Caja Mágica transformó el flujo del equipo: de búsqueda manual entre PDFs a consultas en lenguaje natural con respuesta en segundos. Centralizar los informes — antes distribuidos como archivos HTML — aumentó la seguridad del contenido e integró al equipo editorial en un solo flujo de publicación. Pipeline RAG operativo con búsqueda híbrida y fallback inteligente.",
+    result: "Más de 500 informes indexados y consultables en producción. La Caja Mágica transformó el flujo del equipo: de búsqueda manual entre PDFs a consultas en lenguaje natural con respuesta en segundos. Centralizar los informes, antes distribuidos como archivos HTML, aumentó la seguridad del contenido e integró al equipo editorial en un solo flujo de publicación. Pipeline RAG operativo con búsqueda híbrida y fallback inteligente.",
     expandedMedia: {
       src: "/developer-ai/insighthub-hero.png",
-      alt: "Insight Hub Campaña — Motor RAG para análisis político",
+      alt: "Insight Hub Campaña: Motor RAG para análisis político",
+      width: 1920,
+      height: 1080,
     },
     closedNote:
       "Proyecto cerrado por seguridad; no puedo dar acceso a la ubicación de la plataforma.",

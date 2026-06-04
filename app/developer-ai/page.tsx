@@ -7,7 +7,9 @@ import { RouteHeroStack } from "@/components/sections/route-hero-stack";
 import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
 import { GlowButton } from "@/components/shared/glow-button";
+import { DeveloperAIPhilosophySection } from "@/components/developer-ai/developer-ai-philosophy-section";
 import { getGitHubProfileLink } from "@/lib/cta-links";
+import { DEVELOPER_AI_PHILOSOPHY } from "@/lib/developer-ai-data";
 import { THEMES, BUILDER_STACK, BUILDER_PROJECTS } from "@/lib/design-tokens";
 import {
   ROUTE_HERO_CONTENT,
@@ -65,7 +67,7 @@ export default function DeveloperAIPage() {
     },
     {
       title: "MVPs en tiempo récord",
-      desc: "Frontend, base de datos, lógica y automatización — orquestado por un solo developer con stack completo. Sin agencias, sin equipos enormes, sin meses de espera, sin grandes e insostenibles presupuestos.",
+      desc: "Frontend, base de datos, lógica y automatización, orquestado por un solo developer con stack completo. Sin agencias, sin equipos enormes, sin meses de espera, sin grandes e insostenibles presupuestos.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
@@ -160,9 +162,18 @@ export default function DeveloperAIPage() {
               color: t.text.primary,
             }}
           >
-            <span className="block">La tecnología es lo más</span>
-            <span className="block">
-              cercano a la <span style={{ color: t.accent }}>magia.</span>
+            <span className="md:hidden">
+              <span className="block">La tecnología</span>
+              <span className="block">es lo más</span>
+              <span className="block" style={{ color: t.accent }}>
+                Cercano a la magia.
+              </span>
+            </span>
+            <span className="hidden md:block">
+              <span className="block">La tecnología es lo más</span>
+              <span className="block">
+                cercano a la <span style={{ color: t.accent }}>magia.</span>
+              </span>
             </span>
           </h1>
           <p
@@ -209,11 +220,12 @@ export default function DeveloperAIPage() {
               className="text-sm text-pretty"
               style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
             >
-              “Las personas que son tan locas y creen que pueden cambiar el mundo, son las que lo hacen.” — Steve Paul Jobs
+              “Las personas que son tan locas y creen que pueden cambiar el mundo, son las que lo hacen.”
+              <span className="block mt-2 text-sm" style={{ color: t.text.muted }}>Steve Paul Jobs</span>
             </p>
           </div>
 
-          {/* Project Cards — Accordion */}
+          {/* Project Cards: Accordion */}
           <div className="flex flex-col gap-4">
             {BUILDER_PROJECTS.map((project, i) => {
               const isOpen = expandedIndex === i;
@@ -337,12 +349,10 @@ export default function DeveloperAIPage() {
                     role="region"
                     aria-labelledby={titleId}
                     aria-hidden={!isOpen}
-                    className="overflow-hidden transition-all duration-500"
-                    style={{
-                      maxHeight: isOpen ? "2400px" : "0px",
-                      opacity: isOpen ? 1 : 0,
-                    }}
+                    className="grid transition-[grid-template-rows] duration-500 ease-out"
+                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                   >
+                    <div className="min-h-0 overflow-hidden">
                     <div
                       className="px-6 pb-6 pt-4"
                       style={{ borderTop: `1px solid ${t.border}` }}
@@ -381,19 +391,21 @@ export default function DeveloperAIPage() {
                         </span>
                         <div className="flex flex-col gap-3">
                           {project.how.map((h) => (
-                            <div key={h.label} className="flex gap-3 items-start">
+                            <div
+                              key={h.label}
+                              className="flex flex-col gap-2 sm:flex-row sm:gap-3 sm:items-start"
+                            >
                               <span
-                                className="text-xs font-mono px-2 py-1 rounded-lg shrink-0 mt-0.5"
+                                className="text-xs font-mono px-2 py-1 rounded-lg shrink-0 self-start mt-0.5"
                                 style={{
                                   color: t.teal,
                                   background: dark ? `${t.teal}15` : `${t.teal}10`,
-                                  whiteSpace: "nowrap",
                                 }}
                               >
                                 {h.label}
                               </span>
                               <p
-                                className="text-sm leading-relaxed"
+                                className="text-sm leading-relaxed w-full min-w-0 sm:flex-1"
                                 style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
                               >
                                 {h.desc}
@@ -403,7 +415,7 @@ export default function DeveloperAIPage() {
                         </div>
                       </div>
 
-                      {/* Tech — solo si está poblado */}
+                      {/* Tech: solo si está poblado */}
                       {project.tech.length > 0 && (
                         <div className="mb-6">
                           <span
@@ -414,19 +426,21 @@ export default function DeveloperAIPage() {
                           </span>
                           <div className="flex flex-col gap-3">
                             {project.tech.map((tech) => (
-                              <div key={tech.name} className="flex gap-3 items-start">
+                              <div
+                                key={tech.name}
+                                className="flex flex-col gap-2 sm:flex-row sm:gap-3 sm:items-start"
+                              >
                                 <span
-                                  className="text-xs font-mono px-2 py-1 rounded-lg shrink-0 mt-0.5"
+                                  className="text-xs font-mono px-2 py-1 rounded-lg shrink-0 self-start mt-0.5"
                                   style={{
                                     color: t.accent,
                                     background: dark ? `${t.accent}15` : `${t.accent}10`,
-                                    whiteSpace: "nowrap",
                                   }}
                                 >
                                   {tech.name}
                                 </span>
                                 <p
-                                  className="text-sm leading-relaxed"
+                                  className="text-sm leading-relaxed w-full min-w-0 sm:flex-1"
                                   style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
                                 >
                                   {tech.desc}
@@ -453,27 +467,28 @@ export default function DeveloperAIPage() {
                         </p>
                       </div>
 
-                      {/* Imagen 16:9 */}
+                      {/* Captura del producto */}
                       <div className="relative w-full mb-6">
                         <div
-                          className="relative aspect-video w-full overflow-hidden rounded-xl"
+                          className="w-full overflow-hidden rounded-xl"
                           style={{ border: `1px solid ${t.border}`, background: t.card }}
                         >
                           {mediaSrc ? (
                             <Image
                               src={mediaSrc}
                               alt={project.expandedMedia?.alt ?? ""}
-                              fill
+                              width={project.expandedMedia?.width ?? 1440}
+                              height={project.expandedMedia?.height ?? 900}
                               sizes="(max-width: 768px) 100vw, 960px"
-                              className="object-cover object-top"
+                              className="block h-auto w-full"
                             />
                           ) : (
                             <div
-                              className="absolute inset-0 flex items-center justify-center p-4"
+                              className="flex min-h-[200px] items-center justify-center p-4"
                               aria-hidden
                             >
                               <div
-                                className="h-full w-full rounded-lg border border-dashed flex items-center justify-center"
+                                className="flex h-full w-full min-h-[168px] items-center justify-center rounded-lg border border-dashed"
                                 style={{ borderColor: `${t.text.muted}55` }}
                               >
                                 <span
@@ -516,6 +531,7 @@ export default function DeveloperAIPage() {
                           </div>
                         )
                       )}
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -571,6 +587,13 @@ export default function DeveloperAIPage() {
         </div>
       </section>
 
+      <DeveloperAIPhilosophySection
+        data={DEVELOPER_AI_PHILOSOPHY}
+        theme={t}
+        terminalLabelClass={terminalLabelClass}
+        terminalLabelStyle={terminalLabelStyle}
+      />
+
       {/* Process (oculto temporalmente, se mantiene en código) */}
       {false && (
         <section className="py-12 relative" style={{ borderTop: `1px solid ${t.border}` }}>
@@ -592,12 +615,12 @@ export default function DeveloperAIPage() {
                 {
                   step: "01",
                   title: "Diagnóstico del punto ciego",
-                  desc: "Mapeo el problema real antes de abrir cualquier herramienta de código. Identifico qué datos son fundamentales de rastrear, qué proceso se hace a mano y dónde se rompe el flujo. El punto ciego no es técnico — es operativo, y resolverlo bien es la diferencia entre un sistema que funciona y uno que nadie usa.",
+                  desc: "Mapeo el problema real antes de abrir cualquier herramienta de código. Identifico qué datos son fundamentales de rastrear, qué proceso se hace a mano y dónde se rompe el flujo. El punto ciego no es técnico: es operativo, y resolverlo bien es la diferencia entre un sistema que funciona y uno que nadie usa.",
                 },
                 {
                   step: "02",
                   title: "Arquitectura del ecosistema",
-                  desc: "Diseño los flujos entre actores y datos: quién produce información, quién la consume y qué decisiones activa. Defino qué viaja, cuándo y hacia dónde. No construyo plataformas aisladas — construyo ecosistemas donde cada pieza tiene un rol claro.",
+                  desc: "Diseño los flujos entre actores y datos: quién produce información, quién la consume y qué decisiones activa. Defino qué viaja, cuándo y hacia dónde. No construyo plataformas aisladas: construyo ecosistemas donde cada pieza tiene un rol claro.",
                 },
                 {
                   step: "03",
@@ -670,7 +693,7 @@ export default function DeveloperAIPage() {
               style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: t.text.secondary }}
             >
               Si en tu organización hay un proceso que se hace a mano, un dato que nadie está midiendo
-              o un flujo que nadie está automatizando — ese es el punto ciego que podemos cerrar. Sin agencias.
+              o un flujo que nadie está automatizando. Ese es el punto ciego que podemos cerrar. Sin agencias.
               Sin equipos enormes. Con un sistema integrado con IA construido para tu contexto específico.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

@@ -4,7 +4,7 @@ type ChessIconProps = {
   strokeWidth?: number;
 };
 
-/** Pieza de ajedrez (reina) — Growth en nav; trazo alineado con Lucide */
+/** Pieza de ajedrez (reina): Growth en nav; trazo alineado con Lucide */
 export function ChessIcon({ size = 20, className, strokeWidth = 1.75 }: ChessIconProps) {
   return (
     <svg
