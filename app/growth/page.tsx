@@ -6,6 +6,7 @@ import type { GrowthAccordionTheme } from "@/components/growth/growth-accordion-
 import { GrowthOfferingsList } from "@/components/growth/growth-offerings-list";
 import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CTASection, CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
+import { getLinkedInLink, getLinkedInLabel } from "@/lib/cta-links";
 import { GlowButton } from "@/components/shared/glow-button";
 import { RouteHeroStack } from "@/components/sections/route-hero-stack";
 import { useGrowthOfferingHash } from "@/hooks/use-growth-offering-hash";
@@ -111,7 +112,7 @@ export default function GrowthPage() {
           <div className={ROUTE_HERO_INNER}>
             <div className="mb-4 flex justify-center">
               <GlowButton
-                href="https://www.linkedin.com/in/jhonattansgrowth/"
+                href={getLinkedInLink()}
                 external
                 variant="secondary"
                 size="md"
@@ -134,7 +135,7 @@ export default function GrowthPage() {
                     <rect x="2" y="9" width="4" height="12" />
                     <circle cx="4" cy="4" r="2" />
                   </svg>
-                  jhonattansgrowth
+                  {getLinkedInLabel()}
                 </span>
               </GlowButton>
             </div>

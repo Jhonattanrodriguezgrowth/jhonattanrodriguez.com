@@ -81,14 +81,6 @@ export function PlanCard({
         >
           {plan.price}
         </div>
-        {plan.priceUSD && (
-          <div
-            className="text-[15px] mt-1"
-            style={{ fontFamily: "var(--font-lato), sans-serif", color: surface.body }}
-          >
-            {plan.priceUSD}
-          </div>
-        )}
       </div>
 
       {plan.production && (
@@ -394,14 +386,6 @@ export function PlanCard({
   );
 }
 
-function splitPaymentAmount(amount: string): { main: string; usd?: string } {
-  const match = amount.match(/^(.+?)\s*(\([^)]+\))\s*$/);
-  if (match) {
-    return { main: match[1].trim(), usd: match[2] };
-  }
-  return { main: amount };
-}
-
 function PlanDetailRow({
   stage,
   desc,
@@ -413,8 +397,6 @@ function PlanDetailRow({
   amount: string;
   surface: PlanSurface;
 }) {
-  const { main, usd } = splitPaymentAmount(amount);
-
   return (
     <div
       className="flex flex-col gap-2 p-4 rounded-xl sm:flex-row sm:items-start sm:justify-between sm:gap-4"
@@ -431,19 +413,8 @@ function PlanDetailRow({
             color: surface.detailAccent,
           }}
         >
-          {main}
+          {amount}
         </span>
-        {usd && (
-          <span
-            className="block text-xs font-normal mt-0.5 text-pretty"
-            style={{
-              fontFamily: "var(--font-lato), sans-serif",
-              color: surface.detailBody,
-            }}
-          >
-            {usd}
-          </span>
-        )}
       </div>
       <div className="min-w-0 flex-1 order-2 sm:order-1">
         <span

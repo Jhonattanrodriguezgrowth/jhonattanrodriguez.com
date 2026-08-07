@@ -93,15 +93,13 @@ export function GrowthOfferingCard({
         }
         pricePanel={
           <GrowthPricePanel
-            priceUsd={meta.priceUsd}
             priceCop={meta.priceCop}
             duration={meta.duration}
             priceNote={meta.priceNote}
-            priceUsdSize={meta.priceUsdSize ?? "lg"}
+            priceSize={meta.priceSize ?? "lg"}
             dark={dark}
             accent={accent}
             border={border}
-            textSecondary={text.secondary}
             textMuted={text.muted}
           >
             {meta.calendarLabel ? (

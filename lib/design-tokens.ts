@@ -161,7 +161,6 @@ export const FILM_PLANS = [
     name: "Plan Sprint",
     tagline: "Un día. Una locación. Ocho piezas listas para publicar con equipo ágil en set.",
     price: "$1.200.000 COP",
-    priceUSD: "$300 USD",
     featured: true,
     production: "1 día de producción (6–8 horas)",
     includes: [
@@ -184,10 +183,10 @@ export const FILM_PLANS = [
     ],
     savings: "Más del 50 % comparado con producción tradicional",
     costPerPiece: "$150.000 COP vs. $300.000–$500.000 en producción tradicional",
-    addon: "Add-on opcional: sesión fotográfica, $300.000 COP / $75 USD",
+    addon: "Add-on opcional: sesión fotográfica, $300.000 COP",
     payment: [
-      { stage: "Al confirmar", amount: "$600.000 COP ($150 USD)", desc: "Asegura tu cupo; iniciamos pre-producción" },
-      { stage: "Contra entrega", amount: "$600.000 COP ($150 USD)", desc: "Pagas al recibir tus 8 reels listos" },
+      { stage: "Al confirmar", amount: "$600.000 COP", desc: "Asegura tu cupo; iniciamos pre-producción" },
+      { stage: "Contra entrega", amount: "$600.000 COP", desc: "Pagas al recibir tus 8 reels listos" },
     ],
   },
   {
@@ -195,7 +194,6 @@ export const FILM_PLANS = [
     name: "Plan Mensual",
     tagline: "Tres sesiones. Tres locaciones. Presencia activa todo el mes.",
     price: "$2.520.000 COP",
-    priceUSD: "$630 USD",
     featured: false,
     production: "3 días de producción (3 horas cada sesión)",
     includes: [
@@ -220,8 +218,8 @@ export const FILM_PLANS = [
     ],
     costPerPiece: "$280.000 COP por pieza de video",
     payment: [
-      { stage: "Al confirmar", amount: "$840.000 COP ($210 USD)", desc: "Asegura tus 3 fechas de producción" },
-      { stage: "Contra entrega", amount: "$1.680.000 COP ($420 USD)", desc: "Pagas al recibir todo el contenido del mes" },
+      { stage: "Al confirmar", amount: "$840.000 COP", desc: "Asegura tus 3 fechas de producción" },
+      { stage: "Contra entrega", amount: "$1.680.000 COP", desc: "Pagas al recibir todo el contenido del mes" },
     ],
   },
   {
@@ -229,7 +227,6 @@ export const FILM_PLANS = [
     name: "Plan Legacy",
     tagline: "Algunos momentos no se repiten. Este plan existe para que tampoco se olviden.",
     price: "Cotización personalizada",
-    priceUSD: "",
     featured: false,
     isCustom: true,
     description: "Matrimonios, lanzamientos corporativos icónicos, eventos que marcan un antes y un después. Dirección narrativa en tiempo real con el ojo puesto en lo que vale la pena preservar para siempre.",

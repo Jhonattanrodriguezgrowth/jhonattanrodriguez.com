@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Youtube, Instagram, Linkedin, Github } from "lucide-react";
 import { GlowButton } from "./shared/glow-button";
-import { getCalendarLink, getFilmmakerYouTubeLink, getGitHubProfileLink } from "@/lib/cta-links";
+import { getCalendarLink, getGitHubProfileLink, getInstagramLink, getLinkedInLink, getYouTubeLink } from "@/lib/cta-links";
 import { THEMES } from "@/lib/design-tokens";
 import { glowSecondaryForRoute, resolveRouteThemeId } from "@/lib/route-theme";
 
@@ -18,13 +18,9 @@ const FOOTER_LINKS = [
 ];
 
 const SOCIAL_LINKS: { href: string; label: string; Icon: LucideIcon }[] = [
-  { href: getFilmmakerYouTubeLink(), label: "Canal de YouTube", Icon: Youtube },
-  { href: "https://www.instagram.com/jhonattansfilm/", label: "Instagram", Icon: Instagram },
-  {
-    href: "https://www.linkedin.com/in/jhonattanrodriguezgrowth",
-    label: "LinkedIn",
-    Icon: Linkedin,
-  },
+  { href: getYouTubeLink(), label: "Canal de YouTube", Icon: Youtube },
+  { href: getInstagramLink(), label: "Instagram", Icon: Instagram },
+  { href: getLinkedInLink(), label: "LinkedIn", Icon: Linkedin },
   { href: getGitHubProfileLink(), label: "Perfil de GitHub", Icon: Github },
 ];
 

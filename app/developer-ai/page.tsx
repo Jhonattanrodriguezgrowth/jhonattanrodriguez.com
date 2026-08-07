@@ -8,7 +8,7 @@ import { ThemedPageShell } from "@/components/sections/themed-page-shell";
 import { CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
 import { GlowButton } from "@/components/shared/glow-button";
 import { DeveloperAIPhilosophySection } from "@/components/developer-ai/developer-ai-philosophy-section";
-import { getGitHubProfileLink } from "@/lib/cta-links";
+import { getGitHubProfileLink, getInstagramLink, getInstagramLabel } from "@/lib/cta-links";
 import { DEVELOPER_AI_PHILOSOPHY } from "@/lib/developer-ai-data";
 import { THEMES, BUILDER_STACK, BUILDER_PROJECTS } from "@/lib/design-tokens";
 import {
@@ -16,6 +16,9 @@ import {
   ROUTE_HERO_INNER,
   ROUTE_HERO_SECTION,
 } from "@/lib/route-hero-layout";
+
+/** true = Engagement (como Home); false = Quicksand legacy */
+const DEV_HERO_H1_USE_ENGAGEMENT = false;
 
 export default function DeveloperAIPage() {
   const { theme } = useTheme();
@@ -32,6 +35,20 @@ export default function DeveloperAIPage() {
 
   const dark = theme === "dark";
   const t = dark ? THEMES.builder.dark : THEMES.builder.light;
+  const devHeroH1Style: CSSProperties = DEV_HERO_H1_USE_ENGAGEMENT
+    ? {
+        fontFamily: "var(--font-engagement), 'Engagement', cursive",
+        fontSize: "clamp(36px, 7vw, 72px)",
+        color: t.text.primary,
+      }
+    : {
+        fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
+        fontSize: "clamp(32px, 5vw, 56px)",
+        color: t.text.primary,
+      };
+  const devHeroH1Class = DEV_HERO_H1_USE_ENGAGEMENT
+    ? "mb-4 text-center leading-none"
+    : "font-bold leading-tight mb-4 text-center";
   const display = "display" in t ? (t as { display: string }).display : t.accent;
   /** RGB de t.bg: dark #04080f → 4,8,15 | light #fafbff → 250,251,255 */
   const heroBgRgb = dark ? "4, 8, 15" : "250, 251, 255";
@@ -121,7 +138,7 @@ export default function DeveloperAIPage() {
           <div className={ROUTE_HERO_INNER}>
           <div className="mb-4 flex justify-center">
             <GlowButton
-              href="https://www.instagram.com/jhonattansdev/"
+              href={getInstagramLink()}
               external
               variant="secondary"
               size="md"
@@ -144,7 +161,7 @@ export default function DeveloperAIPage() {
                   <circle cx="12" cy="12" r="4" />
                   <circle cx="17.5" cy="6.5" r="0.5" />
                 </svg>
-                @jhonattansdev
+                {getInstagramLabel()}
               </span>
             </GlowButton>
           </div>
@@ -154,14 +171,7 @@ export default function DeveloperAIPage() {
           >
             Developer AI
           </p>
-          <h1
-            className="font-bold leading-tight mb-4 text-center"
-            style={{
-              fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
-              fontSize: "clamp(32px,5vw,56px)",
-              color: t.text.primary,
-            }}
-          >
+          <h1 className={devHeroH1Class} style={devHeroH1Style}>
             <span className="md:hidden">
               <span className="block">La tecnología</span>
               <span className="block">es lo más</span>

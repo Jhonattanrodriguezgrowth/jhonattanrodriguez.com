@@ -12,3 +12,5 @@ Tras cambios de UI, layout o metadatos, revisar manualmente. Copy del sitio sin 
 | `/mi-historia`  | Foto Home + scrim en zona historia (hero → Murphyia); fade + pb antes del CTA; cards timeline glass; CTA fondo sólido; legacy plexus con `CV_HERO_USE_HOME_PHOTO=false` |
 
 Incluye navegación desde el navbar y enlaces internos (por ejemplo “Volver al inicio” en mi historia).
+
+Enlaces sociales (Instagram, LinkedIn, YouTube): editar solo `lib/cta-links.ts` → `SOCIAL_PROFILES`.

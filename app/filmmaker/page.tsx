@@ -9,7 +9,7 @@ import { FilmMediaFrame } from "@/components/filmmaker/film-media-frame";
 import { PlanCard } from "@/components/filmmaker/plan-card";
 import { FILM_MEDIA } from "@/lib/filmmaker-media";
 import { CTASection, CTACalendar, CTAWhatsApp } from "@/components/cta-buttons";
-import { getFilmmakerYouTubeLink } from "@/lib/cta-links";
+import { getYouTubeLink, getYouTubeLabel, getYouTubeLabelAt } from "@/lib/cta-links";
 import { getPlanSurface } from "@/lib/filmmaker-plan-surface";
 import {
   THEMES,
@@ -122,7 +122,7 @@ export default function FilmmakerPage() {
           <div className={ROUTE_HERO_INNER}>
           <div className="mb-4 flex justify-center">
             <GlowButton
-              href={getFilmmakerYouTubeLink()}
+              href={getYouTubeLink()}
               external
               variant="secondary"
               size="md"
@@ -144,7 +144,7 @@ export default function FilmmakerPage() {
                   <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2 2.87 2.87 0 0 0 0 1.07v3.09a2.87 2.87 0 0 0 1.03 2.2 2.78 2.78 0 0 0 1.95.43C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2 2.87 2.87 0 0 0 0-1.07V7.49a2.87 2.87 0 0 0-1.03-2.07z" />
                   <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none" />
                 </svg>
-                jhonattansfilm
+                {getYouTubeLabel()}
               </span>
             </GlowButton>
           </div>
@@ -448,7 +448,7 @@ export default function FilmmakerPage() {
                 className="max-w-4xl"
               >
                 <GlowButton
-                  href={getFilmmakerYouTubeLink()}
+                  href={getYouTubeLink()}
                   external
                   variant="primary"
                   size="lg"
@@ -461,14 +461,14 @@ export default function FilmmakerPage() {
             )}
           </div>
           <GlowButton
-            href={getFilmmakerYouTubeLink()}
+            href={getYouTubeLink()}
             external
             variant="secondary"
             size="md"
             accentColor={t.accentSolid}
             secondaryColor={t.accent}
           >
-            @jhonattansfilm
+            {getYouTubeLabelAt()}
           </GlowButton>
         </div>
       </section>

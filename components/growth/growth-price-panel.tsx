@@ -1,29 +1,25 @@
 import type { ReactNode } from "react";
 
 type GrowthPricePanelProps = {
-  priceUsd: string;
   priceCop: string;
   duration: string;
   priceNote?: string;
-  priceUsdSize?: "lg" | "md";
+  priceSize?: "lg" | "md";
   dark: boolean;
   accent: string;
   border: string;
-  textSecondary: string;
   textMuted: string;
   children?: ReactNode;
 };
 
 export function GrowthPricePanel({
-  priceUsd,
   priceCop,
   duration,
   priceNote,
-  priceUsdSize = "lg",
+  priceSize = "lg",
   dark,
   accent,
   border,
-  textSecondary,
   textMuted,
   children,
 }: GrowthPricePanelProps) {
@@ -40,14 +36,8 @@ export function GrowthPricePanel({
         style={{
           fontFamily: "var(--font-quicksand), 'Quicksand', sans-serif",
           color: accent,
-          fontSize: priceUsdSize === "lg" ? "clamp(28px, 4vw, 40px)" : "clamp(24px, 3vw, 32px)",
+          fontSize: priceSize === "lg" ? "clamp(28px, 4vw, 40px)" : "clamp(24px, 3vw, 32px)",
         }}
-      >
-        {priceUsd}
-      </div>
-      <div
-        className="text-sm"
-        style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: textSecondary }}
       >
         {priceCop}
       </div>
@@ -59,7 +49,7 @@ export function GrowthPricePanel({
       </div>
       {priceNote ? (
         <div
-          className={`text-xs px-2 py-1 rounded-lg ${priceUsdSize === "md" ? "mt-2" : "mt-1"}`}
+          className={`text-xs px-2 py-1 rounded-lg ${priceSize === "md" ? "mt-2" : "mt-1"}`}
           style={{
             fontFamily: "var(--font-lato), 'Lato', sans-serif",
             color: accent,

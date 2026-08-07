@@ -1,13 +1,35 @@
 // ─── CTA LINKS ────────────────────────────────────────────────────────────────
 // Centralizado para facilitar edicion
 
+export const SOCIAL_PROFILES = {
+  instagram: {
+    url: "https://www.instagram.com/jhonattansdev/",
+    label: "@jhonattansdev",
+  },
+  linkedin: {
+    url: "https://www.linkedin.com/in/jhonattansgrowth/",
+    label: "jhonattansgrowth",
+  },
+  youtube: {
+    url: "https://www.youtube.com/@jhonattansfilm",
+    label: "jhonattansfilm",
+    labelAt: "@jhonattansfilm",
+  },
+} as const;
+
+export const ROUTE_HERO_SOCIAL = {
+  "developer-ai": SOCIAL_PROFILES.instagram,
+  growth: SOCIAL_PROFILES.linkedin,
+  filmmaker: SOCIAL_PROFILES.youtube,
+} as const;
+
 export const CTA_LINKS = {
   whatsapp: "https://wa.me/573045818587",
   /** Sesión de reconocimiento Growth Hack */
   calendar:
     "https://calendly.com/jhonattanrodriguez/sesion-de-reconocimiento-growth-hack",
   githubProfile: "https://github.com/Jhonattanrodriguezgrowth",
-  filmmakerYoutube: "https://www.youtube.com/@jhonattansfilm",
+  filmmakerYoutube: SOCIAL_PROFILES.youtube.url,
 };
 
 export const WHATSAPP_MESSAGES = {
@@ -29,6 +51,34 @@ export function getGitHubProfileLink() {
   return CTA_LINKS.githubProfile;
 }
 
+export function getInstagramLink() {
+  return SOCIAL_PROFILES.instagram.url;
+}
+
+export function getInstagramLabel() {
+  return SOCIAL_PROFILES.instagram.label;
+}
+
+export function getLinkedInLink() {
+  return SOCIAL_PROFILES.linkedin.url;
+}
+
+export function getLinkedInLabel() {
+  return SOCIAL_PROFILES.linkedin.label;
+}
+
+export function getYouTubeLink() {
+  return SOCIAL_PROFILES.youtube.url;
+}
+
+export function getYouTubeLabel() {
+  return SOCIAL_PROFILES.youtube.label;
+}
+
+export function getYouTubeLabelAt() {
+  return SOCIAL_PROFILES.youtube.labelAt;
+}
+
 export function getFilmmakerYouTubeLink() {
-  return CTA_LINKS.filmmakerYoutube;
+  return getYouTubeLink();
 }

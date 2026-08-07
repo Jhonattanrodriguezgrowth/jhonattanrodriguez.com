@@ -41,12 +41,11 @@ export type GrowthOfferingMeta = {
   kickerVariant: GrowthKickerVariant;
   title: string;
   intro: string;
-  priceUsd: string;
   priceCop: string;
   duration: string;
   priceNote?: string;
   calendarLabel?: string;
-  priceUsdSize?: "lg" | "md";
+  priceSize?: "lg" | "md";
   scrollAnchor?: boolean;
   tallDetails?: boolean;
 };
@@ -70,10 +69,9 @@ export const GROWTH_METAADS = {
   title: "Entrenamiento Meta Ads",
   intro:
     "La mayoría de founders le tienen miedo a Meta Ads porque nunca nadie se los explicó bien. En 3 sesiones pasas de no saber dónde hacer clic a tener tu primera campaña activa, con una estrategia de contenido basada en lo que ya está funcionando en tu industria.",
-  priceUsd: "$100 USD",
   priceCop: "$400.000 COP",
   duration: "3 sesiones / 3.5h en total",
-  priceNote: "Refuerzo mensual: $50 USD",
+  priceNote: "Refuerzo mensual: $200.000 COP",
 } as const;
 
 export const GROWTH_METAADS_SESSIONS: GrowthSession[] = [
@@ -108,7 +106,6 @@ export const GROWTH_PRESENCIA_RRSS = {
   title: "Entrenamiento y optimización de marca personal en redes sociales",
   intro:
     "Tener un perfil no es tener presencia. En 4 sesiones transformamos tu cuenta desde cero: estrategia, optimización completa y tu primer contenido publicado. Sin acciones sin sentido, sin tiempo perdido. Pensado para founders y perfiles personales en 1:1. Si lo que necesitas es el sistema completo de marca + operación de RRSS para tu equipo, está en «Control de la marca + Sistema de administración de Redes Sociales».",
-  priceUsd: "$150 USD",
   priceCop: "$600.000 COP",
   duration: "Sprint 15 días / 4 sesiones de 1h",
   calendarLabel: "Agendar entrenamiento",
@@ -222,7 +219,6 @@ export const GROWTH_CONTROL_MARCA_RRSS = {
   title: "Control de la marca + Sistema de administración de Redes Sociales",
   intro:
     "Sin conceptualización de marca, el contenido no tiene norte; sin un sistema de administración de RRSS, el equipo improvisa. En un sprint de 12 sesiones unimos ambos: desde el propósito que alinea a founders y marketing hasta el microsistema en Notion para publicar, medir y mejorar sin depender de ti en cada pieza.",
-  priceUsd: "$630 USD",
   priceCop: "$2.520.000 COP",
   duration: "Sprint ~3 meses / 12 sesiones de 1h",
   priceNote: "3 cupos disponibles",
@@ -280,11 +276,10 @@ export const GROWTH_OFFERINGS: Record<GrowthOfferingId, GrowthOfferingMeta> = {
     kickerVariant: "emphasis",
     title: GROWTH_METAADS.title,
     intro: GROWTH_METAADS.intro,
-    priceUsd: GROWTH_METAADS.priceUsd,
     priceCop: GROWTH_METAADS.priceCop,
     duration: GROWTH_METAADS.duration,
     priceNote: GROWTH_METAADS.priceNote,
-    priceUsdSize: "lg",
+    priceSize: "lg",
     scrollAnchor: true,
   },
   "presencia-rrss": {
@@ -293,11 +288,10 @@ export const GROWTH_OFFERINGS: Record<GrowthOfferingId, GrowthOfferingMeta> = {
     kickerVariant: "standard",
     title: GROWTH_PRESENCIA_RRSS.title,
     intro: GROWTH_PRESENCIA_RRSS.intro,
-    priceUsd: GROWTH_PRESENCIA_RRSS.priceUsd,
     priceCop: GROWTH_PRESENCIA_RRSS.priceCop,
     duration: GROWTH_PRESENCIA_RRSS.duration,
     calendarLabel: GROWTH_PRESENCIA_RRSS.calendarLabel,
-    priceUsdSize: "md",
+    priceSize: "md",
     scrollAnchor: true,
     tallDetails: true,
   },
@@ -307,12 +301,11 @@ export const GROWTH_OFFERINGS: Record<GrowthOfferingId, GrowthOfferingMeta> = {
     kickerVariant: "standard",
     title: GROWTH_CONTROL_MARCA_RRSS.title,
     intro: GROWTH_CONTROL_MARCA_RRSS.intro,
-    priceUsd: GROWTH_CONTROL_MARCA_RRSS.priceUsd,
     priceCop: GROWTH_CONTROL_MARCA_RRSS.priceCop,
     duration: GROWTH_CONTROL_MARCA_RRSS.duration,
     priceNote: GROWTH_CONTROL_MARCA_RRSS.priceNote,
     calendarLabel: GROWTH_CONTROL_MARCA_RRSS.calendarLabel,
-    priceUsdSize: "md",
+    priceSize: "md",
     tallDetails: true,
   },
 };
